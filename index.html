@@ -26,13 +26,14 @@
   <style>
     :root {
       --bg-color: #FAFAF9;
-      --text-color: #1C1C1C;
+      --text-color: #2D1B13;
       --accent-color: #C4A484;
-      --secondary-text: #6B7280;
+      --brand-gold: #e6d2a3;
+      --secondary-text: #6d5c58;
       --border-color: #E5E7EB;
       --container-width: 1200px;
-      --font-serif: 'Playfair Display', serif;
-      --font-sans: 'Inter', sans-serif;
+      --font-serif: 'Noto Serif JP', serif;
+      --font-sans: 'Noto Sans JP', sans-serif;
       --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
@@ -138,51 +139,65 @@
       pointer-events: none;
     }
     .hero-brand-card {
-      background: rgba(45, 27, 19, 0.4);
+      background: rgba(45, 27, 19, 0.35);
       backdrop-filter: blur(8px);
-      padding: 3rem 4rem;
-      border: 2px solid var(--accent-color);
-      color: var(--accent-color);
+      padding: 2.5rem 3rem;
+      border: 2px solid var(--brand-gold);
+      color: var(--brand-gold);
       clip-path: polygon(0% 14%, 6% 14%, 6% 5%, 15% 5%, 15% 0%, 85% 0%, 85% 5%, 94% 5%, 94% 14%, 100% 14%, 100% 86%, 94% 86%, 94% 95%, 85% 95%, 85% 100%, 15% 100%, 15% 95%, 6% 95%, 6% 86%, 0% 86%);
       position: relative;
       margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
     .hero-brand-card::after {
       content: '';
       position: absolute;
-      inset: 8px;
-      border: 1px solid var(--accent-color);
+      inset: 10px;
+      border: 1px solid var(--brand-gold);
       clip-path: inherit;
     }
     .hero-title-main {
       font-family: 'Noto Serif JP', serif;
-      font-size: 56px;
+      font-size: clamp(2.3rem, 6vw, 3.9rem);
       margin: 0;
-      letter-spacing: 0.15em;
-      line-height: 1.2;
+      letter-spacing: 0.1em;
+      line-height: 1.1;
+      color: var(--brand-gold);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
     .hero-subtitle-en {
       font-family: 'Pirata One', cursive;
-      font-size: 32px;
+      font-size: clamp(1.6rem, 4vw, 2.7rem);
       margin-top: 5px;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
+      color: var(--brand-gold);
     }
     .hero-ribbon {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 5px 25px;
-      border: 1px solid var(--accent-color);
+      margin-top: 1.1rem;
+      display: inline-flex;
+      min-width: 280px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--brand-gold);
+      background: linear-gradient(180deg, rgba(26, 15, 10, 0.72) 0%, rgba(50, 30, 22, 0.72) 100%);
       font-family: 'Shippori Mincho', serif;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.2rem;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      color: var(--brand-gold);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
     }
     .hero-catchphrase {
       font-family: 'Shippori Mincho', serif;
-      font-size: 20px;
+      font-size: 1.2rem;
       color: #FFF;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      letter-spacing: 0.3em;
+      padding: 1rem 2rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      letter-spacing: 0.15em;
       margin-top: 20px;
     }
 
@@ -203,22 +218,37 @@
       margin: 20px auto 0;
     }
 
-    /* News */
-    .newsList { max-width: 800px; margin: 0 auto; }
+    /* News Card */
+    .news-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #FFF;
+      border: 1px solid #ddd;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    }
     .newsItem {
       display: flex;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border-color);
-      gap: 40px;
-      align-items: baseline;
+      flex-direction: column;
+      padding: 1.5rem 0;
+      border-bottom: 1px dashed #e8e8e8;
+      gap: 0.5rem;
     }
+    .newsItem:last-child { border-bottom: none; }
     .newsItem__date { 
-      font-size: 14px; 
+      font-size: 0.85rem; 
       color: var(--secondary-text); 
-      letter-spacing: 0.1em;
-      min-width: 100px;
+      letter-spacing: 0.05em;
     }
-    .newsItem__title { font-size: 16px; flex: 1; }
+    .newsItem__title { 
+      font-size: 1rem; 
+      font-family: var(--font-serif);
+      border-bottom: 1px solid rgba(93, 64, 55, 0.1);
+      display: inline-block;
+      width: fit-content;
+    }
+    .newsItem__title a { text-decoration: none; }
+    .newsItem__title a:hover { color: var(--accent-color); }
 
     /* Categories */
     .categoryLinks {
@@ -277,17 +307,38 @@
     .productCard__title { font-size: 18px; margin-bottom: 8px; color: var(--text-color); }
     .productCard__price { font-size: 15px; color: var(--accent-color); font-weight: 500; letter-spacing: 0.05em; }
 
-    /* Guide */
-    .guideGrid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 60px;
-      padding: 80px 0;
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
+    /* Information Section Card */
+    .info-card-container {
+      background-color: #FFF;
+      border: 1px solid #ddd;
+      padding: 2.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+      text-align: center;
     }
-    .guideItem h3 { font-size: 20px; margin-bottom: 24px; }
-    .guideItem p { font-size: 14px; color: var(--secondary-text); }
+    .info-item {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border-bottom: 1px dashed #eee;
+      padding-bottom: 0.5rem;
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-map-link {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid var(--accent-color);
+      background-color: transparent;
+      color: var(--accent-color);
+      font-family: var(--font-serif);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .info-map-link:hover {
+      background-color: var(--accent-color);
+      color: white;
+    }
 
     /* Footer */
     .footer {
@@ -317,13 +368,16 @@
 
     /* Specialty Coffee Cards */
     .specialtyCard {
-      background: var(--color-white);
-      border: 1px solid var(--border-color);
+      background: #FFF;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(94, 81, 77, 0.08);
       display: flex;
       flex-direction: column;
     }
     .specialtyCard__image {
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 5 / 3;
       background-image: url('images/back-coffee-beans.png');
       background-size: cover;
       background-position: center;
@@ -332,22 +386,32 @@
       align-items: center;
       justify-content: center;
     }
-    .specialtyCard__image::before {
-      content: '';
+    .specialtyCard__body { padding: 1.1rem 1.2rem; }
+    .specialtyCard__name { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; font-family: var(--font-serif); }
+    .specialtyCard__months { font-size: 0.8rem; color: #666; margin-bottom: 0.5rem; }
+    .specialtyCard__desc { font-size: 0.8rem; color: #555; line-height: 1.6; }
+
+    /* Specialty Coffee Carousel Controls */
+    .special-coffee-carousel-wrap { position: relative; max-width: 1000px; margin: 0 auto; }
+    .special-coffee-arrow {
       position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.3);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      cursor: pointer;
     }
-    .specialtyCard__flag {
-      position: relative;
-      width: 40%;
-      z-index: 2;
-      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
-    }
-    .specialtyCard__body { padding: 25px; }
-    .specialtyCard__name { font-size: 18px; font-weight: 600; margin-bottom: 10px; font-family: var(--font-serif); }
-    .specialtyCard__months { font-size: 13px; color: var(--accent-color); margin-bottom: 15px; letter-spacing: 0.05em; }
-    .specialtyCard__desc { font-size: 14px; color: var(--secondary-text); line-height: 1.6; }
+    .special-coffee-arrow-prev { left: -60px; }
+    .special-coffee-arrow-next { right: -60px; }
 
     /* Story Blocks */
     .storyBlock { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin: 120px 0; }
@@ -359,16 +423,25 @@
     .storyBlock__text { font-size: 16px; line-height: 2; color: var(--text-color); }
 
     /* Roasting Gallery */
+    .roast-section {
+      background: linear-gradient(180deg, #2a1a14 0%, #3a231b 48%, #2a1a14 100%);
+      color: #f3e7d3;
+      padding: 100px 0;
+      margin: 100px -5vw;
+      padding-left: 5vw;
+      padding-right: 5vw;
+    }
     .roastGrid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
-      gap: 15px;
-      margin-top: 60px;
+      gap: 0.9rem;
+      max-width: 1000px;
+      margin: 60px auto 0;
     }
-    .roastGrid__item { overflow: hidden; background: #000; }
-    .roastGrid__item.video { grid-row: span 2; }
-    .roastGrid__item img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: var(--transition); }
-    .roastGrid__item:hover img { opacity: 1; transform: scale(1.05); }
+    .roastGrid__item { overflow: hidden; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 240, 220, 0.18); }
+    .roastGrid__item.video { grid-column: 1 / -1; }
+    .roastGrid__item img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.03) saturate(1.03); transition: var(--transition); }
+    .roastGrid__item:hover img { transform: scale(1.03); }
 
     /* Mobile */
     @media (max-width: 900px) {
@@ -462,10 +535,10 @@
 
     <section class="section" data-reveal>
       <h2 class="section__title">Journal</h2>
-      <div class="newsList">
+      <div class="news-card">
         <article class="newsItem">
           <span class="newsItem__date">2026.02.16</span>
-          <span class="newsItem__title"><a href="https://note.com/happy_eagle5103" target="_blank" style="text-decoration: underline;">note「ポプラ館珈琲」最新情報を公開しました。</a></span>
+          <span class="newsItem__title"><a href="https://note.com/happy_eagle5103" target="_blank">note「ポプラ館珈琲」最新情報を公開しました。</a></span>
         </article>
         <article class="newsItem">
           <span class="newsItem__date">2026.04.16</span>
@@ -501,12 +574,13 @@
       </div>
     </section>
 
-    <section class="section" data-reveal style="background: #1C1C1C; color: #FFF; padding: 100px 0; margin-left: -5vw; margin-right: -5vw; padding-left: 5vw; padding-right: 5vw;">
+    <section class="roast-section" data-reveal>
       <div class="wrap">
-        <h2 class="section__title" style="color: #FFF;">Roasting Excellence</h2>
-        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
-          <p style="font-size: 24px; font-family: var(--font-serif); color: var(--accent-color); margin-bottom: 40px;">日本の「自家焙煎」を創り上げてきた矜持</p>
-          <p style="line-height: 2; margin-bottom: 60px; opacity: 0.8; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <h2 class="section__title" style="color: #f3e7d3; border-bottom: none;">こだわりの焙煎</h2>
+        <div style="max-width: 860px; margin: 0 auto; text-align: center;">
+          <p style="font-size: 1.25rem; font-family: var(--font-serif); color: #efe2cc; margin-bottom: 1.5rem;">日本の「自家焙煎」を創り上げてきた矜持</p>
+          <p style="line-height: 1.9; margin-bottom: 2rem; color: #efe2cc;">
+            日本の珈琲史において、「自家焙煎」という文化を形作ってきたマスターが培ってきた焙煎の技術をお届けします。<br>
             当店の自慢は、今なお現役で鼓動を続ける「10kg焙煎機の第1号機」。<br>
             40年以上の歳月を経て、鋳物の隅々にまで熱が馴染んだこの機体は、最新鋭のデジタル機では決して出せない、深く、優しく、それでいて力強い火力を豆に届けます。
           </p>
@@ -537,37 +611,45 @@
     <section class="section" data-reveal>
       <h2 class="section__title">Specialty Coffee</h2>
       <p style="text-align: center; margin-top: -40px; margin-bottom: 60px; font-family: var(--font-serif); color: var(--accent-color);">Monthly Excellent Beans / 一杯 ¥1,500(税別)</p>
-      <div class="productGrid">
-        <article class="specialtyCard">
-          <div class="specialtyCard__image" style="background-image: url('images/back-coffee-beans.png');">
-            <img src="images/flag_jamaica.svg" alt="Jamaica" class="specialtyCard__flag">
-          </div>
-          <div class="specialtyCard__body">
-            <h3 class="specialtyCard__name">ジャマイカ ブルーマウンテン<br>クライスデールNo.1</h3>
-            <p class="specialtyCard__months">1月・4月・7月・10月焙煎</p>
-            <p class="specialtyCard__desc">華やかな香りとまろやかな味わい。一期一会の贅沢をお楽しみください。</p>
-          </div>
-        </article>
-        <article class="specialtyCard">
-          <div class="specialtyCard__image" style="background-image: url('images/back-coffee-beans.png');">
-            <img src="images/flag_panama.svg" alt="Panama" class="specialtyCard__flag">
-          </div>
-          <div class="specialtyCard__body">
-            <h3 class="specialtyCard__name">パナマ ゲイシャ<br>ハートマン農園</h3>
-            <p class="specialtyCard__months">2月・5月・8月・11月焙煎</p>
-            <p class="specialtyCard__desc">フローラルな香りと透明感のある味わいが特徴。最高峰の豆をお届けします。</p>
-          </div>
-        </article>
-        <article class="specialtyCard">
-          <div class="specialtyCard__image" style="background-image: url('images/back-coffee-beans.png');">
-            <img src="images/flag_hawaii.svg" alt="Hawaii" class="specialtyCard__flag">
-          </div>
-          <div class="specialtyCard__body">
-            <h3 class="specialtyCard__name">ハワイ コナ100 エクストラファンシー</h3>
-            <p class="specialtyCard__months">3月・6月・9月・12月焙煎</p>
-            <p class="specialtyCard__desc">ハワイアンクイーン農園産。100%コナの甘みと酸味の極上のバランス。</p>
-          </div>
-        </article>
+      <div class="special-coffee-carousel-wrap">
+        <button type="button" class="special-coffee-arrow special-coffee-arrow-prev" aria-label="Previous">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="productGrid special-coffee-list" id="special-coffee-list" style="display: flex; overflow-x: auto; gap: 40px; scroll-snap-type: x mandatory;">
+          <article class="specialtyCard" style="flex: 0 0 260px; scroll-snap-align: start;">
+            <div class="specialtyCard__image">
+              <img src="images/flag_jamaica.svg" alt="Jamaica" class="specialtyCard__flag">
+            </div>
+            <div class="specialtyCard__body">
+              <h3 class="specialtyCard__name">ジャマイカ ブルーマウンテン<br>クライスデールNo.1</h3>
+              <p class="specialtyCard__months">1月・4月・7月・10月焙煎</p>
+              <p class="specialtyCard__desc">華やかな香りとまろやかな味わい。一期一会の贅沢をお楽しみください。</p>
+            </div>
+          </article>
+          <article class="specialtyCard" style="flex: 0 0 260px; scroll-snap-align: start;">
+            <div class="specialtyCard__image">
+              <img src="images/flag_panama.svg" alt="Panama" class="specialtyCard__flag">
+            </div>
+            <div class="specialtyCard__body">
+              <h3 class="specialtyCard__name">パナマ ゲイシャ<br>ハートマン農園</h3>
+              <p class="specialtyCard__months">2月・5月・8月・11月焙煎</p>
+              <p class="specialtyCard__desc">フローラルな香りと透明感のある味わいが特徴。最高峰の豆をお届けします。</p>
+            </div>
+          </article>
+          <article class="specialtyCard" style="flex: 0 0 260px; scroll-snap-align: start;">
+            <div class="specialtyCard__image">
+              <img src="images/flag_hawaii.svg" alt="Hawaii" class="specialtyCard__flag">
+            </div>
+            <div class="specialtyCard__body">
+              <h3 class="specialtyCard__name">ハワイ コナ100 エクストラファンシー</h3>
+              <p class="specialtyCard__months">3月・6月・9月・12月焙煎</p>
+              <p class="specialtyCard__desc">ハワイアンクイーン農園産。100%コナの甘みと酸味の極上のバランス。</p>
+            </div>
+          </article>
+        </div>
+        <button type="button" class="special-coffee-arrow special-coffee-arrow-next" aria-label="Next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
       </div>
     </section>
 
@@ -647,24 +729,31 @@
       </div>
     </section>
 
-    <section class="guideGrid" data-reveal>
-      <div class="guideItem">
-        <h3>Access</h3>
-        <p>〒243-0032 神奈川県厚木市恩名３丁目２４−１４<br>
-        <a href="https://maps.app.goo.gl/AWXe2oHPHbFjMXfD7" target="_blank" style="text-decoration: underline; margin-top: 10px; display: inline-block;">Google Mapはこちら</a></p>
-      </div>
-      <div class="guideItem">
-        <h3>Information</h3>
-        <p>TEL: 046-204-7058<br>
-        営業時間：9:00 - 17:00<br>
-        定休日：土曜日・日曜日</p>
-        <div style="margin-top: 16px;">
-          {PaymentMethodsLogoTag}
+    <section class="section" data-reveal>
+      <div class="container">
+        <h2 class="section__title">Information</h2>
+        <div class="info-card-container">
+          <div class="info-item">
+            <strong>住所</strong><br>
+            〒243-0032 神奈川県厚木市恩名３丁目２４−１４<br>
+            <a class="info-map-link" href="https://maps.app.goo.gl/AWXe2oHPHbFjMXfD7" target="_blank">Googleマップはこちら</a>
+          </div>
+          <div class="info-item">
+            <strong>電話番号</strong><br>
+            046-204-7058
+          </div>
+          <div class="info-item">
+            <strong>営業時間</strong><br>
+            9:00 - 17:00
+          </div>
+          <div class="info-item">
+            <strong>定休日</strong><br>
+            土曜日・日曜日
+          </div>
+          <div style="margin-top: 24px;">
+            {PaymentMethodsLogoTag}
+          </div>
         </div>
-      </div>
-      <div class="guideItem">
-        <h3>Shipping</h3>
-        <p>全国一律 800円（税込）。<br>10,000円以上のお買い上げで送料無料となります。</p>
       </div>
     </section>
 
@@ -798,13 +887,32 @@
         if (slides.length <= 1) return;
 
         let current = 0;
-        const intervalMs = 5000;
+        const intervalMs = 4500;
 
         window.setInterval(() => {
             slides[current].classList.remove('is-active');
             current = (current + 1) % slides.length;
             slides[current].classList.add('is-active');
         }, intervalMs);
+    })();
+
+    // Specialty Coffee Carousel
+    (function () {
+        const list = document.getElementById('special-coffee-list');
+        const prevBtn = document.querySelector('.special-coffee-arrow-prev');
+        const nextBtn = document.querySelector('.special-coffee-arrow-next');
+        if (!list || !prevBtn || !nextBtn) return;
+        function getScrollAmount() {
+            const card = list.querySelector('.specialtyCard');
+            if (!card) return list.offsetWidth * 0.85;
+            return card.offsetWidth + 40; // Card width + gap
+        }
+        prevBtn.addEventListener('click', () => {
+            list.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+            list.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        });
     })();
 
     // Handle BASE purchase button styling
