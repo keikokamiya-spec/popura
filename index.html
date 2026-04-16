@@ -21,7 +21,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;600;700&family=Pirata+One&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -118,6 +118,67 @@
     .hero__item--1 { grid-column: 1 / 8; grid-row: 1 / 3; height: 600px; }
     .hero__item--2 { grid-column: 8 / 13; grid-row: 1 / 2; }
     .hero__item--3 { grid-column: 8 / 13; grid-row: 2 / 3; }
+
+    /* Poplar Brand Card */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      pointer-events: none;
+    }
+    .hero-brand-card {
+      background: rgba(45, 27, 19, 0.4);
+      backdrop-filter: blur(8px);
+      padding: 3rem 4rem;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+      clip-path: polygon(0% 14%, 6% 14%, 6% 5%, 15% 5%, 15% 0%, 85% 0%, 85% 5%, 94% 5%, 94% 14%, 100% 14%, 100% 86%, 94% 86%, 94% 95%, 85% 95%, 85% 100%, 15% 100%, 15% 95%, 6% 95%, 6% 86%, 0% 86%);
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .hero-brand-card::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid var(--accent-color);
+      clip-path: inherit;
+    }
+    .hero-title-main {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 56px;
+      margin: 0;
+      letter-spacing: 0.15em;
+      line-height: 1.2;
+    }
+    .hero-subtitle-en {
+      font-family: 'Pirata One', cursive;
+      font-size: 32px;
+      margin-top: 5px;
+      letter-spacing: 0.05em;
+    }
+    .hero-ribbon {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 5px 25px;
+      border: 1px solid var(--accent-color);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+    }
+    .hero-catchphrase {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 20px;
+      color: #FFF;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      letter-spacing: 0.3em;
+      margin-top: 20px;
+    }
 
     /* Sections */
     .section { margin: 100px 0; }
@@ -248,6 +309,49 @@
       letter-spacing: 0.1em;
     }
 
+    /* Specialty Coffee Cards */
+    .specialtyCard {
+      background: var(--color-white);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+    .specialtyCard__image {
+      aspect-ratio: 16 / 9;
+      background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .specialtyCard__image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+    }
+    .specialtyCard__flag {
+      position: relative;
+      width: 40%;
+      z-index: 2;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+    }
+    .specialtyCard__body { padding: 25px; }
+    .specialtyCard__name { font-size: 18px; font-weight: 600; margin-bottom: 10px; font-family: var(--font-serif); }
+    .specialtyCard__months { font-size: 13px; color: var(--accent-color); margin-bottom: 15px; letter-spacing: 0.05em; }
+    .specialtyCard__desc { font-size: 14px; color: var(--secondary-text); line-height: 1.6; }
+
+    /* Story Blocks */
+    .storyBlock { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin: 120px 0; }
+    .storyBlock:nth-child(even) { direction: rtl; }
+    .storyBlock:nth-child(even) > * { direction: ltr; }
+    .storyBlock__image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; box-shadow: 20px 20px 0 var(--bg-color), 20px 20px 0 1px var(--accent-color); }
+    .storyBlock__content h3 { font-size: 32px; margin-bottom: 30px; position: relative; display: inline-block; }
+    .storyBlock__content h3::after { content: ''; display: block; width: 60%; height: 1px; background: var(--accent-color); margin-top: 10px; }
+    .storyBlock__text { font-size: 16px; line-height: 2; color: var(--text-color); }
+
     /* Mobile */
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; grid-template-rows: auto; }
@@ -256,6 +360,11 @@
       .guideGrid { grid-template-columns: 1fr; gap: 40px; }
       .footer__content { grid-template-columns: 1fr 1fr; }
       .nav { display: none; } /* Add mobile menu later */
+      .storyBlock { grid-template-columns: 1fr; gap: 40px; margin: 60px 0; }
+      .storyBlock:nth-child(even) { direction: ltr; }
+      .storyBlock__image img { box-shadow: 10px 10px 0 var(--bg-color), 10px 10px 0 1px var(--accent-color); }
+      .hero-title-main { font-size: 32px; }
+      .hero-brand-card { padding: 2rem; }
     }
 
     @media (max-width: 640px) {
@@ -283,7 +392,7 @@
       <div class="logo">
         <a href="{IndexPageURL}">
           {LogoTag}
-          {block:NotLogoTag}<h1>POPURA</h1>{/block:NotLogoTag}
+          {block:NotLogoTag}<h1>ポプラ館珈琲</h1>{/block:NotLogoTag}
         </a>
       </div>
       <nav class="nav">
@@ -298,15 +407,24 @@
   {block:IndexPage}
   <main class="wrap">
 
-    <section class="hero" data-reveal>
+    <section class="hero" data-reveal style="position:relative;">
       <div class="hero__item hero__item--1">
-        <img src="images/hero1.png" alt="Popura Interior">
+        <img src="images/hero1.png" alt="Poplar Interior">
       </div>
       <div class="hero__item hero__item--2">
-        <img src="images/hero2.png" alt="Popura Coffee Cup">
+        <img src="images/hero2.png" alt="Poplar Coffee Cup">
       </div>
       <div class="hero__item hero__item--3">
-        <img src="images/hero3.png" alt="Popura Lifestyle">
+        <img src="images/hero3.png" alt="Poplar Lifestyle">
+      </div>
+      
+      <div class="hero-overlay">
+        <div class="hero-brand-card">
+          <h2 class="hero-title-main">ポプラ館珈琲</h2>
+          <p class="hero-subtitle-en">Poplar Coffee House</p>
+          <div class="hero-ribbon">since 1974</div>
+        </div>
+        <p class="hero-catchphrase">一杯の贅沢、受け継がれる味。</p>
       </div>
     </section>
 
@@ -320,25 +438,112 @@
       <h2 class="section__title">Journal</h2>
       <div class="newsList">
         <article class="newsItem">
+          <span class="newsItem__date">2026.02.16</span>
+          <span class="newsItem__title"><a href="https://note.com/happy_eagle5103" target="_blank" style="text-decoration: underline;">note「ポプラ館珈琲」最新情報を公開しました。</a></span>
+        </article>
+        <article class="newsItem">
           <span class="newsItem__date">2026.04.16</span>
-          <span class="newsItem__title">Popura Premium Collection を公開しました。</span>
-        </article>
-        <article class="newsItem">
-          <span class="newsItem__date">2026.03.30</span>
-          <span class="newsItem__title">季節限定コーヒー豆の予約販売を開始。</span>
-        </article>
-        <article class="newsItem">
-          <span class="newsItem__date">2026.03.15</span>
-          <span class="newsItem__title">配送手数料の改定に関するお知らせ。</span>
+          <span class="newsItem__title">ポプラ館珈琲 公式オンラインショップがオープンしました。</span>
         </article>
       </div>
     </section>
 
     <section class="section" data-reveal>
+      <div class="storyBlock">
+        <div class="storyBlock__image">
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800" alt="Master">
+        </div>
+        <div class="storyBlock__content">
+          <h3>Our Master's Passion</h3>
+          <p class="storyBlock__text">
+            「一杯の珈琲には、人の心をほどく力がある」<br><br>
+            そう信じて、半世紀。豆の選別から焙煎、抽出に至るまで、一切の妥協を許さず、ただひたすらに美味しい一杯を追求してきました。忙しい日常の中で、ホッと一息つける場所でありたい。それが、私の変わらぬ願いです。
+          </p>
+        </div>
+      </div>
+
+      <div class="storyBlock">
+        <div class="storyBlock__image">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800" alt="Interior">
+        </div>
+        <div class="storyBlock__content">
+          <h3>Our Story & Commitment</h3>
+          <p class="storyBlock__text">
+            厚木で約30年にわたり愛されてきた「ポプラ館珈琲」。その味と想いを残し守り続け、当時のマスターが今も現役でカウンターに立ち、自家焙煎の珈琲豆で、一杯一杯丁寧にお淹れしています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-reveal style="background: #1C1C1C; color: #FFF; padding: 100px 0; margin-left: -5vw; margin-right: -5vw; padding-left: 5vw; padding-right: 5vw;">
+      <div class="wrap">
+        <h2 class="section__title" style="color: #FFF;">Roasting Excellence</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+          <p style="font-size: 24px; font-family: var(--font-serif); color: var(--accent-color); margin-bottom: 40px;">日本の「自家焙煎」を創り上げてきた矜持</p>
+          <p style="line-height: 2; margin-bottom: 60px; opacity: 0.8;">
+            当店の自慢は、今なお現役で鼓動を続ける「10kg焙煎機の第1号機」。<br>
+            40年以上の歳月を経て、鋳物の隅々にまで熱が馴染んだこの機体は、最新鋭のデジタル機では決して出せない、深く、優しく、それでいて力強い火力を豆に届けます。
+          </p>
+          <div style="aspect-ratio: 16/9; background: #333; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1);">
+            <!-- Placeholder for video -->
+            <p style="opacity: 0.5;">[ ROASTING VIDEO ]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <h2 class="section__title">Specialty Coffee</h2>
+      <p style="text-align: center; margin-top: -40px; margin-bottom: 60px; font-family: var(--font-serif); color: var(--accent-color);">Monthly Excellent Beans / 一杯 ¥1,500(税別)</p>
+      <div class="productGrid">
+        <article class="specialtyCard">
+          <div class="specialtyCard__image">
+            <!-- Flag placeholder -->
+            <div style="font-size: 64px; z-index: 2;">🇯🇲</div>
+          </div>
+          <div class="specialtyCard__body">
+            <h3 class="specialtyCard__name">ジャマイカ ブルーマウンテン<br>クライスデールNo.1</h3>
+            <p class="specialtyCard__months">1月・4月・7月・10月焙煎</p>
+            <p class="specialtyCard__desc">華やかな香りとまろやかな味わい。一期一会の贅沢をお楽しみください。</p>
+          </div>
+        </article>
+        <article class="specialtyCard">
+          <div class="specialtyCard__image">
+             <div style="font-size: 64px; z-index: 2;">🇵🇦</div>
+          </div>
+          <div class="specialtyCard__body">
+            <h3 class="specialtyCard__name">パナマ ゲイシャ<br>ハートマン農園</h3>
+            <p class="specialtyCard__months">2月・5月・8月・11月焙煎</p>
+            <p class="specialtyCard__desc">フローラルな香りと透明感のある味わいが特徴。最高峰の豆をお届けします。</p>
+          </div>
+        </article>
+        <article class="specialtyCard">
+          <div class="specialtyCard__image">
+             <div style="font-size: 64px; z-index: 2;">🇺🇸</div>
+          </div>
+          <div class="specialtyCard__body">
+            <h3 class="specialtyCard__name">ハワイ コナ100 エクストラファンシー</h3>
+            <p class="specialtyCard__months">3月・6月・9月・12月焙煎</p>
+            <p class="specialtyCard__desc">ハワイアンクイーン農園産。100%コナの甘みと酸味の極上のバランス。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <h2 class="section__title">Menu Highlights</h2>
       <div class="categoryLinks">
-        <a href="#" class="categoryCard"><span>Coffee Beans</span></a>
-        <a href="#" class="categoryCard"><span>Equipment</span></a>
-        <a href="#" class="categoryCard"><span>Gift Set</span></a>
+        <a href="#" class="categoryCard" style="height: 300px; flex-direction: column;">
+          <img src="images/menu_coffee.png" alt="" style="height: 200px; object-fit: cover; margin-bottom: 20px;">
+          <span>Original Blend</span>
+        </a>
+        <a href="#" class="categoryCard" style="height: 300px; flex-direction: column;">
+          <img src="images/croissant2.png" alt="" style="height: 200px; object-fit: cover; margin-bottom: 20px;">
+          <span>Croissant Plate</span>
+        </a>
+        <a href="/menu" class="categoryCard" style="height: 300px; background: var(--accent-color); color: #FFF;">
+          <span>View All Menu</span>
+        </a>
       </div>
     </section>
 
@@ -365,18 +570,22 @@
 
     <section class="guideGrid" data-reveal>
       <div class="guideItem">
-        <h3>Shipping</h3>
-        <p>全国一律 800円（税込）。10,000円以上のお買い上げで送料無料となります。</p>
+        <h3>Access</h3>
+        <p>〒243-0032 神奈川県厚木市恩名３丁目２４−１４<br>
+        <a href="https://maps.app.goo.gl/AWXe2oHPHbFjMXfD7" target="_blank" style="text-decoration: underline; margin-top: 10px; display: inline-block;">Google Mapはこちら</a></p>
       </div>
       <div class="guideItem">
-        <h3>Payment</h3>
+        <h3>Information</h3>
+        <p>TEL: 046-204-7058<br>
+        営業時間：9:00 - 17:00<br>
+        定休日：土曜日・日曜日</p>
         <div style="margin-top: 16px;">
           {PaymentMethodsLogoTag}
         </div>
       </div>
       <div class="guideItem">
-        <h3>Calendar</h3>
-        <p>定休日：月曜日・火曜日<br>営業時間：10:00 - 18:00</p>
+        <h3>Shipping</h3>
+        <p>全国一律 800円（税込）。<br>10,000円以上のお買い上げで送料無料となります。</p>
       </div>
     </section>
 
@@ -460,21 +669,20 @@
         <div class="footer__section">
           <h4>Follow Us</h4>
           <div class="footer__links">
-            <a href="#">Instagram</a>
-            <a href="#">Facebook</a>
-            <a href="#">Twitter</a>
+            <a href="https://www.instagram.com/popurakancoffee/" target="_blank">Instagram</a>
+            <a href="https://www.ubereats.com/jp/store/%E8%87%AA%E5%AE%B6%E7%84%99%E7%85%8E%E3%83%9B%E3%83%95%E3%83%A9%E9%A4%A8%E7%8F%88%E7%90%B2-popura-kan-coffee/TiprfoFyXMeE8ywwUZ3WKg" target="_blank">Uber Eats</a>
+            <a href="https://customer-web.rocketnow.co.jp/share?storeId=65939&dishId&key=779db14f-e3cc-4093-94e9-91d07b6a9e77" target="_blank">Rocket Now</a>
           </div>
         </div>
         <div class="footer__section">
           <h4>Contact</h4>
           <div class="footer__links">
-            <span>info@example.com</span>
-            <span>00-0000-0000</span>
+            <span>046-204-7058</span>
           </div>
         </div>
       </div>
       <div class="footer__bottom">
-        &copy; {CopyrightTag} POPURA. All Rights Reserved.
+        &copy; {CopyrightTag} Poplar Coffee House. All Rights Reserved.
       </div>
     </div>
   </footer>
@@ -504,6 +712,14 @@
         header.classList.remove('scrolled');
       }
     });
+
+    // Hero Image Slideshow (if multiple images are provided in the future)
+    (function () {
+        const slides = Array.from(document.querySelectorAll('.hero .hero__item img'));
+        // For our grid layout, we might not want a simple slideshow, 
+        // but if the user uploads multiple hero images to the same slot, this logic can be adapted.
+        // For now, we'll keep the grid as it looks very premium.
+    })();
 
     // Handle BASE purchase button styling
     window.addEventListener('load', () => {
