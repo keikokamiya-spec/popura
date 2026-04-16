@@ -1,0 +1,542 @@
+{block:NotLoadItemsPage}
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{PageTitle}</title>
+  <meta name="BASE-Theme-Name" content="Popura Premium Editorial">
+  <meta name="BASE-Theme-Version" content="1.0">
+
+  {FaviconTag}
+  {CanonicalTag}
+
+  {block:ItemPage}{MetaItemInfoTag}{/block:ItemPage}
+  {block:NotItemPage}{MetaShopInfoTag}{/block:NotItemPage}
+  {block:IndexPage}{HeadLinkNextPrevTag}{/block:IndexPage}
+
+  {BackgroundTag}
+  {GoogleAnalyticsTag}
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #FAFAF9;
+      --text-color: #1C1C1C;
+      --accent-color: #C4A484;
+      --secondary-text: #6B7280;
+      --border-color: #E5E7EB;
+      --container-width: 1200px;
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Inter', sans-serif;
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; transition: var(--transition); }
+    img { max-width: 100%; height: auto; display: block; }
+    h1, h2, h3, h4 { font-family: var(--font-serif); margin: 0; font-weight: 600; }
+
+    .wrap {
+      width: min(var(--container-width), 90%);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 249, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: var(--transition);
+    }
+    .header.scrolled {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo img { height: 40px; width: auto; }
+    .logo h1 { font-size: 28px; letter-spacing: 0.1em; }
+
+    .nav { display: flex; gap: 40px; align-items: center; }
+    .nav a {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      position: relative;
+    }
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--text-color);
+      transition: var(--transition);
+    }
+    .nav a:hover::after { width: 100%; }
+
+    /* Hero */
+    .hero {
+      margin: 40px 0 80px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, minmax(200px, auto));
+      gap: 20px;
+    }
+    .hero__item { overflow: hidden; position: relative; }
+    .hero__item img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .hero__item:hover img { transform: scale(1.05); }
+
+    .hero__item--1 { grid-column: 1 / 8; grid-row: 1 / 3; height: 600px; }
+    .hero__item--2 { grid-column: 8 / 13; grid-row: 1 / 2; }
+    .hero__item--3 { grid-column: 8 / 13; grid-row: 2 / 3; }
+
+    /* Sections */
+    .section { margin: 100px 0; }
+    .section__title {
+      font-size: 42px;
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    .section__title::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--accent-color);
+      margin: 20px auto 0;
+    }
+
+    /* News */
+    .newsList { max-width: 800px; margin: 0 auto; }
+    .newsItem {
+      display: flex;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-color);
+      gap: 40px;
+      align-items: baseline;
+    }
+    .newsItem__date { 
+      font-size: 14px; 
+      color: var(--secondary-text); 
+      letter-spacing: 0.1em;
+      min-width: 100px;
+    }
+    .newsItem__title { font-size: 16px; flex: 1; }
+
+    /* Categories */
+    .categoryLinks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .categoryCard {
+      aspect-ratio: 16 / 9;
+      background: #F3F3F1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-family: var(--font-serif);
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+    .categoryCard::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent-color);
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 1;
+    }
+    .categoryCard span { position: relative; z-index: 2; transition: var(--transition); }
+    .categoryCard:hover::before { opacity: 0.1; }
+    .categoryCard:hover span { transform: translateY(-5px); color: var(--accent-color); }
+
+    /* Product Grid */
+    .productGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 40px;
+    }
+    .productCard { display: block; }
+    .productCard__image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      margin-bottom: 20px;
+      background: #f0f0f0;
+      position: relative;
+    }
+    .productCard__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .productCard:hover .productCard__image img { transform: scale(1.1); }
+    
+    .productCard__info { text-align: center; }
+    .productCard__title { font-size: 18px; margin-bottom: 8px; color: var(--text-color); }
+    .productCard__price { font-size: 15px; color: var(--accent-color); font-weight: 500; letter-spacing: 0.05em; }
+
+    /* Guide */
+    .guideGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
+      padding: 80px 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .guideItem h3 { font-size: 20px; margin-bottom: 24px; }
+    .guideItem p { font-size: 14px; color: var(--secondary-text); }
+
+    /* Footer */
+    .footer {
+      padding: 100px 0 60px;
+      background: #1C1C1C;
+      color: #FFF;
+    }
+    .footer__content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    .footer__section h4 { font-size: 18px; margin-bottom: 24px; color: #FFF; }
+    .footer__links { display: flex; flex-direction: column; gap: 12px; }
+    .footer__links a { font-size: 14px; opacity: 0.7; }
+    .footer__links a:hover { opacity: 1; color: var(--accent-color); }
+    
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.5;
+      letter-spacing: 0.1em;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .hero__item--1 { grid-column: 1 / 2; grid-row: auto; height: 400px; }
+      .hero__item--2, .hero__item--3 { grid-column: 1 / 2; grid-row: auto; height: 250px; }
+      .guideGrid { grid-template-columns: 1fr; gap: 40px; }
+      .footer__content { grid-template-columns: 1fr 1fr; }
+      .nav { display: none; } /* Add mobile menu later */
+    }
+
+    @media (max-width: 640px) {
+      .section__title { font-size: 32px; }
+      .categoryLinks { grid-template-columns: 1fr; }
+      .footer__content { grid-template-columns: 1fr; }
+    }
+
+    /* Animations */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="wrap" style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="logo">
+        <a href="{IndexPageURL}">
+          {LogoTag}
+          {block:NotLogoTag}<h1>POPURA</h1>{/block:NotLogoTag}
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="{IndexPageURL}">Home</a>
+        <a href="{AboutPageURL}">About</a>
+        <a href="{ContactPageURL}">Contact</a>
+        {BASEMenuTag}
+      </nav>
+    </div>
+  </header>
+
+  {block:IndexPage}
+  <main class="wrap">
+
+    <section class="hero" data-reveal>
+      <div class="hero__item hero__item--1">
+        <img src="images/hero1.png" alt="Popura Interior">
+      </div>
+      <div class="hero__item hero__item--2">
+        <img src="images/hero2.png" alt="Popura Coffee Cup">
+      </div>
+      <div class="hero__item hero__item--3">
+        <img src="images/hero3.png" alt="Popura Lifestyle">
+      </div>
+    </section>
+
+    {block:AppsInformationBanner}
+      <section class="section" data-reveal>
+        {AppsInformationBannerTag}
+      </section>
+    {/block:AppsInformationBanner}
+
+    <section class="section" data-reveal>
+      <h2 class="section__title">Journal</h2>
+      <div class="newsList">
+        <article class="newsItem">
+          <span class="newsItem__date">2026.04.16</span>
+          <span class="newsItem__title">Popura Premium Collection を公開しました。</span>
+        </article>
+        <article class="newsItem">
+          <span class="newsItem__date">2026.03.30</span>
+          <span class="newsItem__title">季節限定コーヒー豆の予約販売を開始。</span>
+        </article>
+        <article class="newsItem">
+          <span class="newsItem__date">2026.03.15</span>
+          <span class="newsItem__title">配送手数料の改定に関するお知らせ。</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="categoryLinks">
+        <a href="#" class="categoryCard"><span>Coffee Beans</span></a>
+        <a href="#" class="categoryCard"><span>Equipment</span></a>
+        <a href="#" class="categoryCard"><span>Gift Set</span></a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <h2 class="section__title">Collections</h2>
+      <div class="productGrid">
+        {block:Items}
+        <article class="productCard">
+          <a href="{ItemPageURL}">
+            <div class="productCard__image">
+              {block:ItemImage1}
+                <img src="{ItemImage1URL-500}" alt="{ItemTitle}">
+              {/block:ItemImage1}
+            </div>
+            <div class="productCard__info">
+              <h3 class="productCard__title">{ItemTitle}</h3>
+              <p class="productCard__price">{ItemPrice}</p>
+            </div>
+          </a>
+        </article>
+        {/block:Items}
+      </div>
+    </section>
+
+    <section class="guideGrid" data-reveal>
+      <div class="guideItem">
+        <h3>Shipping</h3>
+        <p>全国一律 800円（税込）。10,000円以上のお買い上げで送料無料となります。</p>
+      </div>
+      <div class="guideItem">
+        <h3>Payment</h3>
+        <div style="margin-top: 16px;">
+          {PaymentMethodsLogoTag}
+        </div>
+      </div>
+      <div class="guideItem">
+        <h3>Calendar</h3>
+        <p>定休日：月曜日・火曜日<br>営業時間：10:00 - 18:00</p>
+      </div>
+    </section>
+
+  </main>
+  {/block:IndexPage}
+
+  {block:AboutPage}
+  <main class="wrap section" data-reveal>
+    <h2 class="section__title">About Us</h2>
+    <div style="max-width: 800px; margin: 0 auto; font-size: 16px; line-height: 2;">
+      {ShopIntroduction}
+    </div>
+  </main>
+  {/block:AboutPage}
+
+  {block:ItemPage}
+  <main class="wrap section" data-reveal>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+      <div class="item__images">
+        {block:ItemImage1}<img src="{ItemImage1URL-origin}" alt="{ItemTitle}" style="width:100%;">{/block:ItemImage1}
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px;">
+           {block:ItemImage2}<img src="{ItemImage2URL-500}" alt="">{/block:ItemImage2}
+           {block:ItemImage3}<img src="{ItemImage3URL-500}" alt="">{/block:ItemImage3}
+        </div>
+      </div>
+      <div class="item__details">
+        <h2 style="font-size: 32px; margin-bottom: 12px;">{ItemTitle}</h2>
+        <p style="font-size: 24px; color: var(--accent-color); margin-bottom: 24px;">{ItemPrice}</p>
+        
+        <div style="margin-bottom: 32px; font-size: 14px; color: var(--secondary-text);">
+          {ItemAttentionTag}
+        </div>
+
+        {block:PurchaseForm}
+          <div style="margin-bottom: 40px;">
+            {ItemSelectTag}
+            <div style="margin-top: 24px;">
+              {PurchaseButton}
+            </div>
+          </div>
+        {/block:PurchaseForm}
+
+        <div class="item__description" style="margin-top: 60px; border-top: 1px solid var(--border-color); padding-top: 40px;">
+          {ItemDetail}
+        </div>
+
+        {block:AppsReview}
+          <div style="margin-top: 60px;">
+            {AppsReviewTag}
+          </div>
+        {/block:AppsReview}
+
+        <div style="margin-top: 40px; font-size: 12px; opacity: 0.5;">
+          {IllegalReportTag}
+        </div>
+      </div>
+    </div>
+  </main>
+  {/block:ItemPage}
+
+  {PageContents}
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__content">
+        <div class="footer__section">
+          <h4>Navigation</h4>
+          <div class="footer__links">
+            <a href="{IndexPageURL}">Home</a>
+            <a href="{AboutPageURL}">About</a>
+            <a href="{ContactPageURL}">Contact</a>
+          </div>
+        </div>
+        <div class="footer__section">
+          <h4>Legal</h4>
+          <div class="footer__links">
+            <a href="{PrivacyPageURL}">{lang:Privacy}</a>
+            <a href="{LawPageURL}">{lang:Law}</a>
+          </div>
+        </div>
+        <div class="footer__section">
+          <h4>Follow Us</h4>
+          <div class="footer__links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+          </div>
+        </div>
+        <div class="footer__section">
+          <h4>Contact</h4>
+          <div class="footer__links">
+            <span>info@example.com</span>
+            <span>00-0000-0000</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        &copy; {CopyrightTag} POPURA. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal animation
+    const reveal = () => {
+      const reveals = document.querySelectorAll('[data-reveal]');
+      reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const revealTop = el.getBoundingClientRect().top;
+        const revealPoint = 100;
+        if (revealTop < windowHeight - revealPoint) {
+          el.classList.add('revealed');
+        }
+      });
+    };
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Handle BASE purchase button styling
+    window.addEventListener('load', () => {
+      const btn = document.querySelector('.base_purchase_btn'); // Common BASE class
+      if (btn) {
+        btn.style.width = '100%';
+        btn.style.height = '60px';
+        btn.style.background = '#1C1C1C';
+        btn.style.color = '#FFF';
+        btn.style.border = 'none';
+        btn.style.fontSize = '16px';
+        btn.style.letterSpacing = '0.1em';
+      }
+    });
+  </script>
+</body>
+</html>
+{/block:NotLoadItemsPage}
+
+{block:LoadItemsPage}
+  {block:Items}
+  <article class="productCard">
+    <a href="{ItemPageURL}">
+      <div class="productCard__image">
+        {block:ItemImage1}
+          <img src="{ItemImage1URL-500}" alt="{ItemTitle}">
+        {/block:ItemImage1}
+      </div>
+      <div class="productCard__info">
+        <h3 class="productCard__title">{ItemTitle}</h3>
+        <p class="productCard__price">{ItemPrice}</p>
+      </div>
+    </a>
+  </article>
+  {/block:Items}
+{/block:LoadItemsPage}
