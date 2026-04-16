@@ -324,7 +324,7 @@
     }
     .specialtyCard__image {
       aspect-ratio: 16 / 9;
-      background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800');
+      background-image: url('images/back-coffee-beans.png');
       background-size: cover;
       background-position: center;
       position: relative;
@@ -357,6 +357,18 @@
     .storyBlock__content h3 { font-size: 32px; margin-bottom: 30px; position: relative; display: inline-block; }
     .storyBlock__content h3::after { content: ''; display: block; width: 60%; height: 1px; background: var(--accent-color); margin-top: 10px; }
     .storyBlock__text { font-size: 16px; line-height: 2; color: var(--text-color); }
+
+    /* Roasting Gallery */
+    .roastGrid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 15px;
+      margin-top: 60px;
+    }
+    .roastGrid__item { overflow: hidden; background: #000; }
+    .roastGrid__item.video { grid-row: span 2; }
+    .roastGrid__item img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: var(--transition); }
+    .roastGrid__item:hover img { opacity: 1; transform: scale(1.05); }
 
     /* Mobile */
     @media (max-width: 900px) {
@@ -398,7 +410,9 @@
       <div class="logo">
         <a href="{IndexPageURL}">
           {LogoTag}
-          {block:NotLogoTag}<h1>ポプラ館珈琲</h1>{/block:NotLogoTag}
+          {block:NotLogoTag}
+            <img src="images/shop-card.png" alt="ポプラ館珈琲" style="height: 60px; width: auto;">
+          {/block:NotLogoTag}
         </a>
       </div>
       <nav class="nav">
@@ -490,16 +504,31 @@
     <section class="section" data-reveal style="background: #1C1C1C; color: #FFF; padding: 100px 0; margin-left: -5vw; margin-right: -5vw; padding-left: 5vw; padding-right: 5vw;">
       <div class="wrap">
         <h2 class="section__title" style="color: #FFF;">Roasting Excellence</h2>
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
           <p style="font-size: 24px; font-family: var(--font-serif); color: var(--accent-color); margin-bottom: 40px;">日本の「自家焙煎」を創り上げてきた矜持</p>
-          <p style="line-height: 2; margin-bottom: 60px; opacity: 0.8;">
+          <p style="line-height: 2; margin-bottom: 60px; opacity: 0.8; max-width: 800px; margin-left: auto; margin-right: auto;">
             当店の自慢は、今なお現役で鼓動を続ける「10kg焙煎機の第1号機」。<br>
             40年以上の歳月を経て、鋳物の隅々にまで熱が馴染んだこの機体は、最新鋭のデジタル機では決して出せない、深く、優しく、それでいて力強い火力を豆に届けます。
           </p>
-          <div style="aspect-ratio: 16/9; background: #000; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
-              <source src="images/video/baisen-syhort.mp4" type="video/mp4">
-            </video>
+          
+          <div class="roastGrid">
+            <div class="roastGrid__item video">
+              <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="images/video/baisen-syhort.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="roastGrid__item">
+              <img src="images/roast/roast.jpg" alt="">
+            </div>
+            <div class="roastGrid__item">
+              <img src="images/roast/roast2.jpg" alt="">
+            </div>
+            <div class="roastGrid__item">
+              <img src="images/roast/S__47874061_0.jpg" alt="">
+            </div>
+            <div class="roastGrid__item">
+              <img src="images/roast/S__47874070_0.jpg" alt="">
+            </div>
           </div>
         </div>
       </div>
@@ -577,6 +606,44 @@
           </a>
         </article>
         {/block:Items}
+
+        <!-- Demo Products for Local Preview -->
+        <article class="productCard">
+          <div class="productCard__image">
+            <img src="images/pancake.png" alt="Pancake">
+          </div>
+          <div class="productCard__info">
+            <h3 class="productCard__title">ポプラ特製パンケーキ</h3>
+            <p class="productCard__price">¥1,200</p>
+          </div>
+        </article>
+        <article class="productCard">
+          <div class="productCard__image">
+            <img src="images/pudding.jpg" alt="Pudding">
+          </div>
+          <div class="productCard__info">
+            <h3 class="productCard__title">自家製カスタードプリン</h3>
+            <p class="productCard__price">¥600</p>
+          </div>
+        </article>
+        <article class="productCard">
+          <div class="productCard__image">
+            <img src="images/wafful.jpg" alt="Waffle">
+          </div>
+          <div class="productCard__info">
+            <h3 class="productCard__title">ベリーワッフル</h3>
+            <p class="productCard__price">¥950</p>
+          </div>
+        </article>
+        <article class="productCard">
+          <div class="productCard__image">
+            <img src="images/toast.png" alt="Toast">
+          </div>
+          <div class="productCard__info">
+            <h3 class="productCard__title">厚切りバタートースト</h3>
+            <p class="productCard__price">¥500</p>
+          </div>
+        </article>
       </div>
     </section>
 
