@@ -7,7 +7,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <title>{PageTitle}</title>
   <meta name="BASE-Theme-Name" content="Popura Premium Editorial">
-  <meta name="BASE-Theme-Version" content="1.0">
+  <meta name="BASE-Theme-Version" content="1.1">
 
   {FaviconTag}
   {CanonicalTag}
@@ -19,878 +19,2230 @@
   {BackgroundTag}
   {GoogleAnalyticsTag}
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;600;700&family=Pirata+One&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-color: #FAFAF9;
-      --text-color: #2D1B13;
-      --accent-color: #C4A484;
-      --brand-gold: #e6d2a3;
-      --secondary-text: #6d5c58;
-      --border-color: #E5E7EB;
-      --container-width: 1200px;
-      --font-serif: 'Noto Serif JP', serif;
-      --font-sans: 'Noto Sans JP', sans-serif;
-      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      --paper: #efefef;
+      --coffee: #7a5648;
+      --coffee-deep: #6a4436;
+      --coffee-soft: #96796d;
+      --line: #d9d0cb;
+      --panel: #c7bbb6;
+      --panel-dark: #775040;
+      --text: #7a5648;
+      --muted: #a89a94;
+      --footer-dark: #313335;
+      --card-bg: #f1f1f1;
+      --container: 1560px;
+      --transition: all 0.35s ease;
+      --font-sans: "Noto Sans JP", sans-serif;
+      --font-serif: "Noto Serif JP", serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      color: var(--text);
+      background: var(--paper);
       font-family: var(--font-sans);
-      line-height: 1.6;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
-    a { text-decoration: none; color: inherit; transition: var(--transition); }
-    img { max-width: 100%; height: auto; display: block; }
-    h1, h2, h3, h4 { font-family: var(--font-serif); margin: 0; font-weight: 600; }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
 
     .wrap {
-      width: min(var(--container-width), 90%);
+      width: min(var(--container), calc(100% - 72px));
       margin: 0 auto;
     }
 
-    /* Header */
-    .header {
-      padding: 30px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250, 250, 249, 0.8);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid transparent;
-      transition: var(--transition);
-    }
-    .header.scrolled {
-      padding: 15px 0;
-      border-bottom: 1px solid var(--border-color);
+    .required-tags {
+      display: none !important;
     }
 
-    .logo img { height: 40px; width: auto; }
-    .logo h1 { font-size: 28px; letter-spacing: 0.1em; }
-
-    .nav { display: flex; gap: 40px; align-items: center; }
-    .nav a {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-weight: 500;
+    .site-header {
       position: relative;
-    }
-    .nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--text-color);
-      transition: var(--transition);
-    }
-    .nav a:hover::after { width: 100%; }
-
-    /* Hero Slideshow */
-    .hero {
-      margin: 0;
-      width: 100%;
-      height: 80vh;
-      position: relative;
+      color: #efddd2;
+      padding: 22px 0 34px;
+      background: #2f211b;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .hero__item {
+
+    .site-header::before {
+      content: "";
       position: absolute;
       inset: 0;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
-      z-index: 1;
-    }
-    .hero__item.is-active {
-      opacity: 1;
-      z-index: 2;
-    }
-    .hero__item img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover;
-      filter: brightness(0.85);
+      background-image: url("https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top3.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.52) saturate(0.9);
     }
 
-    .hero-overlay {
-      position: relative; /* Changed from absolute to work with centered flex */
-      z-index: 20;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      pointer-events: none;
-    }
-    .hero-brand-card {
-      background: rgba(45, 27, 19, 0.35);
-      backdrop-filter: blur(8px);
-      padding: 2.5rem 3rem;
-      border: 2px solid var(--brand-gold);
-      color: var(--brand-gold);
-      clip-path: polygon(0% 14%, 6% 14%, 6% 5%, 15% 5%, 15% 0%, 85% 0%, 85% 5%, 94% 5%, 94% 14%, 100% 14%, 100% 86%, 94% 86%, 94% 95%, 85% 95%, 85% 100%, 15% 100%, 15% 95%, 6% 95%, 6% 86%, 0% 86%);
-      position: relative;
-      margin-bottom: 2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    }
-    .hero-brand-card::after {
-      content: '';
+    .site-header::after {
+      content: "";
       position: absolute;
-      inset: 10px;
-      border: 1px solid var(--brand-gold);
-      clip-path: inherit;
-    }
-    .hero-title-main {
-      font-family: 'Noto Serif JP', serif;
-      font-size: clamp(2.3rem, 6vw, 3.9rem);
-      margin: 0;
-      letter-spacing: 0.1em;
-      line-height: 1.1;
-      color: var(--brand-gold);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-    }
-    .hero-subtitle-en {
-      font-family: 'Pirata One', cursive;
-      font-size: clamp(1.6rem, 4vw, 2.7rem);
-      margin-top: 5px;
-      letter-spacing: 0.04em;
-      color: var(--brand-gold);
-    }
-    .hero-ribbon {
-      margin-top: 1.1rem;
-      display: inline-flex;
-      min-width: 280px;
-      height: 44px;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid var(--brand-gold);
-      background: linear-gradient(180deg, rgba(26, 15, 10, 0.72) 0%, rgba(50, 30, 22, 0.72) 100%);
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.08em;
-      color: var(--brand-gold);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
-    }
-    .hero-catchphrase {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.2rem;
-      color: #FFF;
-      padding: 1rem 2rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-      letter-spacing: 0.15em;
-      margin-top: 20px;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(22, 14, 11, 0.45) 0%, rgba(28, 18, 14, 0.62) 45%, rgba(27, 17, 14, 0.78) 100%);
     }
 
-    /* Sections */
-    .section { margin: 100px 0; }
-    .section__title {
-      font-size: 42px;
-      text-align: center;
-      margin-bottom: 60px;
+    .header-top {
       position: relative;
-    }
-    .section__title::after {
-      content: '';
-      display: block;
-      width: 40px;
-      height: 2px;
-      background: var(--accent-color);
-      margin: 20px auto 0;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 220px 1fr 220px;
+      align-items: center;
+      gap: 24px;
     }
 
-    /* News Card */
-    .news-card {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #FFF;
-      border: 1px solid #ddd;
-      padding: 2rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-    }
-    .newsItem {
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem 0;
-      border-bottom: 1px dashed #e8e8e8;
-      gap: 0.5rem;
-    }
-    .newsItem:last-child { border-bottom: none; }
-    .newsItem__date { 
-      font-size: 0.85rem; 
-      color: var(--secondary-text); 
-      letter-spacing: 0.05em;
-    }
-    .newsItem__title { 
-      font-size: 1rem; 
-      font-family: var(--font-serif);
-      border-bottom: 1px solid rgba(93, 64, 55, 0.1);
-      display: inline-block;
+    .header-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(242, 222, 208, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e9d8ce;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 16px;
+      letter-spacing: 0.04em;
       width: fit-content;
     }
-    .newsItem__title a { text-decoration: none; }
-    .newsItem__title a:hover { color: var(--accent-color); }
 
-    /* Categories */
-    .categoryLinks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+    .header-action:hover {
+      background: rgba(255, 255, 255, 0.12);
     }
-    .categoryCard {
-      aspect-ratio: 16 / 9;
-      background: #F3F3F1;
+
+    .header-action.is-right {
+      margin-left: auto;
+    }
+
+    .icon-menu {
+      position: relative;
+      width: 26px;
+      height: 2px;
+      background: #e8d4ca;
+      box-shadow: 0 8px 0 #e8d4ca, 0 -8px 0 #e8d4ca;
+    }
+
+    .icon-cart {
+      display: inline-flex;
+      width: 22px;
+      height: 22px;
+      color: #e8d4ca;
+      margin-right: 2px;
+    }
+
+    .icon-cart svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .brand-link {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      text-align: center;
+      color: #f0dfb5;
+      background: rgba(22, 17, 14, 0.32);
+      border: 1px solid rgba(240, 217, 160, 0.58);
+      padding: 30px 24px;
+      margin: 6px 0;
+      overflow: hidden;
+    }
+
+    .brand-link::before,
+    .brand-link::after {
+      content: "";
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background: rgba(240, 217, 160, 0.65);
+    }
+
+    .brand-link::before {
+      top: 14px;
+    }
+
+    .brand-link::after {
+      bottom: 14px;
+    }
+
+    .brand-ja {
+      font-family: var(--font-serif);
+      font-size: clamp(68px, 7vw, 108px);
+      line-height: 1;
+      letter-spacing: 0.1em;
+      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .brand-en {
+      display: none;
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 3.9vw, 62px);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin-top: 14px;
+      font-weight: 700;
+      text-shadow: 0 5px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .brand-since {
+      margin-top: 14px;
+      display: inline-block;
+      min-width: 220px;
+      padding: 8px 18px;
+      border: 1px solid rgba(240, 217, 160, 0.75);
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 1.7vw, 24px);
+      letter-spacing: 0.08em;
+      color: #efd9a7;
+      background: rgba(21, 17, 16, 0.34);
+      line-height: 1.15;
+    }
+
+    .header-note {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      margin-top: 12px;
+      color: #f2e5cc;
+    }
+
+    .header-note a {
+      border-bottom: 1px solid rgba(242, 229, 204, 0.45);
+      padding-bottom: 3px;
+    }
+
+    .header-note a:hover {
+      opacity: 0.75;
+    }
+
+    .header-catch {
+      position: relative;
+      z-index: 1;
+      width: min(720px, calc(100% - 40px));
+      margin: 20px auto 0;
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 2.6vw, 44px);
+      line-height: 1.35;
+      letter-spacing: 0.05em;
+      color: #f9f7f2;
+      background: rgba(120, 147, 186, 0.34);
+      border: 1px solid rgba(196, 217, 245, 0.45);
+      border-radius: 6px;
+      padding: 14px 18px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(2px);
+    }
+
+    .hero-stage {
+      background: var(--paper);
+      padding: 24px 0 10px;
+    }
+
+    .hero-shell {
+      position: relative;
+    }
+
+    .hero-rail {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(430px, 1fr));
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0 54px 16px;
+    }
+
+    .hero-rail::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hero-card {
+      border-radius: 4px;
+      overflow: hidden;
+      background: #d8d4d1;
+      height: clamp(260px, 33vw, 700px);
+      scroll-snap-align: center;
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s ease;
+    }
+
+    .hero-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-55%);
+      width: 62px;
+      height: 62px;
+      border: 0;
+      border-radius: 50%;
+      font-size: 36px;
+      line-height: 1;
+      color: #8f7f78;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .hero-arrow:hover {
+      background: #fff;
+    }
+
+    .hero-arrow.prev {
+      left: 4px;
+    }
+
+    .hero-arrow.next {
+      right: 4px;
+    }
+
+    .hero-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .hero-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #d6cec9;
+      border: 1px solid #cfc5bf;
+      cursor: pointer;
+    }
+
+    .hero-dot.is-active {
+      width: 20px;
+      height: 20px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      background: #9f8c83;
+      border-color: #9f8c83;
+    }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 46px;
+      align-items: start;
+      padding: 22px 0 78px;
+    }
+
+    .sidebar {
+      padding-top: 18px;
+    }
+
+    .side-block + .side-block {
+      margin-top: 34px;
+    }
+
+    .side-title {
+      margin: 0 0 14px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--coffee);
+      padding-bottom: 11px;
+      border-bottom: 4px solid var(--line);
+    }
+
+    .side-links,
+    .guide-links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .side-links li a,
+    .guide-links li a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      padding: 14px 2px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--coffee);
+    }
+
+    .side-links li a:hover,
+    .guide-links li a:hover {
+      opacity: 0.72;
+    }
+
+    .side-plus {
+      color: #b17d44;
+      font-size: 20px;
+      line-height: 1;
+      margin-left: 12px;
+    }
+
+    .guide-icon {
+      width: 16px;
+      height: 16px;
+      border: 1px solid #9a7464;
+      border-radius: 2px;
+      margin-right: 10px;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+
+    .guide-text {
+      display: inline-flex;
+      align-items: center;
+      flex: 1;
+      justify-content: flex-start;
+    }
+
+    .sidebar-image {
+      margin: 28px 0;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #d7d2cf;
+    }
+
+    .sidebar-image img,
+    .sidebar-image video {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .content-area {
+      min-width: 0;
+    }
+
+    .notice-panel {
+      margin: 4px 0 44px;
+    }
+
+    .notice-label {
+      font-size: 13px;
+      color: #b2a29b;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+      font-family: var(--font-serif);
+    }
+
+    .notice-title {
+      margin: 0 0 16px;
+      font-size: 42px;
+      line-height: 1.25;
+      color: var(--coffee);
+      font-family: var(--font-serif);
+      border-left: 6px solid #b7823b;
+      padding-left: 18px;
+    }
+
+    .notice-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+      align-items: start;
+    }
+
+    .notice-date {
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      color: #8b6e61;
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+
+    .notice-text {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #8a6758;
+    }
+
+    .series-panel {
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 24px 24px 18px;
+      margin-bottom: 34px;
+    }
+
+    .series-panel.is-subtle {
+      background: #cfc4bf;
+    }
+
+    .series-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 10px;
+      border-bottom: 5px solid var(--panel-dark);
+    }
+
+    .series-head h2 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.25;
+      color: var(--coffee);
+      font-family: var(--font-serif);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .series-more {
+      font-size: 13px;
+      color: #9b6c42;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+
+    .series-track {
+      margin-top: 18px;
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      padding-bottom: 14px;
+    }
+
+    .series-item {
+      flex: 0 0 260px;
+      min-width: 260px;
+      scroll-snap-align: start;
+    }
+
+    .series-thumb {
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      font-family: var(--font-serif);
-      border: 1px solid var(--border-color);
-      position: relative;
-      overflow: hidden;
     }
-    .categoryCard::before {
-      content: '';
+
+    .series-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .series-name {
+      margin: 10px 0 0;
+      font-size: 16px;
+      line-height: 1.45;
+      color: #845f4f;
+    }
+
+    .series-price {
+      margin: 7px 0 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #7b5343;
+    }
+
+    .series-sub {
+      margin: 6px 0 0;
+      font-size: 13px;
+      color: #7f6154;
+      line-height: 1.6;
+    }
+
+    .series-desc {
+      margin: 8px 0 0;
+      font-size: 14px;
+      color: #74584b;
+      line-height: 1.7;
+    }
+
+    .series-thumb.is-beans {
+      background-image: url("https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png");
+      background-size: cover;
+      background-position: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .series-thumb.is-beans img {
+      width: 62%;
+      max-width: 170px;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    }
+
+    .catalog-section {
+      padding-top: 12px;
+    }
+
+    .catalog-switch {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .switch-btn {
+      min-width: 170px;
+      border: 1px solid #7f5a4c;
+      border-radius: 4px;
+      background: transparent;
+      color: #6a4436;
+      padding: 12px 18px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .switch-btn.is-active {
+      background: #6a4436;
+      color: #fff;
+    }
+
+    .catalog-title {
+      margin: 4px 0 16px;
+      font-family: var(--font-serif);
+      font-size: 40px;
+      line-height: 1.3;
+      color: var(--coffee);
+      border-left: 6px solid #b7823b;
+      padding-left: 18px;
+    }
+
+    .catalog-subtitle {
+      margin: 0 0 18px;
+      color: #8d6e60;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .bean-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 30px 26px;
+    }
+
+    .bean-card {
+      background: #f8f6f4;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e1d7d2;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .bean-image {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #ddd;
+    }
+
+    .bean-image .bean-bg {
       position: absolute;
       inset: 0;
-      background: var(--accent-color);
-      opacity: 0;
-      transition: var(--transition);
-      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.9);
     }
-    .categoryCard span { position: relative; z-index: 2; transition: var(--transition); }
-    .categoryCard:hover::before { opacity: 0.1; }
-    .categoryCard:hover span { transform: translateY(-5px); color: var(--accent-color); }
 
-    /* Product Grid */
-    .productGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 40px;
+    .bean-image .bean-flag {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 58%;
+      max-width: 180px;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+      background: #fff;
     }
-    .productCard { display: block; }
-    .productCard__image {
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      margin-bottom: 20px;
-      background: #f0f0f0;
+
+    .bean-image .bean-flag.svg {
+      background: transparent;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    }
+
+    .bean-body {
+      padding: 14px 16px 16px;
+    }
+
+    .bean-name {
+      margin: 0;
+      color: #503a33;
+      font-size: 19px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .bean-price {
+      margin: 10px 0 0;
+      color: #6e4a3f;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .bean-shell {
       position: relative;
     }
+
+    .bean-dots {
+      display: none;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 30px 26px;
+    }
+
+    .productCard {
+      min-width: 0;
+    }
+
+    .productCard__link {
+      display: block;
+      color: inherit;
+    }
+
+    .productCard__image {
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+    }
+
     .productCard__image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: transform 0.7s ease;
     }
-    .productCard:hover .productCard__image img { transform: scale(1.1); }
-    
-    .productCard__info { text-align: center; }
-    .productCard__title { font-size: 18px; margin-bottom: 8px; color: var(--text-color); }
-    .productCard__price { font-size: 15px; color: var(--accent-color); font-weight: 500; letter-spacing: 0.05em; }
 
-    /* Information Section Card */
-    .info-card-container {
-      background-color: #FFF;
-      border: 1px solid #ddd;
-      padding: 2.5rem;
-      max-width: 600px;
-      margin: 0 auto;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-      text-align: center;
+    .productCard__link:hover .productCard__image img {
+      transform: scale(1.04);
     }
-    .info-item {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      border-bottom: 1px dashed #eee;
-      padding-bottom: 0.5rem;
+
+    .productCard__title {
+      margin: 10px 0 0;
+      font-size: 16px;
+      line-height: 1.45;
+      color: #845f4f;
     }
-    .info-item:last-child { border-bottom: none; }
-    .info-map-link {
-      display: inline-block;
-      margin-top: 0.6rem;
-      padding: 0.7rem 1.4rem;
-      border: 1px solid var(--accent-color);
-      background-color: transparent;
-      color: var(--accent-color);
+
+    .productCard__price {
+      margin: 8px 0 0;
+      font-size: 19px;
+      line-height: 1.3;
+      font-weight: 700;
+      color: #7b5343;
+    }
+
+    .static-page {
+      padding: 54px 0 82px;
+    }
+
+    .single-panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .single-title {
+      margin: 0 0 16px;
+      font-size: 34px;
+      color: var(--coffee);
       font-family: var(--font-serif);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .info-map-link:hover {
-      background-color: var(--accent-color);
-      color: white;
     }
 
-    /* Footer */
-    .footer {
-      padding: 100px 0 60px;
-      background: #1C1C1C;
-      color: #FFF;
+    .single-text {
+      color: #856556;
+      font-size: 16px;
+      line-height: 1.9;
     }
-    .footer__content {
+
+    .item-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .item-thumbs {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      margin-bottom: 60px;
+      gap: 10px;
+      margin-top: 10px;
     }
-    .footer__section h4 { font-size: 18px; margin-bottom: 24px; color: #FFF; }
-    .footer__links { display: flex; flex-direction: column; gap: 12px; }
-    .footer__links a { font-size: 14px; opacity: 0.7; }
-    .footer__links a:hover { opacity: 1; color: var(--accent-color); }
-    
-    .footer__bottom {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 40px;
+
+    .item-side .single-title {
+      margin-bottom: 4px;
+    }
+
+    .item-side .single-price {
+      margin: 0 0 14px;
+      font-size: 30px;
+      color: #7b5343;
+      font-weight: 700;
+    }
+
+    .item-description {
+      margin-top: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      color: #856556;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .page-top-strip {
       text-align: center;
-      font-size: 12px;
-      opacity: 0.5;
-      letter-spacing: 0.1em;
+      background: #93766b;
+      color: #f0e7e2;
+      padding: 14px 0 18px;
+      font-size: 18px;
+      letter-spacing: 0.03em;
     }
 
-    /* Specialty Coffee Cards */
-    .specialtyCard {
-      background: #FFF;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(94, 81, 77, 0.08);
-      display: flex;
-      flex-direction: column;
+    .page-top-strip a {
+      opacity: 0.95;
     }
-    .specialtyCard__image {
-      aspect-ratio: 5 / 3;
-      background-image: url('back-coffee-beans.png');
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .specialtyCard__body { padding: 1.1rem 1.2rem; }
-    .specialtyCard__name { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; font-family: var(--font-serif); }
-    .specialtyCard__months { font-size: 0.8rem; color: #666; margin-bottom: 0.5rem; }
-    .specialtyCard__desc { font-size: 0.8rem; color: #555; line-height: 1.6; }
 
-    /* Specialty Coffee Carousel Controls */
-    .special-coffee-carousel-wrap { position: relative; max-width: 1000px; margin: 0 auto; }
-    .special-coffee-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      color: var(--text-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      cursor: pointer;
+    .page-top-strip a:hover {
+      opacity: 0.75;
     }
-    .special-coffee-arrow-prev { left: -60px; }
-    .special-coffee-arrow-next { right: -60px; }
 
-    /* Story Blocks */
-    .storyBlock { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin: 120px 0; }
-    .storyBlock:nth-child(even) { direction: rtl; }
-    .storyBlock:nth-child(even) > * { direction: ltr; }
-    .storyBlock__image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; box-shadow: 20px 20px 0 var(--bg-color), 20px 20px 0 1px var(--accent-color); }
-    .storyBlock__content h3 { font-size: 32px; margin-bottom: 30px; position: relative; display: inline-block; }
-    .storyBlock__content h3::after { content: ''; display: block; width: 60%; height: 1px; background: var(--accent-color); margin-top: 10px; }
-    .storyBlock__text { font-size: 16px; line-height: 2; color: var(--text-color); }
-
-    /* Roasting Gallery */
-    .roast-section {
-      background: linear-gradient(180deg, #2a1a14 0%, #3a231b 48%, #2a1a14 100%);
-      color: #f3e7d3;
-      padding: 100px 0;
-      margin: 100px -5vw;
-      padding-left: 5vw;
-      padding-right: 5vw;
+    .site-footer {
+      margin-top: 0;
+      color: #eaded7;
     }
-    .roastGrid {
+
+    .footer-upper {
+      background: var(--panel-dark);
+      padding: 40px 0 56px;
+    }
+
+    .footer-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 0.9rem;
-      max-width: 1000px;
-      margin: 60px auto 0;
-    }
-    .roastGrid__item { overflow: hidden; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 240, 220, 0.18); }
-    .roastGrid__item.video { grid-column: 1 / -1; }
-    .roastGrid__item img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.03) saturate(1.03); transition: var(--transition); }
-    .roastGrid__item:hover img { transform: scale(1.03); }
-
-    /* Mobile */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; grid-template-rows: auto; }
-      .hero__item--1 { grid-column: 1 / 2; grid-row: auto; height: 400px; }
-      .hero__item--2, .hero__item--3 { grid-column: 1 / 2; grid-row: auto; height: 250px; }
-      .guideGrid { grid-template-columns: 1fr; gap: 40px; }
-      .footer__content { grid-template-columns: 1fr 1fr; }
-      .nav { display: none; } /* Add mobile menu later */
-      .storyBlock { grid-template-columns: 1fr; gap: 40px; margin: 60px 0; }
-      .storyBlock:nth-child(even) { direction: ltr; }
-      .storyBlock__image img { box-shadow: 10px 10px 0 var(--bg-color), 10px 10px 0 1px var(--accent-color); }
-      .hero-title-main { font-size: 32px; }
-      .hero-brand-card { padding: 2rem; }
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 36px;
     }
 
-    @media (max-width: 640px) {
-      .section__title { font-size: 32px; }
-      .categoryLinks { grid-template-columns: 1fr; }
-      .footer__content { grid-template-columns: 1fr; }
+    .footer-title {
+      margin: 0 0 16px;
+      font-size: 30px;
+      font-family: var(--font-serif);
+      color: #e6d4cb;
+      line-height: 1.3;
     }
 
-    /* Animations */
+    .shipping-section .footer-title {
+      margin: 0 0 14px;
+      font-size: clamp(16px, 1.8vw, 32px);
+      font-family: var(--font-sans);
+      font-weight: 700;
+      color: #d3cbc8;
+      position: relative;
+      padding-left: 22px;
+      letter-spacing: 0.01em;
+    }
+
+    .shipping-section .footer-title::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #cbc2bd;
+      font-size: 0.92em;
+      line-height: 1;
+    }
+
+    .shipping-box {
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.14);
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .shipping-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.16);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #cfc8c3;
+    }
+
+    .shipping-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .shipping-copy {
+      min-width: 0;
+      display: block;
+    }
+
+    .shipping-copy strong {
+      display: block;
+      font-size: clamp(17px, 1.55vw, 31px);
+      line-height: 1.2;
+      color: #ece7e4;
+      margin-bottom: 3px;
+      font-weight: 700;
+    }
+
+    .shipping-copy span {
+      display: block;
+      font-size: clamp(14px, 1.2vw, 24px);
+      line-height: 1.28;
+      color: #d6ccc7;
+    }
+
+    .footer-sub-link {
+      text-align: right;
+      font-size: clamp(13px, 0.95vw, 17px);
+      color: #d6b793;
+      margin: 10px 0 24px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .payment-wrap {
+      margin-top: 10px;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .payment-wrap .payment_method,
+    .payment-wrap ul,
+    .payment-wrap ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .payment-wrap .payment_method li,
+    .payment-wrap ul li,
+    .payment-wrap ol li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .payment-wrap .payment_method > a,
+    .payment-wrap .payment_method > span,
+    .payment-wrap .payment_method > div,
+    .payment-wrap .payment_method > img,
+    .payment-wrap .payment_method li,
+    .payment-wrap li,
+    .payment-wrap a {
+      background: #f2f0ed;
+      border: 1px solid rgba(65, 44, 37, 0.2);
+      border-radius: 7px;
+      min-height: 44px;
+      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #4e3e37;
+      font-size: clamp(13px, 0.95vw, 18px);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .payment-wrap .payment_method img,
+    .payment-wrap img {
+      width: auto;
+      max-height: 24px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .payment-wrap .payment_method > img {
+      padding: 10px 16px;
+    }
+
+    .payment-fallback {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: stretch;
+      margin-top: 2px;
+    }
+
+    .pay-chip {
+      min-height: 40px;
+      padding: 8px 14px;
+      background: #f3f1ef;
+      border: 1px solid rgba(66, 43, 36, 0.22);
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #3f322c;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .pay-chip--wide {
+      min-width: 272px;
+    }
+
+    .pay-chip--mid {
+      min-width: 112px;
+    }
+
+    .pay-chip--mid2 {
+      min-width: 220px;
+    }
+
+    .pay-chip--solo {
+      min-width: 96px;
+    }
+
+    .pay-check {
+      font-size: 13px;
+      color: #6d615b;
+      line-height: 1;
+    }
+
+    .pay-logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pay-logo {
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .pay-logo.visa {
+      color: #1547b7;
+      font-style: italic;
+    }
+
+    .pay-logo.jcb {
+      color: #1a7f4c;
+    }
+
+    .pay-logo.amex {
+      color: #1d87c6;
+      font-size: 11px;
+      letter-spacing: 0;
+    }
+
+    .pay-logo.diners {
+      color: #205f8c;
+      font-size: 11px;
+    }
+
+    .pay-master {
+      position: relative;
+      width: 26px;
+      height: 14px;
+      display: inline-block;
+    }
+
+    .pay-master::before,
+    .pay-master::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+
+    .pay-master::before {
+      left: 0;
+      background: #e7382f;
+    }
+
+    .pay-master::after {
+      right: 0;
+      background: #f4a024;
+      opacity: 0.9;
+    }
+
+    .pay-chip.amazon {
+      font-size: 33px;
+      color: #3f3f40;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      padding: 6px 16px;
+    }
+
+    .pay-chip.paypal {
+      color: #0f6ec6;
+      font-size: 34px;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      padding: 7px 14px;
+    }
+
+    .calendar-wrap {
+      margin-top: 8px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .calendar {
+      background: rgba(0, 0, 0, 0.13);
+      border-radius: 8px;
+      padding: 16px 14px 12px;
+    }
+
+    .calendar caption {
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #ecdcd3;
+      text-align: center;
+    }
+
+    .calendar th,
+    .calendar td {
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ecded6;
+      padding: 2px 0;
+      min-width: 22px;
+    }
+
+    .calendar td.is-holiday span,
+    .calendar td.is-today span {
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar td.is-holiday span {
+      background: #f2a4b1;
+      color: #fff;
+    }
+
+    .calendar td.is-today span {
+      background: #c29234;
+      color: #fff;
+    }
+
+    .calendar-note {
+      margin: 8px 2px 0;
+      text-align: right;
+      font-size: 13px;
+      color: #eadfd8;
+    }
+
+    .calendar-note .dot {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: -1px;
+    }
+
+    .calendar-note .dot.today {
+      background: #c29234;
+      margin-left: 10px;
+    }
+
+    .calendar-note .dot.holiday {
+      background: #f2a4b1;
+      margin-left: 10px;
+    }
+
+    .footer-lower {
+      background: var(--footer-dark);
+      padding: 26px 0 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 14px;
+      color: #dfd9d5;
+    }
+
+    .footer-nav a:hover {
+      color: #ffffff;
+    }
+
+    .footer-copy {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #a6a8ac;
+      letter-spacing: 0.03em;
+    }
+
     [data-reveal] {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
+
     [data-reveal].revealed {
       opacity: 1;
       transform: translateY(0);
     }
+
+    @media (max-width: 1100px) {
+      .header-top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+        gap: 14px 18px;
+      }
+
+      .header-action,
+      .header-action.is-right {
+        margin: 0;
+      }
+
+      .header-top > .header-action:first-child {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: start;
+      }
+
+      .header-action.is-right {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+      }
+
+      .header-note {
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .brand-link {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        min-height: 190px;
+        padding: 24px 18px;
+        margin: 2px 0 0;
+      }
+
+      .hero-arrow {
+        display: none;
+      }
+
+      .hero-rail {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        order: 2;
+      }
+
+      .content-area {
+        order: 1;
+      }
+
+      .catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bean-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .series-head h2 {
+        font-size: 30px;
+      }
+
+      .notice-title,
+      .catalog-title {
+        font-size: 36px;
+      }
+
+      .notice-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .item-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shipping-section .footer-title {
+        font-size: 22px;
+      }
+
+      .shipping-copy strong {
+        font-size: 21px;
+      }
+
+      .shipping-copy span {
+        font-size: 16px;
+      }
+
+      .footer-sub-link {
+        font-size: 15px;
+      }
+
+      .pay-chip.amazon {
+        font-size: 24px;
+      }
+
+      .pay-chip.paypal {
+        font-size: 23px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .wrap {
+        width: min(var(--container), calc(100% - 30px));
+      }
+
+      .brand-ja {
+        font-size: clamp(42px, 12vw, 56px);
+        line-height: 1.05;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        word-break: keep-all;
+      }
+
+      .brand-en {
+        display: none;
+      }
+
+      .brand-since {
+        min-width: 180px;
+        padding: 7px 14px;
+        font-size: clamp(12px, 4.2vw, 16px);
+      }
+
+      .header-catch {
+        width: calc(100% - 24px);
+        padding: 10px 8px;
+        font-size: clamp(14px, 4vw, 18px);
+        line-height: 1.25;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+        word-break: keep-all;
+      }
+
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bean-grid {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 10px;
+      }
+
+      .bean-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .bean-card {
+        flex: 0 0 100%;
+        min-width: 100%;
+        scroll-snap-align: start;
+      }
+
+      .bean-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        margin-top: 6px;
+      }
+
+      .bean-dot {
+        width: 12px;
+        height: 12px;
+        border: 1px solid #cfc5bf;
+        border-radius: 50%;
+        background: #d6cec9;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .bean-dot.is-active {
+        width: 18px;
+        height: 18px;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(45deg);
+        background: #9f8c83;
+        border-color: #9f8c83;
+      }
+
+      .series-track {
+        gap: 14px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .series-track::-webkit-scrollbar {
+        display: none;
+      }
+
+      .series-item {
+        flex: 0 0 100%;
+        min-width: 100%;
+      }
+
+      .calendar-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shipping-section .footer-title {
+        font-size: 16px;
+        padding-left: 18px;
+      }
+
+      .shipping-box {
+        padding: 12px 12px;
+        gap: 10px;
+      }
+
+      .shipping-icon {
+        width: 38px;
+        height: 38px;
+      }
+
+      .shipping-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .shipping-copy strong {
+        font-size: 14px;
+      }
+
+      .shipping-copy span {
+        font-size: 12px;
+      }
+
+      .footer-sub-link {
+        font-size: 13px;
+        margin: 8px 0 20px;
+      }
+
+      .payment-wrap .payment_method,
+      .payment-wrap ul,
+      .payment-wrap ol {
+        gap: 8px;
+      }
+
+      .payment-wrap .payment_method > a,
+      .payment-wrap .payment_method > span,
+      .payment-wrap .payment_method > div,
+      .payment-wrap .payment_method > img,
+      .payment-wrap .payment_method li,
+      .payment-wrap li,
+      .payment-wrap a {
+        min-height: 40px;
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+
+      .payment-wrap .payment_method img,
+      .payment-wrap img {
+        max-height: 20px;
+      }
+
+      .payment-fallback {
+        gap: 7px;
+      }
+
+      .pay-chip {
+        min-height: 34px;
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+
+      .pay-chip--wide {
+        min-width: 0;
+        width: calc(100% - 114px);
+        flex: 1 1 auto;
+      }
+
+      .pay-chip--mid {
+        min-width: 106px;
+      }
+
+      .pay-chip--mid2 {
+        min-width: 140px;
+        flex: 1 1 130px;
+      }
+
+      .pay-chip--solo {
+        min-width: 96px;
+      }
+
+      .pay-logos {
+        gap: 9px;
+      }
+
+      .pay-logo.amex,
+      .pay-logo.diners {
+        font-size: 9px;
+      }
+
+      .pay-chip.amazon {
+        font-size: 15px;
+      }
+
+      .pay-chip.paypal {
+        font-size: 15px;
+      }
+    }
   </style>
 </head>
-<body>
+<body id="top">
+  <div class="required-tags" aria-hidden="true">
+    {LogoTag}
+    {BASEMenuTag}
+  </div>
 
-  <header class="header">
-    <div class="wrap" style="display:flex; justify-content:space-between; align-items:center;">
-      <div class="logo">
-        <a href="{IndexPageURL}">
-          {LogoTag}
-          {block:NotLogoTag}
-            <img src="shop-card.png" alt="ポプラ館珈琲" style="height: 60px; width: auto;">
-          {/block:NotLogoTag}
-        </a>
+  <header class="site-header">
+    <div class="wrap header-top">
+      <a href="#sidebar" class="header-action">
+        <span class="icon-menu" aria-hidden="true"></span>
+        <span>メニュー</span>
+      </a>
+
+      <div class="brand-link" aria-label="ポプラ館珈琲">
+        <span class="brand-ja">ポプラ館珈琲</span>
+        <span class="brand-en">POPURA KAN COFFEE</span>
+        <span class="brand-since">since 1974</span>
       </div>
-      <nav class="nav">
-        <a href="{IndexPageURL}">Home</a>
-        <a href="{AboutPageURL}">About</a>
-        <a href="{ContactPageURL}">Contact</a>
-        {BASEMenuTag}
-      </nav>
+
+      <a href="/cart" class="header-action is-right">
+        <span class="icon-cart" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <circle cx="9" cy="19" r="1.5"></circle>
+            <circle cx="17" cy="19" r="1.5"></circle>
+            <path d="M3 4h2l2.2 9.2h10.2l2-7H6.2"></path>
+          </svg>
+        </span>
+        <span>カート</span>
+      </a>
     </div>
+    <div class="wrap header-note">
+      <a href="{AboutPageURL}">ポプラ館珈琲について</a>
+    </div>
+    <p class="header-catch">一杯の贅沢、受け継がれる味。</p>
   </header>
 
   {block:IndexPage}
-  <main class="wrap">
+  <section class="hero-stage" data-reveal>
+    <div class="wrap hero-shell">
+      <button class="hero-arrow prev" type="button" aria-label="前へ">‹</button>
+      <div class="hero-rail" id="js-hero-rail">
+        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top.jpg" alt="店内の風景"></figure>
+        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top2.jpg" alt="店内の風景"></figure>
+        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top3.jpg" alt="珈琲と器"></figure>
+        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top4.jpg" alt="珈琲カップ"></figure>
+        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top5.jpg" alt="店内の風景"></figure>
+        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/story-photo.jpg" alt="豆の選別"></figure>
+      </div>
+      <button class="hero-arrow next" type="button" aria-label="次へ">›</button>
+      <div class="hero-dots" id="js-hero-dots">
+        <button type="button" class="hero-dot is-active" aria-label="1枚目へ"></button>
+        <button type="button" class="hero-dot" aria-label="2枚目へ"></button>
+        <button type="button" class="hero-dot" aria-label="3枚目へ"></button>
+        <button type="button" class="hero-dot" aria-label="4枚目へ"></button>
+      </div>
+    </div>
+  </section>
 
-    <section class="hero" data-reveal>
-      <div class="hero__item is-active">
-        <img src="top.jpg" alt="">
-      </div>
-      <div class="hero__item">
-        <img src="top2.jpg" alt="">
-      </div>
-      <div class="hero__item">
-        <img src="top3.jpg" alt="">
-      </div>
-      <div class="hero__item">
-        <img src="top4.jpg" alt="">
-      </div>
-      <div class="hero__item">
-        <img src="top5.jpg" alt="">
-      </div>
-      
-      <div class="hero-overlay">
-        <div class="hero-brand-card">
-          <h2 class="hero-title-main">ポプラ館珈琲</h2>
-          <p class="hero-subtitle-en">Poplar Coffee House</p>
-          <div class="hero-ribbon">since 1974</div>
-        </div>
-        <p class="hero-catchphrase">一杯の贅沢、受け継がれる味。</p>
-      </div>
-    </section>
+  <main class="wrap main-layout">
+    <aside class="sidebar" id="sidebar" data-reveal>
+      <section class="side-block">
+        <h3 class="side-title">商品カテゴリー</h3>
+        <ul class="side-links">
+          <li><a href="#special-series">スペシャル <span class="side-plus">＋</span></a></li>
+          <li><a href="#catalog">全商品一覧 <span class="side-plus">＋</span></a></li>
+        </ul>
+      </section>
 
-    {block:AppsInformationBanner}
-      <section class="section" data-reveal>
+      <div class="sidebar-image">
+        <video autoplay muted loop playsinline preload="metadata" aria-label="焙煎の様子">
+          <source src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/baisen-syhort.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <section class="side-block">
+        <h3 class="side-title">ショップガイド</h3>
+        <ul class="guide-links">
+          <li>
+            <a href="{AboutPageURL}">
+              <span class="guide-text"><span class="guide-icon" aria-hidden="true"></span>ポプラ館珈琲について</span>
+            </a>
+          </li>
+          <li>
+            <a href="#payment">
+              <span class="guide-text"><span class="guide-icon" aria-hidden="true"></span>お支払い方法について</span>
+            </a>
+          </li>
+          <li>
+            <a href="#shipping">
+              <span class="guide-text"><span class="guide-icon" aria-hidden="true"></span>配送料について</span>
+            </a>
+          </li>
+          <li>
+            <a href="{ContactPageURL}">
+              <span class="guide-text"><span class="guide-icon" aria-hidden="true"></span>CONTACT</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </aside>
+
+    <div class="content-area">
+      {block:AppsInformationBanner}
+      <section data-reveal style="margin-bottom:20px;">
         {AppsInformationBannerTag}
       </section>
-    {/block:AppsInformationBanner}
+      {/block:AppsInformationBanner}
 
-    <section class="section" data-reveal>
-      <h2 class="section__title">Journal</h2>
-      <div class="news-card">
-        <article class="newsItem">
-          <span class="newsItem__date">2026.02.16</span>
-          <span class="newsItem__title"><a href="https://note.com/happy_eagle5103" target="_blank">note「ポプラ館珈琲」最新情報を公開しました。</a></span>
-        </article>
-        <article class="newsItem">
-          <span class="newsItem__date">2026.04.16</span>
-          <span class="newsItem__title">ポプラ館珈琲 公式オンラインショップがオープンしました。</span>
-        </article>
-      </div>
-    </section>
+      <section class="notice-panel" data-reveal>
+        <div class="notice-label">Information</div>
+        <h2 class="notice-title">お知らせ</h2>
 
-    <section class="section" data-reveal>
-      <div class="storyBlock">
-        <div class="storyBlock__image">
-          <img src="story-photo.jpg" alt="Master">
+        <div class="notice-row">
+          <time class="notice-date">2026.02.01より</time>
+          <p class="notice-text">日頃からポプラ館珈琲をご愛顧いただき誠にありがとうございます。原材料高騰および調達量の影響により、価格改定をさせていただくこととなりました。何卒ご理解を賜りますようお願い申し上げます。</p>
         </div>
-        <div class="storyBlock__content">
-          <h3>Our Master's Passion</h3>
-          <p class="storyBlock__text">
-            「一杯の珈琲には、人の心をほどく力がある」<br><br>
-            そう信じて、半世紀。豆の選別から焙煎、抽出に至るまで、一切の妥協を許さず、ただひたすらに美味しい一杯を追求してきました。忙しい日常の中で、ホッと一息つける場所でありたい。それが、私の変わらぬ願いです。
-          </p>
+        <div class="notice-row">
+          <time class="notice-date">2025.06.27</time>
+          <p class="notice-text">ブラジルの自社農園で丁寧に育てたコーヒー豆を独自ルートで輸入し、品質を保ちながら価格の維持に努めてまいりましたが、輸送費と資材費の高騰により価格を改定いたします。</p>
         </div>
-      </div>
+        <div class="notice-row">
+          <time class="notice-date">2025.06.04</time>
+          <p class="notice-text">オンラインストアをリニューアルオープンしました。季節限定豆や定番ブレンドを順次掲載してまいります。</p>
+        </div>
+      </section>
 
-      <div class="storyBlock">
-        <div class="storyBlock__image">
-          <img src="mill.png" alt="Interior">
+      <section class="series-panel is-subtle" id="special-series" data-reveal>
+        <div class="series-head">
+          <h2>スペシャルシリーズ</h2>
+          <a class="series-more" href="#catalog">もっと見る</a>
         </div>
-        <div class="storyBlock__content">
-          <h3>Our Story & Commitment</h3>
-          <p class="storyBlock__text">
-            厚木で約30年にわたり愛されてきた「ポプラ館珈琲」。その味と想いを残し守り続け、当時のマスターが今も現役でカウンターに立ち、自家焙煎の珈琲豆で、一杯一杯丁寧にお淹れしています。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="roast-section" data-reveal>
-      <div class="wrap">
-        <h2 class="section__title" style="color: #f3e7d3; border-bottom: none;">こだわりの焙煎</h2>
-        <div style="max-width: 860px; margin: 0 auto; text-align: center;">
-          <p style="font-size: 1.25rem; font-family: var(--font-serif); color: #efe2cc; margin-bottom: 1.5rem;">日本の「自家焙煎」を創り上げてきた矜持</p>
-          <p style="line-height: 1.9; margin-bottom: 2rem; color: #efe2cc;">
-            日本の珈琲史において、「自家焙煎」という文化を形作ってきたマスターが培ってきた焙煎の技術をお届けします。<br>
-            当店の自慢は、今なお現役で鼓動を続ける「10kg焙煎機の第1号機」。<br>
-            40年以上の歳月を経て、鋳物の隅々にまで熱が馴染んだこの機体は、最新鋭のデジタル機では決して出せない、深く、優しく、それでいて力強い火力を豆に届けます。
-          </p>
-          
-          <div class="roastGrid">
-            <div class="roastGrid__item video">
-              <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
-                <source src="baisen-syhort.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="roastGrid__item">
-              <img src="roast.jpg" alt="">
-            </div>
-            <div class="roastGrid__item">
-              <img src="roast2.jpg" alt="">
-            </div>
-            <div class="roastGrid__item">
-              <img src="S__47874061_0.jpg" alt="">
-            </div>
-            <div class="roastGrid__item">
-              <img src="S__47874070_0.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" data-reveal>
-      <h2 class="section__title">Specialty Coffee</h2>
-      <p style="text-align: center; margin-top: -40px; margin-bottom: 60px; font-family: var(--font-serif); color: var(--accent-color);">Monthly Excellent Beans / 一杯 ¥1,500(税別)</p>
-      <div class="special-coffee-carousel-wrap">
-        <button type="button" class="special-coffee-arrow special-coffee-arrow-prev" aria-label="Previous">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <div class="productGrid special-coffee-list" id="special-coffee-list" style="display: flex; overflow-x: auto; gap: 40px; scroll-snap-type: x mandatory;">
-          <article class="specialtyCard" style="flex: 0 0 260px; scroll-snap-align: start;">
-            <div class="specialtyCard__image">
-          <img src="flag_jamaica.svg" alt="Jamaica" class="specialtyCard__flag">
-            </div>
-            <div class="specialtyCard__body">
-              <h3 class="specialtyCard__name">ジャマイカ ブルーマウンテン<br>クライスデールNo.1</h3>
-              <p class="specialtyCard__months">1月・4月・7月・10月焙煎</p>
-              <p class="specialtyCard__desc">華やかな香りとまろやかな味わい。一期一会の贅沢をお楽しみください。</p>
-            </div>
+        <div class="series-track">
+          <article class="series-item">
+            <a href="#catalog">
+              <div class="series-thumb is-beans">
+                <img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/Flag_of_Jamaica.svg" alt="ジャマイカ ブルーマウンテン クライスデールNo.1">
+              </div>
+              <p class="series-name">ジャマイカ ブルーマウンテン クライスデールNo.1</p>
+              <p class="series-sub">1月・4月・7月・10月焙煎</p>
+              <p class="series-desc">月に一度のスペシャル豆。華やかな香りとまろやかな味わい。</p>
+              <p class="series-price">Beans ¥3,800(税別)</p>
+            </a>
           </article>
-          <article class="specialtyCard" style="flex: 0 0 260px; scroll-snap-align: start;">
-            <div class="specialtyCard__image">
-          <img src="flag_panama.svg" alt="Panama" class="specialtyCard__flag">
-            </div>
-            <div class="specialtyCard__body">
-              <h3 class="specialtyCard__name">パナマ ゲイシャ<br>ハートマン農園</h3>
-              <p class="specialtyCard__months">2月・5月・8月・11月焙煎</p>
-              <p class="specialtyCard__desc">フローラルな香りと透明感のある味わいが特徴。最高峰の豆をお届けします。</p>
-            </div>
+          <article class="series-item">
+            <a href="#catalog">
+              <div class="series-thumb is-beans">
+                <img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/Flag_of_Panama.svg.png" alt="パナマ ゲイシャ ハートマン農園">
+              </div>
+              <p class="series-name">パナマ ゲイシャ ハートマン農園</p>
+              <p class="series-sub">2月・5月・8月・11月焙煎</p>
+              <p class="series-desc">フローラルな香りと透明感のある味わいが特徴のゲイシャ。</p>
+              <p class="series-price">Beans ¥3,300(税別)</p>
+            </a>
           </article>
-          <article class="specialtyCard" style="flex: 0 0 260px; scroll-snap-align: start;">
-            <div class="specialtyCard__image">
-          <img src="flag_hawaii.svg" alt="Hawaii" class="specialtyCard__flag">
-            </div>
-            <div class="specialtyCard__body">
-              <h3 class="specialtyCard__name">ハワイ コナ100 エクストラファンシー</h3>
-              <p class="specialtyCard__months">3月・6月・9月・12月焙煎</p>
-              <p class="specialtyCard__desc">ハワイアンクイーン農園産。100%コナの甘みと酸味の極上のバランス。</p>
-            </div>
+          <article class="series-item">
+            <a href="#catalog">
+              <div class="series-thumb is-beans">
+                <img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/Flag_of_Hawaii.svg.png" alt="ハワイ コナ100 エクストラファンシー ハワイアンクイーン農園">
+              </div>
+              <p class="series-name">ハワイ コナ100 エクストラファンシー ハワイアンクイーン農園</p>
+              <p class="series-sub">3月・6月・9月・12月焙煎</p>
+              <p class="series-desc">100%コナ。甘みと酸味のバランスがとれたエクストラファンシー。</p>
+              <p class="series-price">Beans ¥3,300(税別)</p>
+            </a>
           </article>
         </div>
-        <button type="button" class="special-coffee-arrow special-coffee-arrow-next" aria-label="Next">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      </div>
-    </section>
+      </section>
 
-    <section class="section" data-reveal>
-      <h2 class="section__title">Menu Highlights</h2>
-      <div class="categoryLinks">
-        <a href="#" class="categoryCard" style="height: 300px; flex-direction: column;">
-          <img src="menu_coffee.png" alt="" style="height: 200px; object-fit: cover; margin-bottom: 20px;">
-          <span>Original Blend</span>
-        </a>
-        <a href="#" class="categoryCard" style="height: 300px; flex-direction: column;">
-          <img src="croissant2.png" alt="" style="height: 200px; object-fit: cover; margin-bottom: 20px;">
-          <span>Croissant Plate</span>
-        </a>
-        <a href="/menu" class="categoryCard" style="height: 300px; background: var(--accent-color); color: #FFF;">
-          <span>View All Menu</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" data-reveal>
-      <h2 class="section__title">Collections</h2>
-      <div class="productGrid">
-        {block:Items}
-        <article class="productCard">
-          <a href="{ItemPageURL}">
-            <div class="productCard__image">
-              {block:ItemImage1}
-                <img src="{ItemImage1URL-500}" alt="{ItemTitle}">
-              {/block:ItemImage1}
-            </div>
-            <div class="productCard__info">
-              <h3 class="productCard__title">{ItemTitle}</h3>
-              <p class="productCard__price">{ItemPrice}</p>
-            </div>
-          </a>
-        </article>
-        {/block:Items}
-
-      </div>
-    </section>
-
-    <section class="section" data-reveal>
-      <div class="container">
-        <h2 class="section__title">Information</h2>
-        <div class="info-card-container">
-          <div class="info-item">
-            <strong>住所</strong><br>
-            〒243-0032 神奈川県厚木市恩名３丁目２４−１４<br>
-            <a class="info-map-link" href="https://maps.app.goo.gl/AWXe2oHPHbFjMXfD7" target="_blank">Googleマップはこちら</a>
-          </div>
-          <div class="info-item">
-            <strong>電話番号</strong><br>
-            046-204-7058
-          </div>
-          <div class="info-item">
-            <strong>営業時間</strong><br>
-            9:00 - 17:00
-          </div>
-          <div class="info-item">
-            <strong>定休日</strong><br>
-            土曜日・日曜日
-          </div>
-          <div style="margin-top: 24px;">
-            {PaymentMethodsLogoTag}
-          </div>
+      <section class="catalog-section" id="catalog" data-reveal>
+        <div class="catalog-switch">
+          <button type="button" class="switch-btn is-active">自家焙煎豆</button>
         </div>
-      </div>
-    </section>
+        <h2 class="catalog-title">☕自家焙煎豆</h2>
+        <p class="catalog-subtitle">詳しくは商品カテゴリーごとでご説明しておりますので、そちらからご覧ください。</p>
+        <div class="bean-shell">
+        <div class="bean-grid" id="js-bean-rail">
+          <article class="bean-card">
+            <div class="bean-image">
+              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
+              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/shop-card.png" alt="オリジナルブレンド">
+            </div>
+            <div class="bean-body">
+              <p class="bean-name">オリジナルブレンド焙煎豆 100g</p>
+              <p class="bean-price">店内販売: ¥600</p>
+            </div>
+          </article>
 
+          <article class="bean-card">
+            <div class="bean-image">
+              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
+              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_mexico.png" alt="メキシコ">
+            </div>
+            <div class="bean-body">
+              <p class="bean-name">メキシコ アルツーラ・ブルマ クルスグランデ農園 焙煎豆 100g</p>
+              <p class="bean-price">店内販売: ¥600</p>
+            </div>
+          </article>
+
+          <article class="bean-card">
+            <div class="bean-image">
+              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
+              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_colombia.png" alt="コロンビア">
+            </div>
+            <div class="bean-body">
+              <p class="bean-name">コロンビア スプレモS18 焙煎豆 100g</p>
+              <p class="bean-price">店内販売: ¥600</p>
+            </div>
+          </article>
+
+          <article class="bean-card">
+            <div class="bean-image">
+              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
+              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_brazil.png" alt="ブラジル">
+            </div>
+            <div class="bean-body">
+              <p class="bean-name">ブラジル サントスNo.2 焙煎豆 100g</p>
+              <p class="bean-price">店内販売: ¥600</p>
+            </div>
+          </article>
+
+          <article class="bean-card">
+            <div class="bean-image">
+              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
+              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_yemen.png" alt="イエメン">
+            </div>
+            <div class="bean-body">
+              <p class="bean-name">イエメン モカ・マタリ No.9 焙煎豆 100g</p>
+              <p class="bean-price">店内販売: ¥1,100</p>
+            </div>
+          </article>
+
+          <article class="bean-card">
+            <div class="bean-image">
+              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
+              <img class="bean-flag svg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_panama.svg" alt="パプアニューギニア">
+            </div>
+            <div class="bean-body">
+              <p class="bean-name">パプアニューギニア シグリ 焙煎豆 100g</p>
+              <p class="bean-price">店内販売: ¥1,100</p>
+            </div>
+          </article>
+
+          <article class="bean-card">
+            <div class="bean-image">
+              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
+              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_indonesia.png" alt="インドネシア">
+            </div>
+            <div class="bean-body">
+              <p class="bean-name">インドネシア マンデリンビンダリマ 焙煎豆 100g</p>
+              <p class="bean-price">店内販売: ¥1,000</p>
+            </div>
+          </article>
+        </div>
+        <div class="bean-dots" id="js-bean-dots" aria-label="自家焙煎豆スライドのページ送り"></div>
+        </div>
+      </section>
+    </div>
   </main>
   {/block:IndexPage}
 
   {block:AboutPage}
-  <main class="wrap section" data-reveal>
-    <h2 class="section__title">About Us</h2>
-    <div style="max-width: 800px; margin: 0 auto; font-size: 16px; line-height: 2;">
-      {ShopIntroduction}
-    </div>
+  <main class="wrap static-page" data-reveal>
+    <section class="single-panel">
+      <h1 class="single-title">ポプラ館珈琲について</h1>
+      <div class="single-text">{ShopIntroduction}</div>
+    </section>
   </main>
   {/block:AboutPage}
 
   {block:ItemPage}
-  <main class="wrap section" data-reveal>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
-      <div class="item__images">
-        {block:ItemImage1}<img src="{ItemImage1URL-origin}" alt="{ItemTitle}" style="width:100%;">{/block:ItemImage1}
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px;">
-           {block:ItemImage2}<img src="{ItemImage2URL-500}" alt="">{/block:ItemImage2}
-           {block:ItemImage3}<img src="{ItemImage3URL-500}" alt="">{/block:ItemImage3}
+  <main class="wrap static-page" data-reveal>
+    <section class="single-panel">
+      <div class="item-layout">
+        <div class="item-main">
+          {block:ItemImage1}<img src="{ItemImage1URL-origin}" alt="{ItemTitle}">{/block:ItemImage1}
+          <div class="item-thumbs">
+            {block:ItemImage2}<img src="{ItemImage2URL-500}" alt="{ItemTitle}">{/block:ItemImage2}
+            {block:ItemImage3}<img src="{ItemImage3URL-500}" alt="{ItemTitle}">{/block:ItemImage3}
+            {block:ItemImage4}<img src="{ItemImage4URL-500}" alt="{ItemTitle}">{/block:ItemImage4}
+            {block:ItemImage5}<img src="{ItemImage5URL-500}" alt="{ItemTitle}">{/block:ItemImage5}
+          </div>
         </div>
-      </div>
-      <div class="item__details">
-        <h2 style="font-size: 32px; margin-bottom: 12px;">{ItemTitle}</h2>
-        <p style="font-size: 24px; color: var(--accent-color); margin-bottom: 24px;">{ItemPrice}</p>
-        
-        <div style="margin-bottom: 32px; font-size: 14px; color: var(--secondary-text);">
-          {ItemAttentionTag}
-        </div>
+        <div class="item-side">
+          <h1 class="single-title">{ItemTitle}</h1>
+          <p class="single-price">{ItemPrice}</p>
+          <div class="single-text">{ItemAttentionTag}</div>
 
-        {block:PurchaseForm}
-          <div style="margin-bottom: 40px;">
+          {block:PurchaseForm}
+          <div style="margin-top:16px;">
             {ItemSelectTag}
-            <div style="margin-top: 24px;">
-              {PurchaseButton}
-            </div>
+            <div style="margin-top:14px;">{PurchaseButton}</div>
           </div>
-        {/block:PurchaseForm}
+          {/block:PurchaseForm}
 
-        <div class="item__description" style="margin-top: 60px; border-top: 1px solid var(--border-color); padding-top: 40px;">
-          {ItemDetail}
-        </div>
+          <div class="item-description">{ItemDetail}</div>
 
-        {block:AppsReview}
-          <div style="margin-top: 60px;">
-            {AppsReviewTag}
-          </div>
-        {/block:AppsReview}
-
-        <div style="margin-top: 40px; font-size: 12px; opacity: 0.5;">
-          {IllegalReportTag}
+          {block:AppsReview}
+          <div style="margin-top:18px;">{AppsReviewTag}</div>
+          {/block:AppsReview}
         </div>
       </div>
-    </div>
+
+      <div style="margin-top:20px; color:#9f928d; font-size:12px;">{IllegalReportTag}</div>
+    </section>
   </main>
   {/block:ItemPage}
 
   {PageContents}
 
-  <footer class="footer">
-    <div class="wrap">
-      <div class="footer__content">
-        <div class="footer__section">
-          <h4>Navigation</h4>
-          <div class="footer__links">
-            <a href="{IndexPageURL}">Home</a>
-            <a href="{AboutPageURL}">About</a>
-            <a href="{ContactPageURL}">Contact</a>
+  <div class="page-top-strip">
+    <a href="#top">↑ ページトップへ</a>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-upper">
+      <div class="wrap footer-grid">
+        <section id="shipping" class="shipping-section">
+          <h3 class="footer-title">配送料について</h3>
+          <div class="shipping-box">
+            <span class="shipping-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <rect x="2.5" y="8.5" width="11" height="7" rx="1"></rect>
+                <path d="M13.5 10h4l2 2v3.5h-6"></path>
+                <circle cx="8" cy="17.5" r="1.5"></circle>
+                <circle cx="18" cy="17.5" r="1.5"></circle>
+              </svg>
+            </span>
+            <span class="shipping-copy">
+              <strong>お買い物10,000円以上で送料無料</strong>
+              <span>地域別送料（国内）</span>
+            </span>
           </div>
-        </div>
-        <div class="footer__section">
-          <h4>Legal</h4>
-          <div class="footer__links">
-            <a href="{PrivacyPageURL}">{lang:Privacy}</a>
-            <a href="{LawPageURL}">{lang:Law}</a>
+          <div class="footer-sub-link">› 詳しい送料はこちら</div>
+
+          <h3 class="footer-title" id="payment" style="margin-top:22px;">お支払い方法について</h3>
+          <div class="payment-wrap" id="js-payment-methods">{PaymentMethodsLogoTag}</div>
+          <div class="payment-fallback" id="js-payment-fallback" aria-label="利用可能なお支払い方法">
+            <div class="pay-chip pay-chip--wide">
+              <span class="pay-logos">
+                <span class="pay-logo visa">VISA</span>
+                <span class="pay-master" aria-hidden="true"></span>
+                <span class="pay-logo jcb">JCB</span>
+                <span class="pay-logo amex">AMERICAN EXPRESS</span>
+                <span class="pay-logo diners">Diners Club</span>
+              </span>
+            </div>
+            <div class="pay-chip pay-chip--mid amazon">amazon pay</div>
+            <div class="pay-chip pay-chip--mid paypal">PayPal</div>
+            <div class="pay-chip pay-chip--mid2"><span class="pay-check">✓</span>キャリア決済</div>
+            <div class="pay-chip pay-chip--mid2"><span class="pay-check">✓</span>コンビニ・Pay-easy</div>
+            <div class="pay-chip pay-chip--solo"><span class="pay-check">✓</span>銀行振込</div>
           </div>
-        </div>
-        <div class="footer__section">
-          <h4>Follow Us</h4>
-          <div class="footer__links">
-            <a href="https://www.instagram.com/popurakancoffee/" target="_blank">Instagram</a>
-            <a href="https://www.ubereats.com/jp/store/%E8%87%AA%E5%AE%B6%E7%84%99%E7%85%8E%E3%83%9B%E3%83%95%E3%83%A9%E9%A4%A8%E7%8F%88%E7%90%B2-popura-kan-coffee/TiprfoFyXMeE8ywwUZ3WKg" target="_blank">Uber Eats</a>
-            <a href="https://customer-web.rocketnow.co.jp/share?storeId=65939&dishId&key=779db14f-e3cc-4093-94e9-91d07b6a9e77" target="_blank">Rocket Now</a>
+          <div class="footer-sub-link">› 詳しいお支払い方法のご案内</div>
+        </section>
+
+        <section class="calendar-wrap">
+          <h3 class="footer-title">営業日カレンダー</h3>
+          <div class="calendar-grid">
+            <table class="calendar" role="presentation">
+              <caption>2026年4月</caption>
+              <thead>
+                <tr>
+                  <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td class="is-holiday"><span>4</span></td></tr>
+                <tr><td class="is-holiday"><span>5</span></td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td class="is-holiday"><span>11</span></td></tr>
+                <tr><td class="is-holiday"><span>12</span></td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td class="is-holiday"><span>18</span></td></tr>
+                <tr><td class="is-holiday"><span>19</span></td><td>20</td><td>21</td><td>22</td><td class="is-today"><span>23</span></td><td>24</td><td class="is-holiday"><span>25</span></td></tr>
+                <tr><td class="is-holiday"><span>26</span></td><td>27</td><td>28</td><td>29</td><td>30</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+            <table class="calendar" role="presentation">
+              <caption>2026年5月</caption>
+              <thead>
+                <tr>
+                  <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td></td><td></td><td></td><td></td><td></td><td>1</td><td class="is-holiday"><span>2</span></td></tr>
+                <tr><td class="is-holiday"><span>3</span></td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td class="is-holiday"><span>9</span></td></tr>
+                <tr><td class="is-holiday"><span>10</span></td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td class="is-holiday"><span>16</span></td></tr>
+                <tr><td class="is-holiday"><span>17</span></td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td class="is-holiday"><span>23</span></td></tr>
+                <tr><td class="is-holiday"><span>24</span></td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td class="is-holiday"><span>30</span></td></tr>
+                <tr><td class="is-holiday"><span>31</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-        <div class="footer__section">
-          <h4>Contact</h4>
-          <div class="footer__links">
-            <span>046-204-7058</span>
-          </div>
-        </div>
+          <p class="calendar-note">
+            <span class="dot today"></span>本日
+            <span class="dot holiday"></span>休業日
+          </p>
+        </section>
       </div>
-      <div class="footer__bottom">
-        &copy; {CopyrightTag} Poplar Coffee House. All Rights Reserved.
+    </div>
+
+    <div class="footer-lower">
+      <div class="wrap footer-nav">
+        <a href="{IndexPageURL}">HOME</a>
+        <a href="{AboutPageURL}">ポプラ館珈琲について</a>
+        <a href="{ContactPageURL}">Contact Us</a>
+        <a href="{PrivacyPageURL}">{lang:Privacy}</a>
+        <a href="{LawPageURL}">{lang:Law}</a>
       </div>
+      <div class="wrap footer-copy">Copyright &copy; {CopyrightTag}. All Rights Reserved.</div>
     </div>
   </footer>
 
   <script>
-    // Reveal animation
-    const reveal = () => {
-      const reveals = document.querySelectorAll('[data-reveal]');
-      reveals.forEach(el => {
-        const windowHeight = window.innerHeight;
-        const revealTop = el.getBoundingClientRect().top;
-        const revealPoint = 100;
-        if (revealTop < windowHeight - revealPoint) {
-          el.classList.add('revealed');
-        }
+    (function () {
+      var cdnPrefix = "https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/";
+      var rawPrefix = "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/";
+      var staticImages = document.querySelectorAll('img[src^="' + cdnPrefix + '"]');
+      staticImages.forEach(function (img) {
+        img.addEventListener("error", function () {
+          if (img.dataset.fallbackApplied === "1") return;
+          img.dataset.fallbackApplied = "1";
+          img.src = img.src.replace(cdnPrefix, rawPrefix);
+        });
       });
-    };
-    window.addEventListener('scroll', reveal);
-    window.addEventListener('load', reveal);
 
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('.header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+      var staticVideos = document.querySelectorAll('video source[src^="' + cdnPrefix + '"]');
+      staticVideos.forEach(function (source) {
+        source.addEventListener("error", function () {
+          if (source.dataset.fallbackApplied === "1") return;
+          source.dataset.fallbackApplied = "1";
+          source.src = source.src.replace(cdnPrefix, rawPrefix);
+          var parentVideo = source.parentElement;
+          if (parentVideo && typeof parentVideo.load === "function") parentVideo.load();
+        });
+      });
 
-    // Hero Image Slideshow
-    (function () {
-        const slides = Array.from(document.querySelectorAll('.hero .hero__item'));
-        if (slides.length <= 1) return;
+      var paymentMethods = document.getElementById("js-payment-methods");
+      var paymentFallback = document.getElementById("js-payment-fallback");
+      if (paymentMethods && paymentFallback) {
+        var syncPaymentView = function () {
+          var methodNode = paymentMethods.querySelector("*:not(script):not(style):not(template)");
+          var methodText = paymentMethods.textContent ? paymentMethods.textContent.replace(/\s+/g, "") : "";
+          var hasMethods = Boolean(methodNode || methodText.length);
+          paymentMethods.style.display = hasMethods ? "" : "none";
+          paymentFallback.style.display = hasMethods ? "none" : "flex";
+        };
 
-        let current = 0;
-        const intervalMs = 4500;
-
-        window.setInterval(() => {
-            slides[current].classList.remove('is-active');
-            current = (current + 1) % slides.length;
-            slides[current].classList.add('is-active');
-        }, intervalMs);
-    })();
-
-    // Specialty Coffee Carousel
-    (function () {
-        const list = document.getElementById('special-coffee-list');
-        const prevBtn = document.querySelector('.special-coffee-arrow-prev');
-        const nextBtn = document.querySelector('.special-coffee-arrow-next');
-        if (!list || !prevBtn || !nextBtn) return;
-        function getScrollAmount() {
-            const card = list.querySelector('.specialtyCard');
-            if (!card) return list.offsetWidth * 0.85;
-            return card.offsetWidth + 40; // Card width + gap
+        syncPaymentView();
+        if ("MutationObserver" in window) {
+          var observer = new MutationObserver(syncPaymentView);
+          observer.observe(paymentMethods, { childList: true, subtree: true, characterData: true });
         }
-        prevBtn.addEventListener('click', () => {
-            list.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-        });
-        nextBtn.addEventListener('click', () => {
-            list.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-        });
+        window.setTimeout(syncPaymentView, 500);
+        window.setTimeout(syncPaymentView, 1600);
+      }
     })();
 
-    // Handle BASE purchase button styling
-    window.addEventListener('load', () => {
-      const btn = document.querySelector('.base_purchase_btn'); // Common BASE class
-      if (btn) {
-        btn.style.width = '100%';
-        btn.style.height = '60px';
-        btn.style.background = '#1C1C1C';
-        btn.style.color = '#FFF';
-        btn.style.border = 'none';
-        btn.style.fontSize = '16px';
-        btn.style.letterSpacing = '0.1em';
+    (function () {
+      var elements = document.querySelectorAll("[data-reveal]");
+      if (!elements.length) return;
+      if (!("IntersectionObserver" in window)) {
+        elements.forEach(function (el) { el.classList.add("revealed"); });
+        return;
       }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+      elements.forEach(function (el) { observer.observe(el); });
+    })();
+
+    (function () {
+      var rail = document.getElementById("js-hero-rail");
+      if (!rail) return;
+      var prev = document.querySelector(".hero-arrow.prev");
+      var next = document.querySelector(".hero-arrow.next");
+      var dots = Array.prototype.slice.call(document.querySelectorAll(".hero-dot"));
+      var mobileMedia = window.matchMedia("(max-width: 680px)");
+      var autoTimer = null;
+      var resumeTimer = null;
+      var autoDelay = 3800;
+      var resumeDelay = 5000;
+      var pageSize = function () { return Math.max(rail.clientWidth * 0.78, 320); };
+      var slideSize = function () {
+        var firstCard = rail.querySelector(".hero-card");
+        if (!firstCard) return pageSize();
+        var styles = window.getComputedStyle(rail);
+        var gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        return firstCard.getBoundingClientRect().width + gap;
+      };
+
+      if (prev) {
+        prev.addEventListener("click", function () {
+          rail.scrollBy({ left: -pageSize(), behavior: "smooth" });
+          queueAutoPlay(resumeDelay);
+        });
+      }
+      if (next) {
+        next.addEventListener("click", function () {
+          rail.scrollBy({ left: pageSize(), behavior: "smooth" });
+          queueAutoPlay(resumeDelay);
+        });
+      }
+
+      var updateDots = function () {
+        if (!dots.length) return;
+        var maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 1);
+        var progress = rail.scrollLeft / maxScroll;
+        var index = Math.min(dots.length - 1, Math.max(0, Math.round(progress * (dots.length - 1))));
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle("is-active", i === index);
+        });
+      };
+
+      var stopAutoPlay = function () {
+        if (!autoTimer) return;
+        window.clearInterval(autoTimer);
+        autoTimer = null;
+      };
+
+      var runAutoStep = function () {
+        var maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 0);
+        if (maxScroll < 1) return;
+        var nextLeft = rail.scrollLeft + slideSize();
+        if (nextLeft >= maxScroll - 4) {
+          nextLeft = 0;
+        }
+        rail.scrollTo({ left: nextLeft, behavior: "smooth" });
+      };
+
+      var startAutoPlay = function () {
+        if (!mobileMedia.matches) return;
+        if (rail.scrollWidth <= rail.clientWidth + 1) return;
+        stopAutoPlay();
+        autoTimer = window.setInterval(runAutoStep, autoDelay);
+      };
+
+      var queueAutoPlay = function (delay) {
+        stopAutoPlay();
+        if (resumeTimer) {
+          window.clearTimeout(resumeTimer);
+          resumeTimer = null;
+        }
+        if (!mobileMedia.matches) return;
+        resumeTimer = window.setTimeout(function () {
+          startAutoPlay();
+        }, delay || 0);
+      };
+
+      rail.addEventListener("scroll", updateDots, { passive: true });
+      updateDots();
+      queueAutoPlay(1200);
+
+      dots.forEach(function (dot, i) {
+        dot.addEventListener("click", function () {
+          var ratio = i / Math.max(dots.length - 1, 1);
+          rail.scrollTo({ left: (rail.scrollWidth - rail.clientWidth) * ratio, behavior: "smooth" });
+          queueAutoPlay(resumeDelay);
+        });
+      });
+
+      rail.addEventListener("pointerdown", function () {
+        queueAutoPlay(resumeDelay);
+      });
+      rail.addEventListener("touchstart", function () {
+        queueAutoPlay(resumeDelay);
+      }, { passive: true });
+      rail.addEventListener("wheel", function () {
+        queueAutoPlay(resumeDelay);
+      }, { passive: true });
+
+      var onViewportChange = function () {
+        queueAutoPlay(400);
+        updateDots();
+      };
+      if (typeof mobileMedia.addEventListener === "function") {
+        mobileMedia.addEventListener("change", onViewportChange);
+      } else if (typeof mobileMedia.addListener === "function") {
+        mobileMedia.addListener(onViewportChange);
+      }
+
+      window.addEventListener("resize", function () {
+        queueAutoPlay(500);
+        updateDots();
+      });
+    })();
+
+    (function () {
+      var rail = document.getElementById("js-bean-rail");
+      if (!rail) return;
+      var dotsWrap = document.getElementById("js-bean-dots");
+      var cards = Array.prototype.slice.call(rail.querySelectorAll(".bean-card"));
+      if (!cards.length) return;
+
+      var dots = [];
+
+      var cardStep = function () {
+        var firstCard = rail.querySelector(".bean-card");
+        if (!firstCard) return rail.clientWidth;
+        var styles = window.getComputedStyle(rail);
+        var gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        return firstCard.getBoundingClientRect().width + gap;
+      };
+
+      var scrollToIndex = function (index, smooth) {
+        var left = cardStep() * index;
+        rail.scrollTo({ left: left, behavior: smooth ? "smooth" : "auto" });
+      };
+
+      var updateDots = function () {
+        if (!dots.length) return;
+        var maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 1);
+        var progress = rail.scrollLeft / maxScroll;
+        var index = Math.min(cards.length - 1, Math.max(0, Math.round(progress * (cards.length - 1))));
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle("is-active", i === index);
+        });
+      };
+
+      var buildDots = function () {
+        if (!dotsWrap) return;
+        dotsWrap.innerHTML = "";
+        dots = cards.map(function (_, i) {
+          var dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "bean-dot" + (i === 0 ? " is-active" : "");
+          dot.setAttribute("aria-label", (i + 1) + "枚目へ");
+          dot.addEventListener("click", function () {
+            scrollToIndex(i, true);
+          });
+          dotsWrap.appendChild(dot);
+          return dot;
+        });
+      };
+
+      buildDots();
+      rail.addEventListener("scroll", updateDots, { passive: true });
+      updateDots();
+
+      window.addEventListener("resize", function () {
+        updateDots();
+      });
+    })();
+
+    window.addEventListener("load", function () {
+      var buttons = document.querySelectorAll(".base_purchase_btn");
+      buttons.forEach(function (btn) {
+        btn.style.width = "100%";
+        btn.style.minHeight = "56px";
+        btn.style.border = "0";
+        btn.style.borderRadius = "6px";
+        btn.style.background = "#6a4436";
+        btn.style.color = "#f7efea";
+        btn.style.fontSize = "16px";
+        btn.style.letterSpacing = "0.08em";
+        btn.style.cursor = "pointer";
+      });
     });
   </script>
 </body>
@@ -898,19 +2250,15 @@
 {/block:NotLoadItemsPage}
 
 {block:LoadItemsPage}
-  {block:Items}
-  <article class="productCard">
-    <a href="{ItemPageURL}">
-      <div class="productCard__image">
-        {block:ItemImage1}
-          <img src="{ItemImage1URL-500}" alt="{ItemTitle}">
-        {/block:ItemImage1}
-      </div>
-      <div class="productCard__info">
-        <h3 class="productCard__title">{ItemTitle}</h3>
-        <p class="productCard__price">{ItemPrice}</p>
-      </div>
-    </a>
-  </article>
-  {/block:Items}
+{block:Items}
+<article class="productCard">
+  <a class="productCard__link" href="{ItemPageURL}">
+    <div class="productCard__image">
+      {block:ItemImage1}<img src="{ItemImage1URL-500}" alt="{ItemTitle}">{/block:ItemImage1}
+    </div>
+    <h3 class="productCard__title">{ItemTitle}</h3>
+    <p class="productCard__price">{ItemPrice}</p>
+  </a>
+</article>
+{/block:Items}
 {/block:LoadItemsPage}
