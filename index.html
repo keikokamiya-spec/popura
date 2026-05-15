@@ -1000,117 +1000,11 @@
       filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.34));
     }
 
-    .bean-label-card {
-      position: relative;
+    .catalog-section .productCard__image img {
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      border: 2px solid rgba(226, 203, 166, 0.72);
-      border-radius: 6px;
-      color: #1f120c;
-      background:
-        linear-gradient(180deg, rgba(18, 11, 8, 0.08), rgba(18, 11, 8, 0.88)),
-        url("back-coffee-beans.png") center top / cover no-repeat;
-      box-shadow: inset 0 0 0 5px rgba(13, 9, 7, 0.72);
-    }
-
-    .bean-label-card::before {
-      content: "";
-      position: absolute;
-      left: 4%;
-      top: 0;
-      width: 22%;
-      height: 40%;
-      background: linear-gradient(180deg, rgba(12, 12, 10, 0.98), rgba(20, 17, 14, 0.98));
-      clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
-      box-shadow: 0 0 0 2px rgba(226, 203, 166, 0.48), 0 8px 18px rgba(0, 0, 0, 0.5);
-      z-index: 2;
-    }
-
-    .bean-label-card::after {
-      content: "";
-      position: absolute;
-      left: 4%;
-      right: 4%;
-      bottom: 4%;
-      height: 12%;
-      border: 1px solid rgba(226, 203, 166, 0.56);
-      background: linear-gradient(180deg, rgba(13, 10, 9, 0.96), rgba(8, 7, 6, 0.98));
-      z-index: 2;
-    }
-
-    .bean-label-ribbon {
-      position: absolute;
-      left: 5.7%;
-      top: 7%;
-      width: 18.5%;
-      z-index: 3;
-      color: rgba(226, 203, 166, 0.9);
-      font-family: Georgia, serif;
-      font-size: clamp(0.52rem, 1.3vw, 0.9rem);
-      font-weight: 700;
-      line-height: 1.15;
-      text-align: center;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .bean-label-ribbon img {
-      width: 82%;
-      height: auto;
-      margin: 0.75rem auto 0;
-      border: 1px solid rgba(226, 203, 166, 0.35);
+      object-fit: cover;
       filter: none;
-    }
-
-    .bean-label-ribbon .bean-label-logo {
-      width: 132%;
-      max-width: none;
-      margin-left: -16%;
-      margin-top: 0.2rem;
-      border: 0;
-      opacity: 0.94;
-    }
-
-    .bean-label-body {
-      position: absolute;
-      left: 4%;
-      right: 4%;
-      bottom: 16%;
-      min-height: 38%;
-      padding: 13% 5% 5%;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background:
-        linear-gradient(180deg, rgba(239, 220, 179, 0.98), rgba(216, 187, 137, 0.98));
-      border: 1px solid rgba(87, 50, 28, 0.5);
-      clip-path: polygon(0 8%, 44% 8%, 50% 0, 56% 8%, 100% 8%, 100% 100%, 0 100%);
-    }
-
-    .bean-label-name {
-      font-family: var(--font-title);
-      font-size: clamp(1rem, 2.2vw, 1.72rem);
-      font-weight: 700;
-      line-height: 1.55;
-      letter-spacing: 0.03em;
-    }
-
-    .bean-label-price {
-      position: absolute;
-      left: 4%;
-      right: 4%;
-      bottom: 5.9%;
-      z-index: 3;
-      color: rgba(226, 203, 166, 0.9);
-      font-family: var(--font-title);
-      font-size: clamp(1rem, 2.3vw, 1.78rem);
-      font-weight: 700;
-      line-height: 1;
-      text-align: center;
-      letter-spacing: 0.03em;
     }
 
     .catalog-section .productCard__title,
@@ -1667,11 +1561,7 @@
           <article class="productCard">
             <a class="productCard__link" href="{IndexPageURL}">
               <div class="productCard__image">
-                <div class="bean-label-card" aria-hidden="true">
-                  <div class="bean-label-ribbon"><img class="bean-label-logo" src="shop-card.png" alt=""></div>
-                  <div class="bean-label-body"><span class="bean-label-name">オリジナルブレンド<br>焙煎豆 100g</span></div>
-                  <div class="bean-label-price">店内販売: ¥600</div>
-                </div>
+                <img src="zikabaisenmame7/original-By0eMLg4.webp" alt="オリジナルブレンド 焙煎豆 100g 店内販売: ¥600" loading="lazy">
               </div>
               <h3 class="productCard__title">オリジナルブレンド焙煎豆 100g</h3>
               <p class="productCard__price">店内販売: ¥600</p>
@@ -1680,11 +1570,7 @@
           <article class="productCard">
             <a class="productCard__link" href="{IndexPageURL}">
               <div class="productCard__image">
-                <div class="bean-label-card" aria-hidden="true">
-                  <div class="bean-label-ribbon">MEXICO<img src="flag_mexico.png" alt=""></div>
-                  <div class="bean-label-body"><span class="bean-label-name">メキシコ アルツーラ・ブルマ<br>クルスグランデ農園<br>焙煎豆 100g</span></div>
-                  <div class="bean-label-price">店内販売: ¥600</div>
-                </div>
+                <img src="zikabaisenmame7/mexico-ua5tt73k.webp" alt="メキシコ アルツーラ・ブルマ クルスグランデ農園 焙煎豆 100g 店内販売: ¥600" loading="lazy">
               </div>
               <h3 class="productCard__title">メキシコ アルツーラ・ブルマ クルスグランデ農園 焙煎豆 100g</h3>
               <p class="productCard__price">店内販売: ¥600</p>
@@ -1693,11 +1579,7 @@
           <article class="productCard">
             <a class="productCard__link" href="{IndexPageURL}">
               <div class="productCard__image">
-                <div class="bean-label-card" aria-hidden="true">
-                  <div class="bean-label-ribbon">COLOMBIA<img src="flag_colombia.png" alt=""></div>
-                  <div class="bean-label-body"><span class="bean-label-name">コロンビア スプレモS18<br>焙煎豆<br>100g</span></div>
-                  <div class="bean-label-price">店内販売: ¥600</div>
-                </div>
+                <img src="zikabaisenmame7/colombia-Ckx0smkq.webp" alt="コロンビア スプレモS18 焙煎豆 100g 店内販売: ¥600" loading="lazy">
               </div>
               <h3 class="productCard__title">コロンビア スプレモS18 焙煎豆 100g</h3>
               <p class="productCard__price">店内販売: ¥600</p>
@@ -1706,11 +1588,7 @@
           <article class="productCard">
             <a class="productCard__link" href="{IndexPageURL}">
               <div class="productCard__image">
-                <div class="bean-label-card" aria-hidden="true">
-                  <div class="bean-label-ribbon">BRAZIL<img src="flag_brazil.png" alt=""></div>
-                  <div class="bean-label-body"><span class="bean-label-name">ブラジル サントスNo.2<br>焙煎豆 100g</span></div>
-                  <div class="bean-label-price">店内販売: ¥600</div>
-                </div>
+                <img src="zikabaisenmame7/brazil-CHeLFz8r.webp" alt="ブラジル サントスNo.2 焙煎豆 100g 店内販売: ¥600" loading="lazy">
               </div>
               <h3 class="productCard__title">ブラジル サントスNo.2 焙煎豆 100g</h3>
               <p class="productCard__price">店内販売: ¥600</p>
@@ -1719,11 +1597,7 @@
           <article class="productCard">
             <a class="productCard__link" href="{IndexPageURL}">
               <div class="productCard__image">
-                <div class="bean-label-card" aria-hidden="true">
-                  <div class="bean-label-ribbon">YEMEN<img src="flag_yemen.png" alt=""></div>
-                  <div class="bean-label-body"><span class="bean-label-name">イエメン モカ・マタリ<br>No.9 焙煎豆<br>100g</span></div>
-                  <div class="bean-label-price">店内販売: ¥1,100</div>
-                </div>
+                <img src="zikabaisenmame7/yemen-21RPx16s.webp" alt="イエメン モカ・マタリ No.9 焙煎豆 100g 店内販売: ¥1,100" loading="lazy">
               </div>
               <h3 class="productCard__title">イエメン モカ・マタリ No.9 焙煎豆 100g</h3>
               <p class="productCard__price">店内販売: ¥1,100</p>
@@ -1732,11 +1606,7 @@
           <article class="productCard">
             <a class="productCard__link" href="{IndexPageURL}">
               <div class="productCard__image">
-                <div class="bean-label-card" aria-hidden="true">
-                  <div class="bean-label-ribbon">INDONESIA<img src="flag_indonesia.png" alt=""></div>
-                  <div class="bean-label-body"><span class="bean-label-name">インドネシア<br>マンデリンビンダリマ<br>焙煎豆 100g</span></div>
-                  <div class="bean-label-price">店内販売: ¥1,000</div>
-                </div>
+                <img src="zikabaisenmame7/indonesia-W5hsZDsa.webp" alt="インドネシア マンデリンビンダリマ 焙煎豆 100g 店内販売: ¥1,000" loading="lazy">
               </div>
               <h3 class="productCard__title">インドネシア マンデリンビンダリマ 焙煎豆 100g</h3>
               <p class="productCard__price">店内販売: ¥1,000</p>
@@ -1745,27 +1615,10 @@
           <article class="productCard">
             <a class="productCard__link" href="{IndexPageURL}">
               <div class="productCard__image">
-                <div class="bean-label-card" aria-hidden="true">
-                  <div class="bean-label-ribbon">JAMAICA<img src="Flag_of_Jamaica.svg" alt=""></div>
-                  <div class="bean-label-body"><span class="bean-label-name">ジャマイカ<br>ブルーマウンテン<br>クライスデールNo.1</span></div>
-                  <div class="bean-label-price">Beans ¥3,800(税別)</div>
-                </div>
+                <img src="zikabaisenmame7/papuanewguinea-gdpjHpct.webp" alt="パプアニューギニア シグリ 焙煎豆 100g 店内販売: ¥1,100" loading="lazy">
               </div>
-              <h3 class="productCard__title">ジャマイカ ブルーマウンテン クライスデールNo.1</h3>
-              <p class="productCard__price">Beans ¥3,800(税別)</p>
-            </a>
-          </article>
-          <article class="productCard">
-            <a class="productCard__link" href="{IndexPageURL}">
-              <div class="productCard__image">
-                <div class="bean-label-card" aria-hidden="true">
-                  <div class="bean-label-ribbon">PANAMA<img src="flag_panama.svg" alt=""></div>
-                  <div class="bean-label-body"><span class="bean-label-name">パナマ ゲイシャ<br>ハートマン農園</span></div>
-                  <div class="bean-label-price">Beans ¥3,300(税別)</div>
-                </div>
-              </div>
-              <h3 class="productCard__title">パナマ ゲイシャ ハートマン農園</h3>
-              <p class="productCard__price">Beans ¥3,300(税別)</p>
+              <h3 class="productCard__title">パプアニューギニア シグリ 焙煎豆 100g</h3>
+              <p class="productCard__price">店内販売: ¥1,100</p>
             </a>
           </article>
         </div>
