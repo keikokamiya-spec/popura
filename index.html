@@ -672,14 +672,14 @@
         linear-gradient(82deg, transparent 45%, rgba(255, 205, 138, 0.42) 47% 51%, rgba(48, 18, 8, 0.72) 53%, transparent 57%),
         radial-gradient(circle at 30% 24%, #8a4c25 0 18%, #5d2b13 46%, #2d1208 100%);
       box-shadow:
-        -18px 32px 0 -1px #4f2411,
-        14px 48px 0 0 #7a3d1d,
-        -5px 78px 0 -2px #3f1b0c,
-        15px 104px 0 -1px #5f2e15,
-        -12px 132px 0 0 #7f421e,
-        8px 164px 0 -2px #4a2110,
-        -10px 194px 0 -1px #6d3518;
-      transform: translateX(-50%) rotate(-24deg);
+        0 32px 0 -1px #4f2411,
+        0 62px 0 0 #7a3d1d,
+        0 92px 0 -2px #3f1b0c,
+        0 122px 0 -1px #5f2e15,
+        0 152px 0 0 #7f421e,
+        0 182px 0 -2px #4a2110,
+        0 212px 0 -1px #6d3518;
+      transform: translateX(-50%);
       opacity: 0;
     }
 
@@ -692,15 +692,15 @@
         linear-gradient(96deg, transparent 44%, rgba(255, 215, 150, 0.38) 47% 51%, rgba(42, 15, 7, 0.74) 54%, transparent 58%),
         radial-gradient(circle at 28% 22%, #9a592c 0 16%, #653015 48%, #321409 100%);
       box-shadow:
-        16px 24px 0 -1px #5c2a13,
-        -12px 56px 0 0 #8b4721,
-        14px 88px 0 -2px #47200f,
-        -15px 116px 0 -1px #6e3519,
-        6px 146px 0 0 #8a4923,
-        12px 178px 0 -1px #552711,
-        -7px 204px 0 -2px #743819;
+        0 28px 0 -1px #5c2a13,
+        0 58px 0 0 #8b4721,
+        0 88px 0 -2px #47200f,
+        0 118px 0 -1px #6e3519,
+        0 148px 0 0 #8a4923,
+        0 178px 0 -1px #552711,
+        0 208px 0 -2px #743819;
       opacity: 0;
-      transform: translateX(-50%) rotate(28deg);
+      transform: translateX(-50%);
     }
 
     .special-coffee-month:hover {
@@ -778,27 +778,27 @@
     }
 
     @keyframes coffeePour {
-      0% { height: 0; opacity: 0; transform: translate(0, -8px) scale(0.72); }
-      16% { opacity: 1; transform: translate(3px, 0) scale(0.9); }
-      62% { height: 218px; opacity: 1; transform: translate(-2px, 10px) scale(1); }
-      82% { height: 218px; opacity: 0.9; transform: translate(2px, 24px) scale(0.96); }
-      100% { height: 218px; opacity: 0; transform: translate(0, 54px) scale(0.82); }
+      0% { height: 0; opacity: 0; transform: translateY(-8px) scale(0.72); }
+      16% { opacity: 1; transform: translateY(0) scale(0.9); }
+      62% { height: 218px; opacity: 1; transform: translateY(10px) scale(1); }
+      82% { height: 218px; opacity: 0.9; transform: translateY(24px) scale(0.96); }
+      100% { height: 218px; opacity: 0; transform: translateY(54px) scale(0.82); }
     }
 
     @keyframes coffeeBeansFallA {
       0%,
-      12% { opacity: 0; transform: translate(-50%, -18px) rotate(-24deg) scale(0.72); }
-      28% { opacity: 1; transform: translate(-50%, 6px) rotate(-12deg) scale(0.96); }
-      72% { opacity: 1; transform: translate(-50%, 28px) rotate(18deg) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, 54px) rotate(52deg) scale(0.82); }
+      12% { opacity: 0; transform: translate(-50%, -18px) scale(0.72); }
+      28% { opacity: 1; transform: translate(-50%, 6px) scale(0.96); }
+      72% { opacity: 1; transform: translate(-50%, 28px) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, 54px) scale(0.82); }
     }
 
     @keyframes coffeeBeansFallB {
       0%,
-      20% { opacity: 0; transform: translate(-50%, -12px) rotate(28deg) scale(0.68); }
-      38% { opacity: 1; transform: translate(-50%, 12px) rotate(8deg) scale(0.94); }
-      76% { opacity: 0.95; transform: translate(-50%, 34px) rotate(-24deg) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, 64px) rotate(-58deg) scale(0.78); }
+      20% { opacity: 0; transform: translate(-50%, -12px) scale(0.68); }
+      38% { opacity: 1; transform: translate(-50%, 12px) scale(0.94); }
+      76% { opacity: 0.95; transform: translate(-50%, 34px) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, 64px) scale(0.78); }
     }
 
     @keyframes monthButtonFadeIn {
