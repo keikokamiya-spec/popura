@@ -967,6 +967,10 @@
       gap: 1.3rem;
     }
 
+    .catalog-slider-controls {
+      display: none;
+    }
+
     .productCard {
       min-width: 0;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -1250,6 +1254,50 @@
 
       .menu-highlight {
         grid-template-columns: 1fr;
+      }
+
+      .catalog-grid {
+        display: flex;
+        gap: 0;
+        width: 100%;
+        overflow: hidden;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+
+      .catalog-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .catalog-grid .productCard {
+        flex: 0 0 100%;
+        scroll-snap-align: center;
+      }
+
+      .catalog-grid .productCard:hover {
+        transform: none;
+      }
+
+      .catalog-slider-controls {
+        display: flex;
+        justify-content: center;
+        gap: 0.9rem;
+        margin-top: 1.25rem;
+      }
+
+      .catalog-slider-btn {
+        display: inline-flex;
+        width: 48px;
+        height: 48px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(185, 147, 77, 0.72);
+        border-radius: 2px;
+        color: var(--white);
+        background: linear-gradient(180deg, var(--burgundy), var(--wood));
+        box-shadow: 0 10px 18px rgba(45, 24, 16, 0.24);
+        cursor: pointer;
       }
 
       .special-coffee-months {
@@ -1544,6 +1592,14 @@
               <p class="productCard__price">Beans ¥3,300(税別)</p>
             </a>
           </article>
+        </div>
+        <div class="catalog-slider-controls" aria-label="自家焙煎豆のスライド操作">
+          <button type="button" class="catalog-slider-btn catalog-slider-prev" aria-label="前の商品へ">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="catalog-slider-btn catalog-slider-next" aria-label="次の商品へ">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
     </section>
@@ -1844,6 +1900,40 @@
       });
       nextBtn.addEventListener("click", function () {
         list.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+      });
+    })();
+
+    (function () {
+      var catalog = document.querySelector(".catalog-grid");
+      var prevBtn = document.querySelector(".catalog-slider-prev");
+      var nextBtn = document.querySelector(".catalog-slider-next");
+      if (!catalog || !prevBtn || !nextBtn) return;
+
+      var cards = Array.prototype.slice.call(catalog.querySelectorAll(".productCard"));
+      if (!cards.length) return;
+
+      var current = 0;
+      var mobileQuery = window.matchMedia("(max-width: 768px)");
+
+      function scrollToCard(index, behavior) {
+        current = (index + cards.length) % cards.length;
+        if (!mobileQuery.matches) return;
+        catalog.scrollTo({
+          left: cards[current].offsetLeft - catalog.offsetLeft,
+          behavior: behavior || "smooth"
+        });
+      }
+
+      prevBtn.addEventListener("click", function () {
+        scrollToCard(current - 1);
+      });
+
+      nextBtn.addEventListener("click", function () {
+        scrollToCard(current + 1);
+      });
+
+      window.addEventListener("resize", function () {
+        scrollToCard(current, "auto");
       });
     })();
 
