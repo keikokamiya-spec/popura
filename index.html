@@ -6,1580 +6,1276 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="mobile-web-app-capable" content="yes">
   <title>{PageTitle}</title>
-  <meta name="BASE-Theme-Name" content="Popura Premium Editorial">
-  <meta name="BASE-Theme-Version" content="1.1">
+  <meta name="BASE-Theme-Name" content="Popura Kissaten Classic">
+  <meta name="BASE-Theme-Version" content="2.0">
 
   {FaviconTag}
   {CanonicalTag}
-
   {block:ItemPage}{MetaItemInfoTag}{/block:ItemPage}
   {block:NotItemPage}{MetaShopInfoTag}{/block:NotItemPage}
   {block:IndexPage}{HeadLinkNextPrevTag}{/block:IndexPage}
-
   {BackgroundTag}
   {GoogleAnalyticsTag}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&family=Pirata+One&family=Shippori+Mincho:wght@500;700&family=Yuji+Syuku&family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --paper: #efefef;
-      --coffee: #7a5648;
-      --coffee-deep: #6a4436;
-      --coffee-soft: #96796d;
-      --line: #d9d0cb;
-      --panel: #c7bbb6;
-      --panel-dark: #775040;
-      --text: #7a5648;
-      --muted: #a89a94;
-      --footer-dark: #313335;
-      --card-bg: #f1f1f1;
-      --container: 1560px;
-      --transition: all 0.35s ease;
-      --font-sans: "Noto Sans JP", sans-serif;
-      --font-serif: "Noto Serif JP", serif;
+      --paper: #f5ebdd;
+      --paper-deep: #e3cda5;
+      --brown: #3a2416;
+      --wood: #5a2f1b;
+      --burgundy: #8b1e1e;
+      --green: #2f4a38;
+      --gold: #b08a4a;
+      --cream: #fff8e8;
+      --white: #fcfaf2;
+      --shadow: 0 18px 34px rgba(45, 24, 16, 0.2);
+      --container: 1120px;
+      --font-title: "Kaisei Decol", "Shippori Mincho", "Noto Serif JP", serif;
+      --font-body: "Zen Old Mincho", "Noto Serif JP", serif;
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      margin: 0;
-      color: var(--text);
-      background: var(--paper);
-      font-family: var(--font-sans);
-      line-height: 1.65;
+      color: var(--brown);
+      background:
+        repeating-linear-gradient(90deg, rgba(58, 36, 22, 0.035) 0 1px, transparent 1px 42px),
+        linear-gradient(180deg, #f5ebdd 0%, #f5ebdd 48%, rgba(176, 138, 74, 0.32) 100%);
+      font-family: var(--font-body);
+      font-weight: 500;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
 
-    img {
+    img,
+    video {
+      display: block;
       max-width: 100%;
       height: auto;
-      display: block;
     }
 
     a {
       color: inherit;
       text-decoration: none;
-      transition: var(--transition);
     }
 
-    .wrap {
-      width: min(var(--container), calc(100% - 72px));
-      margin: 0 auto;
+    button {
+      font: inherit;
     }
 
     .required-tags {
       display: none !important;
     }
 
-    .site-header {
+    .container {
+      width: min(var(--container), 90%);
+      margin: 0 auto;
       position: relative;
-      color: #efddd2;
-      padding: 22px 0 34px;
-      background: #2f211b;
+      z-index: 1;
+    }
+
+    .section {
+      position: relative;
+      padding: 5rem 0;
       overflow: hidden;
     }
 
-    .site-header::before {
-      content: "";
+    .section-title {
+      display: block;
+      width: 100%;
+      margin: 0 0 2.2rem;
+      padding-bottom: 0.55rem;
+      border-bottom: 2px solid rgba(176, 138, 74, 0.78);
+      color: var(--brown);
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 4vw, 2.45rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-shadow: 0 1px 0 rgba(255, 248, 232, 0.75);
+    }
+
+    .section-kicker {
+      margin-bottom: 0.5rem;
+      color: var(--gold);
+      font-family: "Pirata One", Georgia, serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+
+    .site-header {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background: #160d09;
+    }
+
+    .hero-image {
       position: absolute;
       inset: 0;
-      background-image: url("https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top3.jpg");
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.52) saturate(0.9);
-    }
-
-    .site-header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(22, 14, 11, 0.45) 0%, rgba(28, 18, 14, 0.62) 45%, rgba(27, 17, 14, 0.78) 100%);
-    }
-
-    .header-top {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 220px 1fr 220px;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .header-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      border: 1px solid rgba(242, 222, 208, 0.2);
-      background: rgba(255, 255, 255, 0.06);
-      color: #e9d8ce;
-      border-radius: 8px;
-      padding: 14px 18px;
-      font-size: 16px;
-      letter-spacing: 0.04em;
-      width: fit-content;
-    }
-
-    .header-action:hover {
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    .header-action.is-right {
-      margin-left: auto;
-    }
-
-    .icon-menu {
-      position: relative;
-      width: 26px;
-      height: 2px;
-      background: #e8d4ca;
-      box-shadow: 0 8px 0 #e8d4ca, 0 -8px 0 #e8d4ca;
-    }
-
-    .icon-cart {
-      display: inline-flex;
-      width: 22px;
-      height: 22px;
-      color: #e8d4ca;
-      margin-right: 2px;
-    }
-
-    .icon-cart svg {
       width: 100%;
       height: 100%;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.9;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      object-fit: cover;
+      opacity: 0;
+      filter: sepia(0.22) saturate(0.82) contrast(1.08) brightness(0.78);
+      transition: opacity 1.2s ease;
     }
 
-    .brand-link {
-      position: relative;
+    .hero-image.is-active {
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 220px;
+      padding: 6rem 1rem 4rem;
       text-align: center;
-      color: #f0dfb5;
-      background: rgba(22, 17, 14, 0.32);
-      border: 1px solid rgba(240, 217, 160, 0.58);
-      padding: 30px 24px;
-      margin: 6px 0;
-      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(47, 74, 56, 0.24), transparent 34%, rgba(139, 30, 30, 0.24)),
+        radial-gradient(circle at center, transparent 34%, rgba(58, 36, 22, 0.54) 100%);
     }
 
-    .brand-link::before,
-    .brand-link::after {
+    .hero-brand-card {
+      --brand-gold: #b08a4a;
+      position: relative;
+      width: min(760px, 92vw);
+      padding: 2.25rem 2rem 2.55rem;
+      border: 2px solid var(--brand-gold);
+      color: var(--brand-gold);
+      background: linear-gradient(180deg, rgba(90, 47, 27, 0.9), rgba(58, 36, 22, 0.9));
+      clip-path: polygon(0% 14%, 6% 14%, 6% 5%, 15% 5%, 15% 0%, 85% 0%, 85% 5%, 94% 5%, 94% 14%, 100% 14%, 100% 86%, 94% 86%, 94% 95%, 85% 95%, 85% 100%, 15% 100%, 15% 95%, 6% 95%, 6% 86%, 0% 86%);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45), inset 0 0 0 3px rgba(255, 243, 205, 0.08);
+    }
+
+    .hero-brand-card::after {
       content: "";
       position: absolute;
-      left: 16px;
-      right: 16px;
-      height: 1px;
-      background: rgba(240, 217, 160, 0.65);
+      inset: 10px;
+      border: 1px solid var(--brand-gold);
+      clip-path: inherit;
+      pointer-events: none;
     }
 
-    .brand-link::before {
-      top: 14px;
-    }
-
-    .brand-link::after {
-      bottom: 14px;
-    }
-
-    .brand-ja {
-      font-family: var(--font-serif);
-      font-size: clamp(68px, 7vw, 108px);
-      line-height: 1;
-      letter-spacing: 0.1em;
-      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-    }
-
-    .brand-en {
-      display: none;
-      font-family: var(--font-serif);
-      font-size: clamp(40px, 3.9vw, 62px);
+    .hero-title {
+      margin: 0 0 0.35rem;
+      color: var(--paper);
+      font-family: "Yuji Syuku", "Kaisei Decol", serif;
+      font-size: clamp(2.35rem, 6vw, 3.95rem);
+      font-weight: 400;
+      line-height: 1.1;
       letter-spacing: 0.04em;
-      line-height: 1.15;
-      margin-top: 14px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
+    }
+
+    .hero-subtitle {
+      color: var(--gold);
+      font-family: "Pirata One", Georgia, serif;
+      font-size: clamp(0.95rem, 2vw, 1.25rem);
       font-weight: 700;
-      text-shadow: 0 5px 14px rgba(0, 0, 0, 0.35);
-    }
-
-    .brand-since {
-      margin-top: 14px;
-      display: inline-block;
-      min-width: 220px;
-      padding: 8px 18px;
-      border: 1px solid rgba(240, 217, 160, 0.75);
-      font-family: var(--font-serif);
-      font-size: clamp(16px, 1.7vw, 24px);
-      letter-spacing: 0.08em;
-      color: #efd9a7;
-      background: rgba(21, 17, 16, 0.34);
-      line-height: 1.15;
-    }
-
-    .header-note {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: center;
-      font-size: 14px;
-      letter-spacing: 0.06em;
-      margin-top: 12px;
-      color: #f2e5cc;
-    }
-
-    .header-note a {
-      border-bottom: 1px solid rgba(242, 229, 204, 0.45);
-      padding-bottom: 3px;
-    }
-
-    .header-note a:hover {
-      opacity: 0.75;
-    }
-
-    .header-catch {
-      position: relative;
-      z-index: 1;
-      width: min(720px, calc(100% - 40px));
-      margin: 20px auto 0;
-      text-align: center;
-      font-family: var(--font-serif);
-      font-size: clamp(26px, 2.6vw, 44px);
-      line-height: 1.35;
-      letter-spacing: 0.05em;
-      color: #f9f7f2;
-      background: rgba(120, 147, 186, 0.34);
-      border: 1px solid rgba(196, 217, 245, 0.45);
-      border-radius: 6px;
-      padding: 14px 18px;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(2px);
-    }
-
-    .hero-stage {
-      background: var(--paper);
-      padding: 24px 0 10px;
-    }
-
-    .hero-shell {
-      position: relative;
-    }
-
-    .hero-rail {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(430px, 1fr));
-      gap: 14px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      padding: 0 54px 16px;
-    }
-
-    .hero-rail::-webkit-scrollbar {
-      display: none;
-    }
-
-    .hero-card {
-      border-radius: 4px;
-      overflow: hidden;
-      background: #d8d4d1;
-      height: clamp(260px, 33vw, 700px);
-      scroll-snap-align: center;
-    }
-
-    .hero-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.9s ease;
-    }
-
-    .hero-card:hover img {
-      transform: scale(1.03);
-    }
-
-    .hero-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-55%);
-      width: 62px;
-      height: 62px;
-      border: 0;
-      border-radius: 50%;
-      font-size: 36px;
-      line-height: 1;
-      color: #8f7f78;
-      background: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-      cursor: pointer;
-      z-index: 5;
-    }
-
-    .hero-arrow:hover {
-      background: #fff;
-    }
-
-    .hero-arrow.prev {
-      left: 4px;
-    }
-
-    .hero-arrow.next {
-      right: 4px;
-    }
-
-    .hero-dots {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
-      margin-top: 12px;
-    }
-
-    .hero-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #d6cec9;
-      border: 1px solid #cfc5bf;
-      cursor: pointer;
-    }
-
-    .hero-dot.is-active {
-      width: 20px;
-      height: 20px;
-      border-radius: 50% 50% 50% 0;
-      transform: rotate(45deg);
-      background: #9f8c83;
-      border-color: #9f8c83;
-    }
-
-    .main-layout {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 46px;
-      align-items: start;
-      padding: 22px 0 78px;
-    }
-
-    .sidebar {
-      padding-top: 18px;
-    }
-
-    .side-block + .side-block {
-      margin-top: 34px;
-    }
-
-    .side-title {
-      margin: 0 0 14px;
-      font-size: 18px;
-      font-weight: 700;
+      line-height: 1.08;
       letter-spacing: 0.02em;
-      color: var(--coffee);
-      padding-bottom: 11px;
-      border-bottom: 4px solid var(--line);
     }
 
-    .side-links,
-    .guide-links {
-      margin: 0;
-      padding: 0;
-      list-style: none;
+    .hero-ribbon {
+      min-width: 280px;
+      height: 44px;
+      margin: 1.1rem auto 0;
+      padding: 0 1.5rem;
+      border: 2px solid var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      background: linear-gradient(180deg, rgba(139, 30, 30, 0.88), rgba(90, 47, 27, 0.88));
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+      font-family: var(--font-title);
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
     }
 
-    .side-links li a,
-    .guide-links li a {
+    .hero-catchphrase {
+      display: inline-block;
+      margin-top: 1.4rem;
+      padding: 1rem 2rem;
+      border: 1px solid rgba(185, 147, 77, 0.48);
+      border-radius: 4px;
+      color: var(--paper);
+      background: rgba(58, 36, 22, 0.62);
+      backdrop-filter: blur(8px);
+      font-family: var(--font-title);
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.82);
+    }
+
+    .scroll-nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      border-bottom: 1px solid rgba(185, 147, 77, 0.5);
+      background:
+        linear-gradient(90deg, rgba(47, 74, 56, 0.3), transparent 38%, rgba(139, 30, 30, 0.24)),
+        rgba(58, 36, 22, 0.96);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+      transform: translateY(-100%);
+      transition: transform 0.35s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .scroll-nav.is-show,
+    .scroll-nav.is-menu-open {
+      transform: translateY(0);
+    }
+
+    .scroll-nav-inner {
+      width: min(1120px, 92%);
+      min-height: 68px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--line);
-      padding: 14px 2px;
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--coffee);
+      gap: 1.5rem;
     }
 
-    .side-links li a:hover,
-    .guide-links li a:hover {
-      opacity: 0.72;
+    .scroll-logo {
+      color: var(--gold);
+      font-family: var(--font-title);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
     }
 
-    .side-plus {
-      color: #b17d44;
-      font-size: 20px;
-      line-height: 1;
-      margin-left: 12px;
+    .scroll-links {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
     }
 
-    .guide-icon {
-      width: 16px;
-      height: 16px;
-      border: 1px solid #9a7464;
+    .scroll-links a {
+      position: relative;
+      color: var(--white);
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .scroll-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.35rem;
+      width: 100%;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s ease;
+    }
+
+    .scroll-links a:hover::after,
+    .scroll-links a.is-active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .scroll-menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(185, 147, 77, 0.58);
       border-radius: 2px;
-      margin-right: 10px;
-      flex-shrink: 0;
-      display: inline-block;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      background: rgba(255, 243, 208, 0.08);
+      cursor: pointer;
     }
 
-    .guide-text {
+    main {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 16% 10%, rgba(185, 147, 77, 0.2) 0 15%, transparent 16%),
+        radial-gradient(circle at 88% 28%, rgba(25, 61, 45, 0.17) 0 12%, transparent 13%),
+        repeating-linear-gradient(90deg, rgba(58, 33, 24, 0.055) 0 1px, transparent 1px 84px),
+        repeating-linear-gradient(0deg, rgba(58, 33, 24, 0.04) 0 1px, transparent 1px 72px),
+        linear-gradient(180deg, #f5ebdd 0%, rgba(245, 235, 221, 0.92) 50%, rgba(176, 138, 74, 0.32) 100%);
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(45, 24, 16, 0.12), transparent 18%, transparent 82%, rgba(45, 24, 16, 0.12)),
+        radial-gradient(circle at center, transparent 45%, rgba(45, 24, 16, 0.18) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    .news-section {
+      background:
+        linear-gradient(rgba(32, 18, 12, 0.72), rgba(32, 18, 12, 0.82)),
+        url("top4.jpg") center / cover no-repeat;
+      color: var(--white);
+    }
+
+    .news-section .section-title {
+      color: var(--white);
+      border-bottom-color: rgba(255, 248, 236, 0.82);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.72);
+    }
+
+    .news-card,
+    .info-card-container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: clamp(1.4rem, 4vw, 2.5rem);
+      border: 1px solid rgba(185, 147, 77, 0.62);
+      background:
+        linear-gradient(180deg, rgba(255, 243, 213, 0.92), rgba(226, 204, 162, 0.86)),
+        repeating-linear-gradient(90deg, rgba(58, 33, 24, 0.04) 0 1px, transparent 1px 28px);
+      box-shadow: var(--shadow), inset 0 0 0 6px rgba(255, 243, 213, 0.28);
+      color: var(--brown);
+      text-align: left;
+    }
+
+    .news-card-label {
+      display: inline-flex;
+      margin-bottom: 0.8rem;
+      padding: 0.18rem 0.7rem;
+      color: var(--white);
+      background: linear-gradient(180deg, var(--burgundy), var(--wood));
+      font-family: var(--font-title);
+      letter-spacing: 0.08em;
+    }
+
+    .news-card a {
       display: inline-flex;
       align-items: center;
-      flex: 1;
-      justify-content: flex-start;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      padding: 0.75rem 1.1rem;
+      border: 1px solid var(--wood);
+      color: var(--wood);
+      background: rgba(255, 252, 244, 0.78);
+      font-family: var(--font-title);
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    .sidebar-image {
-      margin: 28px 0;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #d7d2cf;
+    .news-card a:hover {
+      color: var(--white);
+      background: var(--wood);
     }
 
-    .sidebar-image img,
-    .sidebar-image video {
+    .roast-section {
+      background:
+        linear-gradient(90deg, rgba(25, 61, 45, 0.12), transparent 48%, rgba(139, 30, 30, 0.12)),
+        linear-gradient(180deg, rgba(255, 243, 213, 0.5), rgba(213, 186, 139, 0.4));
+    }
+
+    .roast-layout,
+    .story-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .section-lead {
+      margin-bottom: 1.2rem;
+      color: var(--wood);
+      font-family: var(--font-title);
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: 0.06em;
+    }
+
+    .copy p + p {
+      margin-top: 1rem;
+    }
+
+    .photo-frame {
+      position: relative;
+      padding: 0.75rem;
+      border: 1px solid rgba(185, 147, 77, 0.52);
+      background: rgba(255, 248, 232, 0.65);
+      box-shadow: var(--shadow);
+    }
+
+    .photo-frame img,
+    .photo-frame video {
       width: 100%;
       aspect-ratio: 4 / 3;
       object-fit: cover;
+      filter: sepia(0.16) saturate(0.9) contrast(1.05);
     }
 
-    .content-area {
-      min-width: 0;
+    .story-section {
+      color: var(--white);
+      background:
+        linear-gradient(rgba(36, 20, 13, 0.74), rgba(31, 17, 11, 0.78)),
+        url("story-back.png") center / cover no-repeat;
     }
 
-    .notice-panel {
-      margin: 4px 0 44px;
+    .story-section .section-title,
+    .story-section .section-lead {
+      color: var(--white);
+      border-bottom-color: rgba(252, 250, 242, 0.62);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
     }
 
-    .notice-label {
-      font-size: 13px;
-      color: #b2a29b;
-      letter-spacing: 0.08em;
-      margin-bottom: 2px;
-      font-family: var(--font-serif);
+    .story-section .copy {
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.66);
     }
 
-    .notice-title {
-      margin: 0 0 16px;
-      font-size: 42px;
-      line-height: 1.25;
-      color: var(--coffee);
-      font-family: var(--font-serif);
-      border-left: 6px solid #b7823b;
-      padding-left: 18px;
+    .menu-section {
+      background:
+        linear-gradient(rgba(45, 24, 16, 0.58), rgba(34, 17, 11, 0.66)),
+        linear-gradient(90deg, rgba(25, 61, 45, 0.18), transparent 38%, rgba(111, 36, 31, 0.2)),
+        url("top2.jpg") center / cover no-repeat;
+      color: var(--white);
     }
 
-    .notice-row {
+    .menu-section .section-title,
+    .menu-section .section-kicker {
+      color: var(--white);
+      border-bottom-color: rgba(255, 255, 255, 0.72);
+      text-shadow: 0 2px 9px rgba(0, 0, 0, 0.72);
+    }
+
+    .menu-highlight {
       display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 24px;
-      border-bottom: 1px solid var(--line);
-      padding: 18px 0;
-      align-items: start;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
     }
 
-    .notice-date {
-      font-size: 16px;
-      letter-spacing: 0.02em;
-      color: #8b6e61;
-      white-space: nowrap;
-      padding-top: 4px;
-    }
-
-    .notice-text {
-      margin: 0;
-      font-size: 16px;
-      line-height: 1.7;
-      color: #8a6758;
-    }
-
-    .series-panel {
-      background: var(--panel);
-      border-radius: 16px;
-      padding: 24px 24px 18px;
-      margin-bottom: 34px;
-    }
-
-    .series-panel.is-subtle {
-      background: #cfc4bf;
-    }
-
-    .series-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 18px;
-      padding-bottom: 10px;
-      border-bottom: 5px solid var(--panel-dark);
-    }
-
-    .series-head h2 {
-      margin: 0;
-      font-size: 34px;
-      line-height: 1.25;
-      color: var(--coffee);
-      font-family: var(--font-serif);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .series-more {
-      font-size: 13px;
-      color: #9b6c42;
-      font-weight: 600;
-      white-space: nowrap;
-      letter-spacing: 0.01em;
-    }
-
-    .series-track {
-      margin-top: 18px;
-      display: flex;
-      gap: 18px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: thin;
-      padding-bottom: 14px;
-    }
-
-    .series-item {
-      flex: 0 0 260px;
-      min-width: 260px;
-      scroll-snap-align: start;
-    }
-
-    .series-thumb {
-      background: var(--card-bg);
-      border-radius: 8px;
-      overflow: hidden;
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .series-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .series-name {
-      margin: 10px 0 0;
-      font-size: 16px;
-      line-height: 1.45;
-      color: #845f4f;
-    }
-
-    .series-price {
-      margin: 7px 0 0;
-      font-size: 18px;
-      font-weight: 700;
-      color: #7b5343;
-    }
-
-    .series-sub {
-      margin: 6px 0 0;
-      font-size: 13px;
-      color: #7f6154;
-      line-height: 1.6;
-    }
-
-    .series-desc {
-      margin: 8px 0 0;
-      font-size: 14px;
-      color: #74584b;
-      line-height: 1.7;
-    }
-
-    .series-thumb.is-beans {
-      background-image: url("https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png");
-      background-size: cover;
-      background-position: center;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .series-thumb.is-beans img {
-      width: 62%;
-      max-width: 170px;
-      height: auto;
-      object-fit: contain;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
-    }
-
-    .catalog-section {
-      padding-top: 12px;
-    }
-
-    .catalog-switch {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 26px;
-    }
-
-    .switch-btn {
-      min-width: 170px;
-      border: 1px solid #7f5a4c;
+    .highlight-card,
+    .productCard {
+      border: 1px solid rgba(185, 147, 77, 0.46);
       border-radius: 4px;
-      background: transparent;
-      color: #6a4436;
-      padding: 12px 18px;
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .switch-btn.is-active {
-      background: #6a4436;
-      color: #fff;
-    }
-
-    .catalog-title {
-      margin: 4px 0 16px;
-      font-family: var(--font-serif);
-      font-size: 40px;
-      line-height: 1.3;
-      color: var(--coffee);
-      border-left: 6px solid #b7823b;
-      padding-left: 18px;
-    }
-
-    .catalog-subtitle {
-      margin: 0 0 18px;
-      color: #8d6e60;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .bean-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 30px 26px;
-    }
-
-    .bean-card {
-      background: #f8f6f4;
-      border-radius: 8px;
       overflow: hidden;
-      border: 1px solid #e1d7d2;
-      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+      color: var(--brown);
+      background: linear-gradient(180deg, rgba(255, 248, 232, 0.97), rgba(228, 209, 168, 0.97));
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
     }
 
-    .bean-image {
-      position: relative;
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      background: #ddd;
-    }
-
-    .bean-image .bean-bg {
-      position: absolute;
-      inset: 0;
+    .highlight-card img {
       width: 100%;
-      height: 100%;
+      height: 260px;
       object-fit: cover;
-      filter: saturate(0.9);
+      filter: sepia(0.16) saturate(0.88) contrast(1.06);
     }
 
-    .bean-image .bean-flag {
+    .highlight-body {
+      min-height: 132px;
+      padding: 1.15rem 1.05rem 1.25rem;
+      text-align: center;
+    }
+
+    .highlight-body h3 {
+      color: var(--wood);
+      font-family: var(--font-title);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+    }
+
+    .highlight-body p {
+      margin-top: 0.45rem;
+      font-weight: 700;
+    }
+
+    .special-coffee {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      padding: 1.45rem 1.2rem 1.7rem;
+      border: 1px solid rgba(185, 147, 77, 0.42);
+      background: rgba(32, 16, 10, 0.74);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(2px);
+      text-align: center;
+    }
+
+    .special-coffee-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.75rem, 4.4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      line-height: 1.35;
+      margin-bottom: 0.65rem;
+      color: var(--paper);
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.78);
+    }
+
+    .special-coffee-en {
+      font-family: var(--font-title);
+      font-size: clamp(0.78rem, 1.4vw, 1rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .special-coffee-tagline {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--paper);
+      line-height: 1.8;
+      margin-bottom: 0.2rem;
+      text-shadow: 0 2px 9px rgba(0, 0, 0, 0.78);
+    }
+
+    .special-coffee-sub {
+      display: inline-block;
+      margin-top: 0.25rem;
+      margin-bottom: 0.35rem;
+      padding: 0.38rem 0.9rem;
+      border: 1px solid rgba(185, 147, 77, 0.68);
+      background: rgba(255, 243, 213, 0.94);
+      color: var(--brown);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22);
+      font-family: var(--font-title);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .special-coffee-note {
+      max-width: 860px;
+      margin: 0 auto 1.25rem;
+      color: var(--paper);
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.7;
+      text-shadow: 0 2px 9px rgba(0, 0, 0, 0.82);
+    }
+
+    .special-coffee-months {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.9rem 0.75rem;
+      max-width: 860px;
+      margin: 1.15rem auto 1.65rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .special-coffee-month {
+      position: relative;
+      min-height: 106px;
+      border: none;
+      color: var(--paper);
+      background: transparent;
+      filter: drop-shadow(0 9px 13px rgba(0, 0, 0, 0.28));
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: opacity 0.28s ease, transform 0.28s ease, filter 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      isolation: isolate;
+    }
+
+    .special-coffee-month::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 150px;
+      height: 110px;
+      background: center / contain no-repeat url("special-coffee-pot.webp");
+      transform: translateX(-50%);
+      z-index: 0;
+      transition: filter 0.2s ease;
+    }
+
+    .special-coffee-month::after {
+      display: none;
+    }
+
+    .special-coffee-month .month-label {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      width: 54px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 61px;
+      padding-left: 0.08em;
+      transform: translateX(5px);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 7px rgba(255, 224, 174, 0.24);
+    }
+
+    .special-coffee-month .month-label::before,
+    .special-coffee-month .month-label::after {
+      display: none;
+    }
+
+    .special-coffee-month .coffee-pour {
+      position: absolute;
+      left: calc(50% - 60px);
+      top: 79px;
+      width: 100px;
+      height: 0;
+      background: transparent;
+      box-shadow: none;
+      opacity: 0;
+      transform: translate(0, 0) scaleX(0.86);
+      transform-origin: top;
+      z-index: 2;
+      pointer-events: none;
+      filter: drop-shadow(0 3px 4px rgba(16, 4, 1, 0.8)) drop-shadow(0 0 9px rgba(108, 50, 18, 0.58));
+      overflow: hidden;
+      mix-blend-mode: multiply;
+    }
+
+    .special-coffee-month .coffee-pour::before,
+    .special-coffee-month .coffee-pour::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      pointer-events: none;
+    }
+
+    .special-coffee-month .coffee-pour::before {
+      top: 0;
+      width: 100px;
+      height: 232px;
+      background: center top / 100px 232px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='232' viewBox='0 0 100 232'%3E%3Cdefs%3E%3ClinearGradient id='coffeeBody' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230b0200'/%3E%3Cstop offset='.32' stop-color='%23300d03'/%3E%3Cstop offset='.66' stop-color='%23783a16'/%3E%3Cstop offset='1' stop-color='%23130400'/%3E%3C/linearGradient%3E%3ClinearGradient id='coffeeGlow' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f0a45a' stop-opacity='.66'/%3E%3Cstop offset='.45' stop-color='%23a55724' stop-opacity='.42'/%3E%3Cstop offset='1' stop-color='%23fff0c2' stop-opacity='.12'/%3E%3C/linearGradient%3E%3Cfilter id='liquidEdge' x='-30%25' y='-8%25' width='160%25' height='116%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.018 .09' numOctaves='2' seed='6' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='2.2' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M25 0 C30 54 61 82 54 122 C48 157 64 194 64 232' fill='none' stroke='%23070100' stroke-width='29' stroke-linecap='round' opacity='.86' filter='url(%23liquidEdge)'/%3E%3Cpath d='M25 0 C30 54 61 82 54 122 C48 157 64 194 64 232' fill='none' stroke='url(%23coffeeBody)' stroke-width='23' stroke-linecap='round' filter='url(%23liquidEdge)'/%3E%3Cpath d='M21 5 C27 55 53 86 48 124 C43 158 55 193 58 227' fill='none' stroke='url(%23coffeeGlow)' stroke-width='10' stroke-linecap='round' opacity='.88'/%3E%3Cpath d='M18 14 C26 58 47 88 43 124 C39 157 48 190 54 217' fill='none' stroke='%23ffd28c' stroke-width='3' stroke-linecap='round' opacity='.48'/%3E%3Cpath d='M33 23 C39 67 62 92 55 127 C51 154 61 185 64 211' fill='none' stroke='%23100000' stroke-width='5' stroke-linecap='round' opacity='.35'/%3E%3C/svg%3E");
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .special-coffee-month .coffee-pour::after {
+      bottom: -13px;
+      width: 68px;
+      height: 22px;
+      background:
+        radial-gradient(ellipse at 50% 52%, rgba(18, 3, 0, 0.78) 0 25%, rgba(87, 34, 10, 0.58) 38%, transparent 70%),
+        radial-gradient(circle at 24% 38%, rgba(255, 212, 138, 0.36) 0 8%, transparent 18%),
+        radial-gradient(circle at 76% 42%, rgba(255, 180, 88, 0.28) 0 7%, transparent 17%);
+      filter: blur(0.15px) drop-shadow(0 0 4px rgba(96, 41, 15, 0.55));
+      opacity: 0;
+      transform: translateX(-50%);
+    }
+
+    .special-coffee-month:hover {
+      transform: translateY(-2px);
+      color: var(--paper);
+      filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.34));
+    }
+
+    .special-coffee-month:hover::before {
+      filter: brightness(1.12) saturate(1.08) drop-shadow(0 0 10px rgba(255, 215, 160, 0.7));
+    }
+
+    .special-coffee-months.is-focusing {
+      min-height: 178px;
+    }
+
+    .special-coffee-months.is-focusing .special-coffee-month {
+      pointer-events: none;
+    }
+
+    .special-coffee-month.is-hidden-during-pour {
+      opacity: 0;
+      transform: scale(0.92);
+      visibility: hidden;
+    }
+
+    .special-coffee-month.is-focus-target {
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
-      width: 58%;
-      max-width: 180px;
-      height: auto;
-      object-fit: contain;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
-      background: #fff;
+      width: min(180px, 48vw);
+      transform: translate(-50%, -50%) scale(1.16);
+      z-index: 20;
+      opacity: 1;
+      visibility: visible;
+      filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.42)) drop-shadow(0 0 16px rgba(255, 215, 160, 0.38));
     }
 
-    .bean-image .bean-flag.svg {
-      background: transparent;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    .special-coffee-month.is-focus-target::before {
+      width: 178px;
+      height: 130px;
+      filter: brightness(1.08) saturate(1.08);
     }
 
-    .bean-body {
-      padding: 14px 16px 16px;
+    .special-coffee-month.is-focus-target .coffee-pour {
+      left: calc(50% - 64px);
+      top: 98px;
     }
 
-    .bean-name {
-      margin: 0;
-      color: #503a33;
-      font-size: 19px;
-      line-height: 1.55;
-      font-weight: 700;
+    .special-coffee-months.is-restoring .special-coffee-month {
+      animation: monthButtonFadeIn 0.42s ease both;
     }
 
-    .bean-price {
-      margin: 10px 0 0;
-      color: #6e4a3f;
-      font-size: 18px;
-      font-weight: 600;
+    .special-coffee-month.is-pouring .coffee-pour {
+      animation: coffeePour 0.92s cubic-bezier(0.2, 0.65, 0.24, 1) both;
     }
 
-    .bean-shell {
+    .special-coffee-month.is-pouring .coffee-pour::after {
+      animation: coffeeDrops 0.92s ease-out both;
+    }
+
+    .special-coffee-month.is-pouring::before {
+      animation: coffeePotTilt 0.92s cubic-bezier(0.2, 0.65, 0.24, 1) both;
+    }
+
+    @keyframes coffeePotTilt {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      18% { transform: translateX(-50%) rotate(-13deg); }
+      58% { transform: translateX(-50%) rotate(-24deg); }
+      100% { transform: translateX(-50%) rotate(0deg); }
+    }
+
+    @keyframes coffeePour {
+      0% { height: 0; opacity: 0; transform: translate(0, 0) scaleX(0.62); }
+      18% { opacity: 1; transform: translate(2px, 0) scaleX(0.9); }
+      36% { transform: translate(-2px, 1px) scaleX(1); }
+      58% { height: 218px; opacity: 1; transform: translate(3px, 2px) scaleX(1.04); }
+      78% { height: 206px; opacity: 0.92; transform: translate(-1px, 14px) scaleX(0.96); }
+      100% { height: 116px; opacity: 0; transform: translate(0, 38px) scaleX(0.7); }
+    }
+
+    @keyframes coffeeDrops {
+      0%,
+      16% { opacity: 0; transform: translate(-50%, -4px) scaleX(0.22); }
+      42% { opacity: 0.82; transform: translate(-50%, 4px) scaleX(0.82); }
+      74% { opacity: 0.62; transform: translate(-50%, 8px) scaleX(1); }
+      100% { opacity: 0; transform: translate(-50%, 10px) scaleX(0.38); }
+    }
+
+    @keyframes monthButtonFadeIn {
+      from { opacity: 0; transform: translateY(8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .special-coffee-carousel-wrap {
       position: relative;
+      max-width: min(560px, 94vw);
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .bean-dots {
+    .special-coffee-arrow {
       display: none;
+    }
+
+    .special-coffee-list {
+      display: block;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .special-coffee-card {
+      display: none;
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .special-coffee-card.is-active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      animation: beanCardRise 0.56s ease both;
+    }
+
+    .special-coffee-card.is-active.is-slow-reveal {
+      animation: coffeeCardSlowRise 3s ease both;
+    }
+
+    .special-coffee-card-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: transparent;
+      filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.38));
+    }
+
+    .special-coffee-product-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .special-coffee-card.is-revealing .special-coffee-card-img::before,
+    .special-coffee-card.is-revealing .special-coffee-card-img::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 7%;
+      width: 10px;
+      height: 15px;
+      border-radius: 50%;
+      background: #5a321e;
+      box-shadow:
+        -58px -22px 0 #3b2115,
+        -36px 9px 0 #8b5935,
+        -13px -34px 0 #6c3f25,
+        24px -14px 0 #4a2718,
+        52px 4px 0 #7a4a2d;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+      animation: beanPop 0.64s ease both;
+    }
+
+    .special-coffee-card.is-revealing .special-coffee-card-img::after {
+      bottom: 15%;
+      transform: scale(0.78);
+      animation-delay: 0.08s;
+    }
+
+    @keyframes beanCardRise {
+      from { opacity: 0; transform: translateY(24px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes coffeeCardSlowRise {
+      0% { opacity: 1; clip-path: inset(100% 0 0 0); }
+      28% { clip-path: inset(62% 0 0 0); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes beanPop {
+      0% { opacity: 0; transform: translate(-50%, 18px) scale(0.72) rotate(-8deg); }
+      42% { opacity: 0.95; }
+      100% { opacity: 0; transform: translate(-50%, -42px) scale(1) rotate(10deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .special-coffee-month.is-pouring .coffee-pour,
+      .special-coffee-card.is-active,
+      .special-coffee-card.is-revealing .special-coffee-card-img::before,
+      .special-coffee-card.is-revealing .special-coffee-card-img::after {
+        animation: none;
+      }
+    }
+
+    .view-menu-btn,
+    .sns-footer-action,
+    .return-top,
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      padding: 0.75rem 1.3rem;
+      border: 1px solid rgba(185, 147, 77, 0.72);
+      color: var(--white);
+      background: linear-gradient(180deg, var(--burgundy), var(--wood));
+      font-family: var(--font-title);
+      letter-spacing: 0.05em;
+      box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+    }
+
+    .menu-action,
+    .sns-footer-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .catalog-section {
+      background: rgba(245, 235, 221, 0.74);
     }
 
     .catalog-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 30px 26px;
+      gap: 1.3rem;
     }
 
     .productCard {
       min-width: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .productCard__link {
-      display: block;
-      color: inherit;
+    .productCard:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 34px rgba(45, 24, 16, 0.26);
     }
 
     .productCard__image {
-      background: var(--card-bg);
-      border-radius: 8px;
-      overflow: hidden;
       aspect-ratio: 1 / 1;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.22)),
+        url("back-coffee-beans.png") center / cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .productCard__image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease;
+      width: 74%;
+      height: 74%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.34));
     }
 
-    .productCard__link:hover .productCard__image img {
-      transform: scale(1.04);
+    .productCard__title,
+    .productCard__price {
+      padding: 0 1rem;
+      color: var(--brown);
     }
 
     .productCard__title {
-      margin: 10px 0 0;
-      font-size: 16px;
-      line-height: 1.45;
-      color: #845f4f;
+      margin-top: 1rem;
+      min-height: 3.2em;
+      font-family: var(--font-title);
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .productCard__price {
-      margin: 8px 0 0;
-      font-size: 19px;
-      line-height: 1.3;
+      padding-bottom: 1.1rem;
+      color: var(--wood);
       font-weight: 700;
-      color: #7b5343;
+    }
+
+    .sns-order-section {
+      background:
+        linear-gradient(180deg, rgba(255, 243, 213, 0.56), rgba(213, 186, 139, 0.52));
+      text-align: center;
+    }
+
+    .sns-footer-copy {
+      margin-top: 1.6rem;
+      font-size: 0.92rem;
+    }
+
+    .site-footer {
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 0 0;
+      background:
+        linear-gradient(rgba(58, 36, 22, 0.24), rgba(58, 36, 22, 0.34)),
+        url("story-back.png") center / cover no-repeat;
+      text-align: center;
+    }
+
+    .site-footer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(80, 43, 28, 0.12), transparent 22%, transparent 78%, rgba(80, 43, 28, 0.12)),
+        radial-gradient(circle at center, transparent 45%, rgba(80, 43, 28, 0.16) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    .site-footer .section-title {
+      display: inline-block;
+      width: auto;
+      margin-bottom: 2rem;
+      padding: 0.15rem 1.1rem 0.3rem;
+      color: var(--white);
+      background: rgba(35, 20, 12, 0.34);
+      border-bottom-color: rgba(255, 248, 236, 0.82);
+      text-shadow: 0 2px 2px rgba(0, 0, 0, 0.92), 0 0 18px rgba(0, 0, 0, 0.72);
+    }
+
+    .info-layout {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .info-item {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed rgba(58, 33, 24, 0.32);
+      text-align: left;
+    }
+
+    .info-item strong {
+      font-family: var(--font-title);
+      white-space: nowrap;
+    }
+
+    .info-map-link,
+    .info-map-open {
+      color: var(--wood);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .info-map-frame {
+      overflow: hidden;
+      border: 1px solid rgba(92, 60, 45, 0.28);
+      box-shadow: 0 10px 24px rgba(64, 34, 15, 0.12);
+    }
+
+    .info-map-frame iframe {
+      display: block;
+      width: 100%;
+      height: 320px;
+      border: 0;
+      filter: sepia(0.12) saturate(0.9);
+    }
+
+    .footer-nav {
+      margin-top: 2.5rem;
+      padding: 1rem 0;
+      color: var(--white);
+      background: var(--brown);
+    }
+
+    .footer-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem 1.4rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+    }
+
+    .footer-copy {
+      padding: 1rem 0;
+      color: var(--white);
+      background: #24160f;
+      font-size: 0.8rem;
     }
 
     .static-page {
-      padding: 54px 0 82px;
+      padding: 6rem 0;
+      background: var(--paper);
     }
 
     .single-panel {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 28px;
+      border: 1px solid rgba(185, 147, 77, 0.46);
+      background: linear-gradient(180deg, rgba(255, 248, 232, 0.97), rgba(228, 209, 168, 0.97));
+      box-shadow: var(--shadow);
+      padding: clamp(1.25rem, 4vw, 2.4rem);
     }
 
     .single-title {
-      margin: 0 0 16px;
-      font-size: 34px;
-      color: var(--coffee);
-      font-family: var(--font-serif);
-    }
-
-    .single-text {
-      color: #856556;
-      font-size: 16px;
-      line-height: 1.9;
+      margin-bottom: 1rem;
+      color: var(--wood);
+      font-family: var(--font-title);
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
     }
 
     .item-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 34px;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+      gap: 2rem;
       align-items: start;
+    }
+
+    .item-main > img {
+      width: 100%;
+      border: 1px solid rgba(185, 147, 77, 0.46);
     }
 
     .item-thumbs {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 10px;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
     }
 
-    .item-side .single-title {
-      margin-bottom: 4px;
-    }
-
-    .item-side .single-price {
-      margin: 0 0 14px;
-      font-size: 30px;
-      color: #7b5343;
+    .single-price {
+      margin-bottom: 1rem;
+      color: var(--burgundy);
+      font-family: var(--font-title);
+      font-size: 1.45rem;
       font-weight: 700;
     }
 
     .item-description {
-      margin-top: 20px;
-      border-top: 1px solid var(--line);
-      padding-top: 20px;
-      color: #856556;
-      font-size: 15px;
-      line-height: 1.9;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed rgba(58, 33, 24, 0.32);
     }
 
-    .page-top-strip {
-      text-align: center;
-      background: #93766b;
-      color: #f0e7e2;
-      padding: 14px 0 18px;
-      font-size: 18px;
-      letter-spacing: 0.03em;
-    }
-
-    .page-top-strip a {
-      opacity: 0.95;
-    }
-
-    .page-top-strip a:hover {
-      opacity: 0.75;
-    }
-
-    .site-footer {
-      margin-top: 0;
-      color: #eaded7;
-    }
-
-    .footer-upper {
-      background: var(--panel-dark);
-      padding: 40px 0 56px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 36px;
-    }
-
-    .footer-title {
-      margin: 0 0 16px;
-      font-size: 30px;
-      font-family: var(--font-serif);
-      color: #e6d4cb;
-      line-height: 1.3;
-    }
-
-    .shipping-section .footer-title {
-      margin: 0 0 14px;
-      font-size: clamp(16px, 1.8vw, 32px);
-      font-family: var(--font-sans);
-      font-weight: 700;
-      color: #d3cbc8;
-      position: relative;
-      padding-left: 22px;
-      letter-spacing: 0.01em;
-    }
-
-    .shipping-section .footer-title::before {
-      content: "–";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: #cbc2bd;
-      font-size: 0.92em;
-      line-height: 1;
-    }
-
-    .shipping-box {
-      border-radius: 6px;
-      background: rgba(0, 0, 0, 0.14);
-      padding: 16px 18px;
-      margin-bottom: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .shipping-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.16);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: #cfc8c3;
-    }
-
-    .shipping-icon svg {
-      width: 28px;
-      height: 28px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .shipping-copy {
-      min-width: 0;
-      display: block;
-    }
-
-    .shipping-copy strong {
-      display: block;
-      font-size: clamp(17px, 1.55vw, 31px);
-      line-height: 1.2;
-      color: #ece7e4;
-      margin-bottom: 3px;
-      font-weight: 700;
-    }
-
-    .shipping-copy span {
-      display: block;
-      font-size: clamp(14px, 1.2vw, 24px);
-      line-height: 1.28;
-      color: #d6ccc7;
-    }
-
-    .footer-sub-link {
-      text-align: right;
-      font-size: clamp(13px, 0.95vw, 17px);
-      color: #d6b793;
-      margin: 10px 0 24px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .payment-wrap {
-      margin-top: 10px;
-      background: transparent;
-      border-radius: 0;
-      padding: 0;
-      border: 0;
-    }
-
-    .payment-wrap .payment_method,
-    .payment-wrap ul,
-    .payment-wrap ol {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .payment-wrap .payment_method li,
-    .payment-wrap ul li,
-    .payment-wrap ol li {
-      margin: 0;
-      padding: 0;
-    }
-
-    .payment-wrap .payment_method > a,
-    .payment-wrap .payment_method > span,
-    .payment-wrap .payment_method > div,
-    .payment-wrap .payment_method > img,
-    .payment-wrap .payment_method li,
-    .payment-wrap li,
-    .payment-wrap a {
-      background: #f2f0ed;
-      border: 1px solid rgba(65, 44, 37, 0.2);
-      border-radius: 7px;
-      min-height: 44px;
-      padding: 8px 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #4e3e37;
-      font-size: clamp(13px, 0.95vw, 18px);
-      font-weight: 600;
-      line-height: 1.2;
-    }
-
-    .payment-wrap .payment_method img,
-    .payment-wrap img {
-      width: auto;
-      max-height: 24px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .payment-wrap .payment_method > img {
-      padding: 10px 16px;
-    }
-
-    .payment-fallback {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: stretch;
-      margin-top: 2px;
-    }
-
-    .pay-chip {
-      min-height: 40px;
-      padding: 8px 14px;
-      background: #f3f1ef;
-      border: 1px solid rgba(66, 43, 36, 0.22);
-      border-radius: 5px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: #3f322c;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .pay-chip--wide {
-      min-width: 272px;
-    }
-
-    .pay-chip--mid {
-      min-width: 112px;
-    }
-
-    .pay-chip--mid2 {
-      min-width: 220px;
-    }
-
-    .pay-chip--solo {
-      min-width: 96px;
-    }
-
-    .pay-check {
-      font-size: 13px;
-      color: #6d615b;
-      line-height: 1;
-    }
-
-    .pay-logos {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .pay-logo {
-      font-weight: 800;
-      letter-spacing: 0.01em;
-    }
-
-    .pay-logo.visa {
-      color: #1547b7;
-      font-style: italic;
-    }
-
-    .pay-logo.jcb {
-      color: #1a7f4c;
-    }
-
-    .pay-logo.amex {
-      color: #1d87c6;
-      font-size: 11px;
-      letter-spacing: 0;
-    }
-
-    .pay-logo.diners {
-      color: #205f8c;
-      font-size: 11px;
-    }
-
-    .pay-master {
-      position: relative;
-      width: 26px;
-      height: 14px;
-      display: inline-block;
-    }
-
-    .pay-master::before,
-    .pay-master::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-    }
-
-    .pay-master::before {
-      left: 0;
-      background: #e7382f;
-    }
-
-    .pay-master::after {
-      right: 0;
-      background: #f4a024;
-      opacity: 0.9;
-    }
-
-    .pay-chip.amazon {
-      font-size: 33px;
-      color: #3f3f40;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      padding: 6px 16px;
-    }
-
-    .pay-chip.paypal {
-      color: #0f6ec6;
-      font-size: 34px;
-      font-style: italic;
-      letter-spacing: -0.02em;
-      padding: 7px 14px;
-    }
-
-    .calendar-wrap {
-      margin-top: 8px;
-    }
-
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .calendar {
-      background: rgba(0, 0, 0, 0.13);
-      border-radius: 8px;
-      padding: 16px 14px 12px;
-    }
-
-    .calendar caption {
-      margin-bottom: 8px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #ecdcd3;
-      text-align: center;
-    }
-
-    .calendar th,
-    .calendar td {
-      text-align: center;
-      font-size: 14px;
-      line-height: 1.6;
-      color: #ecded6;
-      padding: 2px 0;
-      min-width: 22px;
-    }
-
-    .calendar td.is-holiday span,
-    .calendar td.is-today span {
-      display: inline-flex;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .calendar td.is-holiday span {
-      background: #f2a4b1;
-      color: #fff;
-    }
-
-    .calendar td.is-today span {
-      background: #c29234;
-      color: #fff;
-    }
-
-    .calendar-note {
-      margin: 8px 2px 0;
-      text-align: right;
-      font-size: 13px;
-      color: #eadfd8;
-    }
-
-    .calendar-note .dot {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      margin-right: 6px;
-      vertical-align: -1px;
-    }
-
-    .calendar-note .dot.today {
-      background: #c29234;
-      margin-left: 10px;
-    }
-
-    .calendar-note .dot.holiday {
-      background: #f2a4b1;
-      margin-left: 10px;
-    }
-
-    .footer-lower {
-      background: var(--footer-dark);
-      padding: 26px 0 28px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .footer-nav {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      font-size: 14px;
-      color: #dfd9d5;
-    }
-
-    .footer-nav a:hover {
-      color: #ffffff;
-    }
-
-    .footer-copy {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #a6a8ac;
-      letter-spacing: 0.03em;
-    }
-
-    [data-reveal] {
+    [data-scroll-reveal] {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(34px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    [data-reveal].revealed {
+    [data-scroll-reveal].is-visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    @media (max-width: 1100px) {
-      .header-top {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        align-items: start;
-        gap: 14px 18px;
-      }
-
-      .header-action,
-      .header-action.is-right {
-        margin: 0;
-      }
-
-      .header-top > .header-action:first-child {
-        grid-column: 1;
-        grid-row: 1;
-        justify-self: start;
-      }
-
-      .header-action.is-right {
-        grid-column: 2;
-        grid-row: 1;
-        justify-self: end;
-      }
-
-      .header-note {
-        justify-content: center;
-        margin-top: 10px;
-      }
-
-      .brand-link {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        min-height: 190px;
-        padding: 24px 18px;
-        margin: 2px 0 0;
-      }
-
-      .hero-arrow {
-        display: none;
-      }
-
-      .hero-rail {
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      .main-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        order: 2;
-      }
-
-      .content-area {
-        order: 1;
-      }
-
-      .catalog-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .bean-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .series-head h2 {
-        font-size: 30px;
-      }
-
-      .notice-title,
-      .catalog-title {
-        font-size: 36px;
-      }
-
-      .notice-row {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-
+    @media (max-width: 960px) {
+      .roast-layout,
+      .story-layout,
       .item-layout {
         grid-template-columns: 1fr;
       }
 
-      .footer-grid {
-        grid-template-columns: 1fr;
+      .catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .shipping-section .footer-title {
-        font-size: 22px;
-      }
-
-      .shipping-copy strong {
-        font-size: 21px;
-      }
-
-      .shipping-copy span {
-        font-size: 16px;
-      }
-
-      .footer-sub-link {
-        font-size: 15px;
-      }
-
-      .pay-chip.amazon {
-        font-size: 24px;
-      }
-
-      .pay-chip.paypal {
-        font-size: 23px;
+      .special-coffee-months {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 680px) {
-      .wrap {
-        width: min(var(--container), calc(100% - 30px));
+    @media (max-width: 768px) {
+      .site-header {
+        min-height: 92vh;
       }
 
-      .brand-ja {
-        font-size: clamp(42px, 12vw, 56px);
-        line-height: 1.05;
-        letter-spacing: 0.08em;
-        white-space: nowrap;
-        word-break: keep-all;
+      .scroll-menu-toggle {
+        display: inline-flex;
       }
 
-      .brand-en {
+      .scroll-links {
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
         display: none;
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0.5rem 4%;
+        background: rgba(58, 36, 22, 0.98);
+        border-top: 1px solid rgba(185, 147, 77, 0.38);
       }
 
-      .brand-since {
-        min-width: 180px;
-        padding: 7px 14px;
-        font-size: clamp(12px, 4.2vw, 16px);
+      .scroll-nav.is-menu-open .scroll-links {
+        display: grid;
       }
 
-      .header-catch {
-        width: calc(100% - 24px);
-        padding: 10px 8px;
-        font-size: clamp(14px, 4vw, 18px);
-        line-height: 1.25;
-        letter-spacing: 0.01em;
-        white-space: nowrap;
-        word-break: keep-all;
+      .scroll-links a {
+        padding: 0.9rem 0;
+        border-bottom: 1px solid rgba(185, 147, 77, 0.22);
+      }
+
+      .hero-brand-card {
+        padding: 1.7rem 1rem 2rem;
+      }
+
+      .hero-ribbon {
+        min-width: 220px;
+        font-size: 0.95rem;
+      }
+
+      .hero-catchphrase {
+        padding: 0.8rem 1rem;
+        letter-spacing: 0.06em;
+      }
+
+      .section {
+        padding: 4rem 0;
+      }
+
+      .menu-highlight {
+        grid-template-columns: 1fr;
+      }
+
+      .special-coffee-months {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.95rem 0.55rem;
+      }
+
+      .special-coffee-months.is-focusing {
+        min-height: 158px;
+      }
+
+      .special-coffee-month {
+        min-height: 98px;
+        font-size: 0.84rem;
+      }
+
+      .special-coffee-month::before {
+        top: 0;
+        width: 136px;
+        height: 100px;
+      }
+
+      .special-coffee-month .month-label {
+        width: 50px;
+        height: 30px;
+        margin-top: 56px;
+        transform: translateX(7px);
+      }
+
+      .special-coffee-month .coffee-pour {
+        left: calc(50% - 55px);
+        top: 74px;
+      }
+
+      .special-coffee-month.is-focus-target {
+        width: min(160px, 62vw);
+        transform: translate(-50%, -50%) scale(1.08);
+      }
+
+      .special-coffee-month.is-focus-target::before {
+        width: 154px;
+        height: 114px;
+      }
+
+      .special-coffee-month.is-focus-target .coffee-pour {
+        left: calc(50% - 68px);
+        top: 88px;
+      }
+
+      .info-item {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: min(100% - 28px, var(--container));
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 11vw, 2.8rem);
       }
 
       .catalog-grid {
         grid-template-columns: 1fr;
-      }
-
-      .bean-grid {
-        display: flex;
-        gap: 14px;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        padding-bottom: 10px;
-      }
-
-      .bean-grid::-webkit-scrollbar {
-        display: none;
-      }
-
-      .bean-card {
-        flex: 0 0 100%;
-        min-width: 100%;
-        scroll-snap-align: start;
-      }
-
-      .bean-dots {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 14px;
-        margin-top: 6px;
-      }
-
-      .bean-dot {
-        width: 12px;
-        height: 12px;
-        border: 1px solid #cfc5bf;
-        border-radius: 50%;
-        background: #d6cec9;
-        cursor: pointer;
-        padding: 0;
-      }
-
-      .bean-dot.is-active {
-        width: 18px;
-        height: 18px;
-        border-radius: 50% 50% 50% 0;
-        transform: rotate(45deg);
-        background: #9f8c83;
-        border-color: #9f8c83;
-      }
-
-      .series-track {
-        gap: 14px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-
-      .series-track::-webkit-scrollbar {
-        display: none;
-      }
-
-      .series-item {
-        flex: 0 0 100%;
-        min-width: 100%;
-      }
-
-      .calendar-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .shipping-section .footer-title {
-        font-size: 16px;
-        padding-left: 18px;
-      }
-
-      .shipping-box {
-        padding: 12px 12px;
-        gap: 10px;
-      }
-
-      .shipping-icon {
-        width: 38px;
-        height: 38px;
-      }
-
-      .shipping-icon svg {
-        width: 22px;
-        height: 22px;
-      }
-
-      .shipping-copy strong {
-        font-size: 14px;
-      }
-
-      .shipping-copy span {
-        font-size: 12px;
-      }
-
-      .footer-sub-link {
-        font-size: 13px;
-        margin: 8px 0 20px;
-      }
-
-      .payment-wrap .payment_method,
-      .payment-wrap ul,
-      .payment-wrap ol {
-        gap: 8px;
-      }
-
-      .payment-wrap .payment_method > a,
-      .payment-wrap .payment_method > span,
-      .payment-wrap .payment_method > div,
-      .payment-wrap .payment_method > img,
-      .payment-wrap .payment_method li,
-      .payment-wrap li,
-      .payment-wrap a {
-        min-height: 40px;
-        padding: 7px 10px;
-        font-size: 12px;
-      }
-
-      .payment-wrap .payment_method img,
-      .payment-wrap img {
-        max-height: 20px;
-      }
-
-      .payment-fallback {
-        gap: 7px;
-      }
-
-      .pay-chip {
-        min-height: 34px;
-        padding: 7px 10px;
-        font-size: 12px;
-      }
-
-      .pay-chip--wide {
-        min-width: 0;
-        width: calc(100% - 114px);
-        flex: 1 1 auto;
-      }
-
-      .pay-chip--mid {
-        min-width: 106px;
-      }
-
-      .pay-chip--mid2 {
-        min-width: 140px;
-        flex: 1 1 130px;
-      }
-
-      .pay-chip--solo {
-        min-width: 96px;
-      }
-
-      .pay-logos {
-        gap: 9px;
-      }
-
-      .pay-logo.amex,
-      .pay-logo.diners {
-        font-size: 9px;
-      }
-
-      .pay-chip.amazon {
-        font-size: 15px;
-      }
-
-      .pay-chip.paypal {
-        font-size: 15px;
       }
     }
   </style>
@@ -1590,643 +1286,494 @@
     {BASEMenuTag}
   </div>
 
-  <header class="site-header">
-    <div class="wrap header-top">
-      <a href="#sidebar" class="header-action">
-        <span class="icon-menu" aria-hidden="true"></span>
-        <span>メニュー</span>
-      </a>
-
-      <div class="brand-link" aria-label="ポプラ館珈琲">
-        <span class="brand-ja">ポプラ館珈琲</span>
-        <span class="brand-en">POPURA KAN COFFEE</span>
-        <span class="brand-since">since 1974</span>
+  <nav class="scroll-nav" aria-label="ページ内ナビゲーション">
+    <div class="scroll-nav-inner">
+      <a href="#top" class="scroll-logo">ポプラ館 珈琲</a>
+      <button class="scroll-menu-toggle" type="button" aria-expanded="false" aria-label="メニューを開く">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="scroll-links">
+        <a href="#information">店舗情報</a>
+        <a href="#news">お知らせ</a>
+        <a href="#roast">焙煎</a>
+        <a href="#menu">メニュー</a>
+        <a href="{IndexPageURL}">商品</a>
+        <a href="/cart">カート</a>
       </div>
+    </div>
+  </nav>
 
-      <a href="/cart" class="header-action is-right">
-        <span class="icon-cart" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-            <circle cx="9" cy="19" r="1.5"></circle>
-            <circle cx="17" cy="19" r="1.5"></circle>
-            <path d="M3 4h2l2.2 9.2h10.2l2-7H6.2"></path>
-          </svg>
-        </span>
-        <span>カート</span>
-      </a>
+  <header class="site-header">
+    <img class="hero-image is-active" src="top.jpg" alt="店内風景 1">
+    <img class="hero-image" src="top2.jpg" alt="店内風景 2">
+    <img class="hero-image" src="top3.jpg" alt="店内風景 3">
+    <img class="hero-image" src="top4.jpg" alt="店内風景 4">
+    <img class="hero-image" src="top5.jpg" alt="店内風景 5">
+    <div class="hero-overlay">
+      <div class="hero-brand-card">
+        <h1 class="hero-title">ポプラ館 珈琲</h1>
+        <p class="hero-subtitle">Popura-kan Coffee</p>
+        <div class="hero-ribbon">since 1974</div>
+      </div>
+      <p class="hero-catchphrase">一杯の贅沢、受け継がれる味。</p>
     </div>
-    <div class="wrap header-note">
-      <a href="{AboutPageURL}">ポプラ館珈琲について</a>
-    </div>
-    <p class="header-catch">一杯の贅沢、受け継がれる味。</p>
   </header>
 
   {block:IndexPage}
-  <section class="hero-stage" data-reveal>
-    <div class="wrap hero-shell">
-      <button class="hero-arrow prev" type="button" aria-label="前へ">‹</button>
-      <div class="hero-rail" id="js-hero-rail">
-        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top.jpg" alt="店内の風景"></figure>
-        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top2.jpg" alt="店内の風景"></figure>
-        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top3.jpg" alt="珈琲と器"></figure>
-        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top4.jpg" alt="珈琲カップ"></figure>
-        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/top5.jpg" alt="店内の風景"></figure>
-        <figure class="hero-card"><img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/story-photo.jpg" alt="豆の選別"></figure>
+  <main>
+    <section class="section news-section" id="news" data-scroll-reveal>
+      <div class="container">
+        <h2 class="section-title">お知らせ</h2>
+        <div class="news-card">
+          <span class="news-card-label">Instagram</span>
+          <h3>ポプラ館 珈琲のInstagram</h3>
+          <p>日々のお知らせや新メニュー、店内の様子はこちらでも発信しています。</p>
+          <a href="https://www.instagram.com/popurakan/" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagramを見る
+          </a>
+        </div>
       </div>
-      <button class="hero-arrow next" type="button" aria-label="次へ">›</button>
-      <div class="hero-dots" id="js-hero-dots">
-        <button type="button" class="hero-dot is-active" aria-label="1枚目へ"></button>
-        <button type="button" class="hero-dot" aria-label="2枚目へ"></button>
-        <button type="button" class="hero-dot" aria-label="3枚目へ"></button>
-        <button type="button" class="hero-dot" aria-label="4枚目へ"></button>
+    </section>
+
+    <section class="section roast-section" id="roast" data-scroll-reveal>
+      <div class="container">
+        <h2 class="section-title">こだわりの焙煎</h2>
+        <div class="roast-layout">
+          <div class="copy">
+            <p class="section-lead">焙煎が、珈琲の味を決める</p>
+            <p>日本の「自家焙煎」という文化を形作ってきたマスターが培ってきた焙煎の技術をお届けします。</p>
+            <p>当店の自慢は、今なお現役で鼓動を続ける「10kg焙煎機の第1号機」。40年以上の歳月を経て、鋳物の隅々にまで熱が馴染んだこの機体は、最新鋭のデジタル機では決して出せない、深く、優しく、それでいて力強い火力を豆に届けます。</p>
+            <p>本物のコーヒーの味をご提供します。</p>
+          </div>
+          <div class="photo-frame">
+            <video autoplay muted loop playsinline preload="metadata" poster="roast.jpg">
+              <source src="baisen-syhort.mp4" type="video/mp4">
+              <img src="roast.jpg" alt="焙煎の様子">
+            </video>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <main class="wrap main-layout">
-    <aside class="sidebar" id="sidebar" data-reveal>
-      <section class="side-block">
-        <h3 class="side-title">商品カテゴリー</h3>
-        <ul class="side-links">
-          <li><a href="#special-series">スペシャル <span class="side-plus">＋</span></a></li>
-          <li><a href="#catalog">全商品一覧 <span class="side-plus">＋</span></a></li>
-        </ul>
-      </section>
+    <section class="section menu-section" id="menu" data-scroll-reveal>
+      <div class="container">
+        <div class="special-coffee special-coffee-month-mode">
+          <h3 class="special-coffee-title">スペシャリティー珈琲</h3>
+          <p class="special-coffee-en">Rare Specialty Coffee Selection</p>
+          <p class="special-coffee-tagline">ブルーマウンテン、ゲイシャ、コナ。毎月変えている、特別な一杯です。</p>
+          <p class="special-coffee-sub">一杯 ¥1,500(税別)</p>
+          <p class="special-coffee-note">※ 数量限定・店頭販売のみ。入荷数に限りがあるため、一期一会の香りと味わいを店頭でお確かめください。</p>
+          <div class="special-coffee-months" aria-label="月ごとのスペシャリティー珈琲">
+            <button type="button" class="special-coffee-month is-active" data-coffee="blue-mountain" aria-pressed="true"><span class="month-label">1月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="panama-geisha" aria-pressed="false"><span class="month-label">2月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="hawaii-kona" aria-pressed="false"><span class="month-label">3月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="blue-mountain" aria-pressed="false"><span class="month-label">4月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="panama-geisha" aria-pressed="false"><span class="month-label">5月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="hawaii-kona" aria-pressed="false"><span class="month-label">6月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="blue-mountain" aria-pressed="false"><span class="month-label">7月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="panama-geisha" aria-pressed="false"><span class="month-label">8月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="hawaii-kona" aria-pressed="false"><span class="month-label">9月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="blue-mountain" aria-pressed="false"><span class="month-label">10月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="panama-geisha" aria-pressed="false"><span class="month-label">11月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+            <button type="button" class="special-coffee-month" data-coffee="hawaii-kona" aria-pressed="false"><span class="month-label">12月</span><span class="coffee-pour" aria-hidden="true"></span></button>
+          </div>
+          <div class="special-coffee-carousel-wrap">
+            <button type="button" class="special-coffee-arrow special-coffee-arrow-prev" aria-label="前のカードへ">
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <ul class="special-coffee-list" id="special-coffee-list">
+              <li class="special-coffee-card is-active" data-coffee-card="blue-mountain">
+                <div class="special-coffee-card-img">
+                  <img src="special-coffee-blue-bag.png" alt="ジャマイカ ブルーマウンテン クライスデールNo.1" class="special-coffee-product-img" loading="lazy">
+                </div>
+              </li>
+              <li class="special-coffee-card" data-coffee-card="panama-geisha">
+                <div class="special-coffee-card-img">
+                  <img src="special-coffee-panama-bag.png" alt="パナマ ゲイシャ ハートマン農園" class="special-coffee-product-img" loading="lazy">
+                </div>
+              </li>
+              <li class="special-coffee-card" data-coffee-card="hawaii-kona">
+                <div class="special-coffee-card-img">
+                  <img src="special-coffee-kona-bag.png" alt="ハワイ コナ100 エクストラファンシー ハワイアンクイーン農園" class="special-coffee-product-img" loading="lazy">
+                </div>
+              </li>
+            </ul>
+            <button type="button" class="special-coffee-arrow special-coffee-arrow-next" aria-label="次のカードへ">
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
 
-      <div class="sidebar-image">
-        <video autoplay muted loop playsinline preload="metadata" aria-label="焙煎の様子">
-          <source src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/baisen-syhort.mp4" type="video/mp4">
-        </video>
       </div>
+    </section>
 
-      <section class="side-block">
-        <h3 class="side-title">ショップガイド</h3>
-        <ul class="guide-links">
-          <li>
-            <a href="{AboutPageURL}">
-              <span class="guide-text"><span class="guide-icon" aria-hidden="true"></span>ポプラ館珈琲について</span>
-            </a>
-          </li>
-          <li>
-            <a href="#payment">
-              <span class="guide-text"><span class="guide-icon" aria-hidden="true"></span>お支払い方法について</span>
-            </a>
-          </li>
-          <li>
-            <a href="#shipping">
-              <span class="guide-text"><span class="guide-icon" aria-hidden="true"></span>配送料について</span>
-            </a>
-          </li>
-          <li>
-            <a href="{ContactPageURL}">
-              <span class="guide-text"><span class="guide-icon" aria-hidden="true"></span>CONTACT</span>
-            </a>
-          </li>
-        </ul>
-      </section>
-    </aside>
+    {block:AppsInformationBanner}
+    <section class="section" data-scroll-reveal>
+      <div class="container">{AppsInformationBannerTag}</div>
+    </section>
+    {/block:AppsInformationBanner}
 
-    <div class="content-area">
-      {block:AppsInformationBanner}
-      <section data-reveal style="margin-bottom:20px;">
-        {AppsInformationBannerTag}
-      </section>
-      {/block:AppsInformationBanner}
-
-      <section class="notice-panel" data-reveal>
-        <div class="notice-label">Information</div>
-        <h2 class="notice-title">お知らせ</h2>
-
-        <div class="notice-row">
-          <time class="notice-date">2026.02.01より</time>
-          <p class="notice-text">日頃からポプラ館珈琲をご愛顧いただき誠にありがとうございます。原材料高騰および調達量の影響により、価格改定をさせていただくこととなりました。何卒ご理解を賜りますようお願い申し上げます。</p>
-        </div>
-        <div class="notice-row">
-          <time class="notice-date">2025.06.27</time>
-          <p class="notice-text">ブラジルの自社農園で丁寧に育てたコーヒー豆を独自ルートで輸入し、品質を保ちながら価格の維持に努めてまいりましたが、輸送費と資材費の高騰により価格を改定いたします。</p>
-        </div>
-        <div class="notice-row">
-          <time class="notice-date">2025.06.04</time>
-          <p class="notice-text">オンラインストアをリニューアルオープンしました。季節限定豆や定番ブレンドを順次掲載してまいります。</p>
-        </div>
-      </section>
-
-      <section class="series-panel is-subtle" id="special-series" data-reveal>
-        <div class="series-head">
-          <h2>スペシャルシリーズ</h2>
-          <a class="series-more" href="#catalog">もっと見る</a>
-        </div>
-        <div class="series-track">
-          <article class="series-item">
-            <a href="#catalog">
-              <div class="series-thumb is-beans">
-                <img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/Flag_of_Jamaica.svg" alt="ジャマイカ ブルーマウンテン クライスデールNo.1">
-              </div>
-              <p class="series-name">ジャマイカ ブルーマウンテン クライスデールNo.1</p>
-              <p class="series-sub">1月・4月・7月・10月焙煎</p>
-              <p class="series-desc">月に一度のスペシャル豆。華やかな香りとまろやかな味わい。</p>
-              <p class="series-price">Beans ¥3,800(税別)</p>
+    <section class="section catalog-section" id="catalog" data-scroll-reveal>
+      <div class="container">
+        <p class="section-kicker">Online Store</p>
+        <h2 class="section-title">自家焙煎豆</h2>
+        <div class="catalog-grid">
+          <article class="productCard">
+            <a class="productCard__link" href="{IndexPageURL}">
+              <div class="productCard__image"><img src="shop-card.png" alt="オリジナルブレンド"></div>
+              <h3 class="productCard__title">オリジナルブレンド焙煎豆 100g</h3>
+              <p class="productCard__price">店内販売: ¥600</p>
             </a>
           </article>
-          <article class="series-item">
-            <a href="#catalog">
-              <div class="series-thumb is-beans">
-                <img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/Flag_of_Panama.svg.png" alt="パナマ ゲイシャ ハートマン農園">
-              </div>
-              <p class="series-name">パナマ ゲイシャ ハートマン農園</p>
-              <p class="series-sub">2月・5月・8月・11月焙煎</p>
-              <p class="series-desc">フローラルな香りと透明感のある味わいが特徴のゲイシャ。</p>
-              <p class="series-price">Beans ¥3,300(税別)</p>
+          <article class="productCard">
+            <a class="productCard__link" href="{IndexPageURL}">
+              <div class="productCard__image"><img src="flag_mexico.png" alt="メキシコ"></div>
+              <h3 class="productCard__title">メキシコ アルツーラ・ブルマ クルスグランデ農園 焙煎豆 100g</h3>
+              <p class="productCard__price">店内販売: ¥600</p>
             </a>
           </article>
-          <article class="series-item">
-            <a href="#catalog">
-              <div class="series-thumb is-beans">
-                <img src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/Flag_of_Hawaii.svg.png" alt="ハワイ コナ100 エクストラファンシー ハワイアンクイーン農園">
-              </div>
-              <p class="series-name">ハワイ コナ100 エクストラファンシー ハワイアンクイーン農園</p>
-              <p class="series-sub">3月・6月・9月・12月焙煎</p>
-              <p class="series-desc">100%コナ。甘みと酸味のバランスがとれたエクストラファンシー。</p>
-              <p class="series-price">Beans ¥3,300(税別)</p>
+          <article class="productCard">
+            <a class="productCard__link" href="{IndexPageURL}">
+              <div class="productCard__image"><img src="flag_colombia.png" alt="コロンビア"></div>
+              <h3 class="productCard__title">コロンビア スプレモS18 焙煎豆 100g</h3>
+              <p class="productCard__price">店内販売: ¥600</p>
+            </a>
+          </article>
+          <article class="productCard">
+            <a class="productCard__link" href="{IndexPageURL}">
+              <div class="productCard__image"><img src="flag_brazil.png" alt="ブラジル"></div>
+              <h3 class="productCard__title">ブラジル サントスNo.2 焙煎豆 100g</h3>
+              <p class="productCard__price">店内販売: ¥600</p>
+            </a>
+          </article>
+          <article class="productCard">
+            <a class="productCard__link" href="{IndexPageURL}">
+              <div class="productCard__image"><img src="flag_yemen.png" alt="イエメン"></div>
+              <h3 class="productCard__title">イエメン モカ・マタリ No.9 焙煎豆 100g</h3>
+              <p class="productCard__price">店内販売: ¥1,100</p>
+            </a>
+          </article>
+          <article class="productCard">
+            <a class="productCard__link" href="{IndexPageURL}">
+              <div class="productCard__image"><img src="flag_indonesia.png" alt="インドネシア"></div>
+              <h3 class="productCard__title">インドネシア マンデリンビンダリマ 焙煎豆 100g</h3>
+              <p class="productCard__price">店内販売: ¥1,000</p>
+            </a>
+          </article>
+          <article class="productCard">
+            <a class="productCard__link" href="{IndexPageURL}">
+              <div class="productCard__image"><img src="Flag_of_Jamaica.svg" alt="ジャマイカ"></div>
+              <h3 class="productCard__title">ジャマイカ ブルーマウンテン クライスデールNo.1</h3>
+              <p class="productCard__price">Beans ¥3,800(税別)</p>
+            </a>
+          </article>
+          <article class="productCard">
+            <a class="productCard__link" href="{IndexPageURL}">
+              <div class="productCard__image"><img src="flag_panama.svg" alt="パナマ"></div>
+              <h3 class="productCard__title">パナマ ゲイシャ ハートマン農園</h3>
+              <p class="productCard__price">Beans ¥3,300(税別)</p>
             </a>
           </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="catalog-section" id="catalog" data-reveal>
-        <div class="catalog-switch">
-          <button type="button" class="switch-btn is-active">自家焙煎豆</button>
-        </div>
-        <h2 class="catalog-title">☕自家焙煎豆</h2>
-        <p class="catalog-subtitle">詳しくは商品カテゴリーごとでご説明しておりますので、そちらからご覧ください。</p>
-        <div class="bean-shell">
-        <div class="bean-grid" id="js-bean-rail">
-          <article class="bean-card">
-            <div class="bean-image">
-              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
-              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/shop-card.png" alt="オリジナルブレンド">
-            </div>
-            <div class="bean-body">
-              <p class="bean-name">オリジナルブレンド焙煎豆 100g</p>
-              <p class="bean-price">店内販売: ¥600</p>
-            </div>
-          </article>
-
-          <article class="bean-card">
-            <div class="bean-image">
-              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
-              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_mexico.png" alt="メキシコ">
-            </div>
-            <div class="bean-body">
-              <p class="bean-name">メキシコ アルツーラ・ブルマ クルスグランデ農園 焙煎豆 100g</p>
-              <p class="bean-price">店内販売: ¥600</p>
-            </div>
-          </article>
-
-          <article class="bean-card">
-            <div class="bean-image">
-              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
-              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_colombia.png" alt="コロンビア">
-            </div>
-            <div class="bean-body">
-              <p class="bean-name">コロンビア スプレモS18 焙煎豆 100g</p>
-              <p class="bean-price">店内販売: ¥600</p>
-            </div>
-          </article>
-
-          <article class="bean-card">
-            <div class="bean-image">
-              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
-              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_brazil.png" alt="ブラジル">
-            </div>
-            <div class="bean-body">
-              <p class="bean-name">ブラジル サントスNo.2 焙煎豆 100g</p>
-              <p class="bean-price">店内販売: ¥600</p>
-            </div>
-          </article>
-
-          <article class="bean-card">
-            <div class="bean-image">
-              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
-              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_yemen.png" alt="イエメン">
-            </div>
-            <div class="bean-body">
-              <p class="bean-name">イエメン モカ・マタリ No.9 焙煎豆 100g</p>
-              <p class="bean-price">店内販売: ¥1,100</p>
-            </div>
-          </article>
-
-          <article class="bean-card">
-            <div class="bean-image">
-              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
-              <img class="bean-flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Flag_of_Papua_New_Guinea.svg/960px-Flag_of_Papua_New_Guinea.svg.png" alt="パプアニューギニア">
-            </div>
-            <div class="bean-body">
-              <p class="bean-name">パプアニューギニア シグリ 焙煎豆 100g</p>
-              <p class="bean-price">店内販売: ¥1,100</p>
-            </div>
-          </article>
-
-          <article class="bean-card">
-            <div class="bean-image">
-              <img class="bean-bg" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/back-coffee-beans.png" alt="">
-              <img class="bean-flag" src="https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/flag_indonesia.png" alt="インドネシア">
-            </div>
-            <div class="bean-body">
-              <p class="bean-name">インドネシア マンデリンビンダリマ 焙煎豆 100g</p>
-              <p class="bean-price">店内販売: ¥1,000</p>
-            </div>
-          </article>
-        </div>
-        <div class="bean-dots" id="js-bean-dots" aria-label="自家焙煎豆スライドのページ送り"></div>
-        </div>
-      </section>
-    </div>
   </main>
   {/block:IndexPage}
 
   {block:AboutPage}
-  <main class="wrap static-page" data-reveal>
-    <section class="single-panel">
-      <h1 class="single-title">ポプラ館珈琲について</h1>
-      <div class="single-text">{ShopIntroduction}</div>
-    </section>
+  <main class="static-page" data-scroll-reveal>
+    <div class="container">
+      <section class="single-panel">
+        <h1 class="single-title">ポプラ館珈琲について</h1>
+        <div class="single-text">{ShopIntroduction}</div>
+      </section>
+    </div>
   </main>
   {/block:AboutPage}
 
   {block:ItemPage}
-  <main class="wrap static-page" data-reveal>
-    <section class="single-panel">
-      <div class="item-layout">
-        <div class="item-main">
-          {block:ItemImage1}<img src="{ItemImage1URL-origin}" alt="{ItemTitle}">{/block:ItemImage1}
-          <div class="item-thumbs">
-            {block:ItemImage2}<img src="{ItemImage2URL-500}" alt="{ItemTitle}">{/block:ItemImage2}
-            {block:ItemImage3}<img src="{ItemImage3URL-500}" alt="{ItemTitle}">{/block:ItemImage3}
-            {block:ItemImage4}<img src="{ItemImage4URL-500}" alt="{ItemTitle}">{/block:ItemImage4}
-            {block:ItemImage5}<img src="{ItemImage5URL-500}" alt="{ItemTitle}">{/block:ItemImage5}
+  <main class="static-page" data-scroll-reveal>
+    <div class="container">
+      <section class="single-panel">
+        <div class="item-layout">
+          <div class="item-main">
+            {block:ItemImage1}<img src="{ItemImage1URL-origin}" alt="{ItemTitle}">{/block:ItemImage1}
+            <div class="item-thumbs">
+              {block:ItemImage2}<img src="{ItemImage2URL-500}" alt="{ItemTitle}">{/block:ItemImage2}
+              {block:ItemImage3}<img src="{ItemImage3URL-500}" alt="{ItemTitle}">{/block:ItemImage3}
+              {block:ItemImage4}<img src="{ItemImage4URL-500}" alt="{ItemTitle}">{/block:ItemImage4}
+              {block:ItemImage5}<img src="{ItemImage5URL-500}" alt="{ItemTitle}">{/block:ItemImage5}
+            </div>
+          </div>
+          <div class="item-side">
+            <h1 class="single-title">{ItemTitle}</h1>
+            <p class="single-price">{ItemPrice}</p>
+            <div class="single-text">{ItemAttentionTag}</div>
+            {block:PurchaseForm}
+            <div style="margin-top:16px;">
+              {ItemSelectTag}
+              <div style="margin-top:14px;">{PurchaseButton}</div>
+            </div>
+            {/block:PurchaseForm}
+            <div class="item-description">{ItemDetail}</div>
+            {block:AppsReview}
+            <div style="margin-top:18px;">{AppsReviewTag}</div>
+            {/block:AppsReview}
           </div>
         </div>
-        <div class="item-side">
-          <h1 class="single-title">{ItemTitle}</h1>
-          <p class="single-price">{ItemPrice}</p>
-          <div class="single-text">{ItemAttentionTag}</div>
-
-          {block:PurchaseForm}
-          <div style="margin-top:16px;">
-            {ItemSelectTag}
-            <div style="margin-top:14px;">{PurchaseButton}</div>
-          </div>
-          {/block:PurchaseForm}
-
-          <div class="item-description">{ItemDetail}</div>
-
-          {block:AppsReview}
-          <div style="margin-top:18px;">{AppsReviewTag}</div>
-          {/block:AppsReview}
-        </div>
-      </div>
-
-      <div style="margin-top:20px; color:#9f928d; font-size:12px;">{IllegalReportTag}</div>
-    </section>
+        <div style="margin-top:20px; color:#7f6756; font-size:12px;">{IllegalReportTag}</div>
+      </section>
+    </div>
   </main>
   {/block:ItemPage}
 
   {PageContents}
 
-  <div class="page-top-strip">
-    <a href="#top">↑ ページトップへ</a>
-  </div>
-
-  <footer class="site-footer">
-    <div class="footer-upper">
-      <div class="wrap footer-grid">
-        <section id="shipping" class="shipping-section">
-          <h3 class="footer-title">配送料について</h3>
-          <div class="shipping-box">
-            <span class="shipping-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                <rect x="2.5" y="8.5" width="11" height="7" rx="1"></rect>
-                <path d="M13.5 10h4l2 2v3.5h-6"></path>
-                <circle cx="8" cy="17.5" r="1.5"></circle>
-                <circle cx="18" cy="17.5" r="1.5"></circle>
-              </svg>
-            </span>
-            <span class="shipping-copy">
-              <strong>お買い物10,000円以上で送料無料</strong>
-              <span>地域別送料（国内）</span>
-            </span>
-          </div>
-          <div class="footer-sub-link">› 詳しい送料はこちら</div>
-
-          <h3 class="footer-title" id="payment" style="margin-top:22px;">お支払い方法について</h3>
-          <div class="payment-wrap" id="js-payment-methods">{PaymentMethodsLogoTag}</div>
-          <div class="payment-fallback" id="js-payment-fallback" aria-label="利用可能なお支払い方法">
-            <div class="pay-chip pay-chip--wide">
-              <span class="pay-logos">
-                <span class="pay-logo visa">VISA</span>
-                <span class="pay-master" aria-hidden="true"></span>
-                <span class="pay-logo jcb">JCB</span>
-                <span class="pay-logo amex">AMERICAN EXPRESS</span>
-                <span class="pay-logo diners">Diners Club</span>
-              </span>
+  <footer class="site-footer" id="information" data-scroll-reveal>
+    <div class="container">
+      <h2 class="section-title">店舗情報</h2>
+      <div class="info-card-container">
+        <div class="info-layout">
+          <div class="info-item">
+            <strong><i class="fa-solid fa-location-dot" aria-hidden="true"></i> 住所</strong>
+            <div>
+              〒243-0032<br>
+              神奈川県厚木市恩名３丁目２４−１４<br>
+              <a class="info-map-link" href="https://maps.app.goo.gl/AWXe2oHPHbFjMXfD7" target="_blank" rel="noopener noreferrer">Googleマップはこちら</a>
             </div>
-            <div class="pay-chip pay-chip--mid amazon">amazon pay</div>
-            <div class="pay-chip pay-chip--mid paypal">PayPal</div>
-            <div class="pay-chip pay-chip--mid2"><span class="pay-check">✓</span>キャリア決済</div>
-            <div class="pay-chip pay-chip--mid2"><span class="pay-check">✓</span>コンビニ・Pay-easy</div>
-            <div class="pay-chip pay-chip--solo"><span class="pay-check">✓</span>銀行振込</div>
           </div>
-          <div class="footer-sub-link">› 詳しいお支払い方法のご案内</div>
-        </section>
-
-        <section class="calendar-wrap">
-          <h3 class="footer-title">営業日カレンダー</h3>
-          <div class="calendar-grid">
-            <table class="calendar" role="presentation">
-              <caption>2026年4月</caption>
-              <thead>
-                <tr>
-                  <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td class="is-holiday"><span>4</span></td></tr>
-                <tr><td class="is-holiday"><span>5</span></td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td class="is-holiday"><span>11</span></td></tr>
-                <tr><td class="is-holiday"><span>12</span></td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td class="is-holiday"><span>18</span></td></tr>
-                <tr><td class="is-holiday"><span>19</span></td><td>20</td><td>21</td><td>22</td><td class="is-today"><span>23</span></td><td>24</td><td class="is-holiday"><span>25</span></td></tr>
-                <tr><td class="is-holiday"><span>26</span></td><td>27</td><td>28</td><td>29</td><td>30</td><td></td><td></td></tr>
-              </tbody>
-            </table>
-            <table class="calendar" role="presentation">
-              <caption>2026年5月</caption>
-              <thead>
-                <tr>
-                  <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td></td><td></td><td></td><td></td><td></td><td>1</td><td class="is-holiday"><span>2</span></td></tr>
-                <tr><td class="is-holiday"><span>3</span></td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td class="is-holiday"><span>9</span></td></tr>
-                <tr><td class="is-holiday"><span>10</span></td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td class="is-holiday"><span>16</span></td></tr>
-                <tr><td class="is-holiday"><span>17</span></td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td class="is-holiday"><span>23</span></td></tr>
-                <tr><td class="is-holiday"><span>24</span></td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td class="is-holiday"><span>30</span></td></tr>
-                <tr><td class="is-holiday"><span>31</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
+          <div class="info-item">
+            <strong><i class="fa-solid fa-phone" aria-hidden="true"></i> 電話番号</strong>
+            <div>046-204-7058</div>
           </div>
-          <p class="calendar-note">
-            <span class="dot today"></span>本日
-            <span class="dot holiday"></span>休業日
-          </p>
-        </section>
+          <div class="info-item">
+            <strong><i class="fa-regular fa-clock" aria-hidden="true"></i> 営業時間</strong>
+            <div>9:00 - 17:00</div>
+          </div>
+          <div class="info-item">
+            <strong><i class="fa-solid fa-store" aria-hidden="true"></i> 定休日</strong>
+            <div>土曜日・日曜日</div>
+          </div>
+          <div class="info-map-frame">
+            <iframe src="https://www.google.com/maps?q=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%8E%9A%E6%9C%A8%E5%B8%82%E6%81%A9%E5%90%8D3%E4%B8%81%E7%9B%AE24-14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="ポプラ館 珈琲の地図"></iframe>
+          </div>
+          <a class="info-map-open" href="https://maps.app.goo.gl/AWXe2oHPHbFjMXfD7" target="_blank" rel="noopener noreferrer">
+            Googleマップで開く <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+        </div>
       </div>
     </div>
-
-    <div class="footer-lower">
-      <div class="wrap footer-nav">
+    <div class="footer-nav">
+      <div class="container">
         <a href="{IndexPageURL}">HOME</a>
         <a href="{AboutPageURL}">ポプラ館珈琲について</a>
         <a href="{ContactPageURL}">Contact Us</a>
         <a href="{PrivacyPageURL}">{lang:Privacy}</a>
         <a href="{LawPageURL}">{lang:Law}</a>
+        <a href="#top">ページトップへ</a>
       </div>
-      <div class="wrap footer-copy">Copyright &copy; {CopyrightTag}. All Rights Reserved.</div>
     </div>
+    <p class="footer-copy">Copyright &copy; {CopyrightTag}. All Rights Reserved.</p>
   </footer>
 
   <script>
     (function () {
-      var cdnPrefix = "https://cdn.jsdelivr.net/gh/keikokamiya-spec/popura@main/";
-      var rawPrefix = "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/";
-      var staticImages = document.querySelectorAll('img[src^="' + cdnPrefix + '"]');
-      staticImages.forEach(function (img) {
-        img.addEventListener("error", function () {
-          if (img.dataset.fallbackApplied === "1") return;
-          img.dataset.fallbackApplied = "1";
-          img.src = img.src.replace(cdnPrefix, rawPrefix);
-        });
-      });
+      var fixedNav = document.querySelector(".scroll-nav");
+      if (!fixedNav) return;
+      var menuToggle = fixedNav.querySelector(".scroll-menu-toggle");
+      var menuLinks = Array.prototype.slice.call(fixedNav.querySelectorAll(".scroll-links a"));
+      var targets = menuLinks.map(function (link) {
+        var href = link.getAttribute("href");
+        if (!href || href.charAt(0) !== "#") return null;
+        var target = document.querySelector(href);
+        return target ? { link: link, target: target } : null;
+      }).filter(Boolean);
 
-      var staticVideos = document.querySelectorAll('video source[src^="' + cdnPrefix + '"]');
-      staticVideos.forEach(function (source) {
-        source.addEventListener("error", function () {
-          if (source.dataset.fallbackApplied === "1") return;
-          source.dataset.fallbackApplied = "1";
-          source.src = source.src.replace(cdnPrefix, rawPrefix);
-          var parentVideo = source.parentElement;
-          if (parentVideo && typeof parentVideo.load === "function") parentVideo.load();
-        });
-      });
-
-      var paymentMethods = document.getElementById("js-payment-methods");
-      var paymentFallback = document.getElementById("js-payment-fallback");
-      if (paymentMethods && paymentFallback) {
-        var syncPaymentView = function () {
-          var methodNode = paymentMethods.querySelector("*:not(script):not(style):not(template)");
-          var methodText = paymentMethods.textContent ? paymentMethods.textContent.replace(/\s+/g, "") : "";
-          var hasMethods = Boolean(methodNode || methodText.length);
-          paymentMethods.style.display = hasMethods ? "" : "none";
-          paymentFallback.style.display = hasMethods ? "none" : "flex";
-        };
-
-        syncPaymentView();
-        if ("MutationObserver" in window) {
-          var observer = new MutationObserver(syncPaymentView);
-          observer.observe(paymentMethods, { childList: true, subtree: true, characterData: true });
+      function closeMenu() {
+        fixedNav.classList.remove("is-menu-open");
+        if (menuToggle) {
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "メニューを開く");
         }
-        window.setTimeout(syncPaymentView, 500);
-        window.setTimeout(syncPaymentView, 1600);
       }
+
+      function updateNav() {
+        fixedNav.classList.toggle("is-show", window.scrollY > 30);
+        var activeId = "";
+        targets.forEach(function (item) {
+          if (item.target.getBoundingClientRect().top <= fixedNav.offsetHeight + 42) {
+            activeId = item.target.id;
+          }
+        });
+        menuLinks.forEach(function (link) {
+          var isActive = link.getAttribute("href") === "#" + activeId;
+          link.classList.toggle("is-active", isActive);
+          if (isActive) link.setAttribute("aria-current", "true");
+          else link.removeAttribute("aria-current");
+        });
+      }
+
+      if (menuToggle) {
+        menuToggle.addEventListener("click", function () {
+          var isOpen = fixedNav.classList.toggle("is-menu-open");
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+          menuToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+        });
+      }
+
+      menuLinks.forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
+      window.addEventListener("scroll", updateNav, { passive: true });
+      window.addEventListener("resize", updateNav);
+      updateNav();
     })();
 
     (function () {
-      var elements = document.querySelectorAll("[data-reveal]");
-      if (!elements.length) return;
-      if (!("IntersectionObserver" in window)) {
-        elements.forEach(function (el) { el.classList.add("revealed"); });
+      var revealItems = Array.prototype.slice.call(document.querySelectorAll("[data-scroll-reveal]"));
+      if (!revealItems.length) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+        revealItems.forEach(function (item) { item.classList.add("is-visible"); });
         return;
       }
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
+            entry.target.classList.add("is-visible");
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
-      elements.forEach(function (el) { observer.observe(el); });
+      }, { rootMargin: "0px 0px -12% 0px", threshold: 0.12 });
+      revealItems.forEach(function (item) { observer.observe(item); });
     })();
 
     (function () {
-      var rail = document.getElementById("js-hero-rail");
-      if (!rail) return;
-      var prev = document.querySelector(".hero-arrow.prev");
-      var next = document.querySelector(".hero-arrow.next");
-      var dots = Array.prototype.slice.call(document.querySelectorAll(".hero-dot"));
-      var mobileMedia = window.matchMedia("(max-width: 680px)");
-      var autoTimer = null;
-      var resumeTimer = null;
-      var autoDelay = 3800;
-      var resumeDelay = 5000;
-      var pageSize = function () { return Math.max(rail.clientWidth * 0.78, 320); };
-      var slideSize = function () {
-        var firstCard = rail.querySelector(".hero-card");
-        if (!firstCard) return pageSize();
-        var styles = window.getComputedStyle(rail);
-        var gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
-        return firstCard.getBoundingClientRect().width + gap;
-      };
-
-      if (prev) {
-        prev.addEventListener("click", function () {
-          rail.scrollBy({ left: -pageSize(), behavior: "smooth" });
-          queueAutoPlay(resumeDelay);
-        });
-      }
-      if (next) {
-        next.addEventListener("click", function () {
-          rail.scrollBy({ left: pageSize(), behavior: "smooth" });
-          queueAutoPlay(resumeDelay);
-        });
-      }
-
-      var updateDots = function () {
-        if (!dots.length) return;
-        var maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 1);
-        var progress = rail.scrollLeft / maxScroll;
-        var index = Math.min(dots.length - 1, Math.max(0, Math.round(progress * (dots.length - 1))));
-        dots.forEach(function (dot, i) {
-          dot.classList.toggle("is-active", i === index);
-        });
-      };
-
-      var stopAutoPlay = function () {
-        if (!autoTimer) return;
-        window.clearInterval(autoTimer);
-        autoTimer = null;
-      };
-
-      var runAutoStep = function () {
-        var maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 0);
-        if (maxScroll < 1) return;
-        var nextLeft = rail.scrollLeft + slideSize();
-        if (nextLeft >= maxScroll - 4) {
-          nextLeft = 0;
-        }
-        rail.scrollTo({ left: nextLeft, behavior: "smooth" });
-      };
-
-      var startAutoPlay = function () {
-        if (!mobileMedia.matches) return;
-        if (rail.scrollWidth <= rail.clientWidth + 1) return;
-        stopAutoPlay();
-        autoTimer = window.setInterval(runAutoStep, autoDelay);
-      };
-
-      var queueAutoPlay = function (delay) {
-        stopAutoPlay();
-        if (resumeTimer) {
-          window.clearTimeout(resumeTimer);
-          resumeTimer = null;
-        }
-        if (!mobileMedia.matches) return;
-        resumeTimer = window.setTimeout(function () {
-          startAutoPlay();
-        }, delay || 0);
-      };
-
-      rail.addEventListener("scroll", updateDots, { passive: true });
-      updateDots();
-      queueAutoPlay(1200);
-
-      dots.forEach(function (dot, i) {
-        dot.addEventListener("click", function () {
-          var ratio = i / Math.max(dots.length - 1, 1);
-          rail.scrollTo({ left: (rail.scrollWidth - rail.clientWidth) * ratio, behavior: "smooth" });
-          queueAutoPlay(resumeDelay);
-        });
-      });
-
-      rail.addEventListener("pointerdown", function () {
-        queueAutoPlay(resumeDelay);
-      });
-      rail.addEventListener("touchstart", function () {
-        queueAutoPlay(resumeDelay);
-      }, { passive: true });
-      rail.addEventListener("wheel", function () {
-        queueAutoPlay(resumeDelay);
-      }, { passive: true });
-
-      var onViewportChange = function () {
-        queueAutoPlay(400);
-        updateDots();
-      };
-      if (typeof mobileMedia.addEventListener === "function") {
-        mobileMedia.addEventListener("change", onViewportChange);
-      } else if (typeof mobileMedia.addListener === "function") {
-        mobileMedia.addListener(onViewportChange);
-      }
-
-      window.addEventListener("resize", function () {
-        queueAutoPlay(500);
-        updateDots();
-      });
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".site-header .hero-image"));
+      if (slides.length <= 1 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var current = 0;
+      window.setInterval(function () {
+        slides[current].classList.remove("is-active");
+        current = (current + 1) % slides.length;
+        slides[current].classList.add("is-active");
+      }, 4500);
     })();
 
     (function () {
-      var rail = document.getElementById("js-bean-rail");
-      if (!rail) return;
-      var dotsWrap = document.getElementById("js-bean-dots");
-      var cards = Array.prototype.slice.call(rail.querySelectorAll(".bean-card"));
-      if (!cards.length) return;
+      var list = document.getElementById("special-coffee-list");
+      var prevBtn = document.querySelector(".special-coffee-arrow-prev");
+      var nextBtn = document.querySelector(".special-coffee-arrow-next");
+      var monthButtons = Array.prototype.slice.call(document.querySelectorAll(".special-coffee-month"));
+      var cards = Array.prototype.slice.call(document.querySelectorAll(".special-coffee-card[data-coffee-card]"));
+      if (!list || !monthButtons.length || !cards.length) return;
+      var monthGroup = document.querySelector(".special-coffee-months");
+      var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var pourTimer = null;
+      var revealTimer = null;
+      var restoreTimer = null;
+      var cleanupTimer = null;
 
-      var dots = [];
-
-      var cardStep = function () {
-        var firstCard = rail.querySelector(".bean-card");
-        if (!firstCard) return rail.clientWidth;
-        var styles = window.getComputedStyle(rail);
-        var gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
-        return firstCard.getBoundingClientRect().width + gap;
-      };
-
-      var scrollToIndex = function (index, smooth) {
-        var left = cardStep() * index;
-        rail.scrollTo({ left: left, behavior: smooth ? "smooth" : "auto" });
-      };
-
-      var updateDots = function () {
-        if (!dots.length) return;
-        var maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 1);
-        var progress = rail.scrollLeft / maxScroll;
-        var index = Math.min(cards.length - 1, Math.max(0, Math.round(progress * (cards.length - 1))));
-        dots.forEach(function (dot, i) {
-          dot.classList.toggle("is-active", i === index);
+      function resetMonthFocus() {
+        window.clearTimeout(pourTimer);
+        window.clearTimeout(restoreTimer);
+        window.clearTimeout(cleanupTimer);
+        if (monthGroup) {
+          monthGroup.classList.remove("is-focusing", "is-restoring");
+        }
+        monthButtons.forEach(function (monthButton) {
+          monthButton.classList.remove("is-pouring", "is-focus-target", "is-hidden-during-pour");
         });
-      };
+      }
 
-      var buildDots = function () {
-        if (!dotsWrap) return;
-        dotsWrap.innerHTML = "";
-        dots = cards.map(function (_, i) {
-          var dot = document.createElement("button");
-          dot.type = "button";
-          dot.className = "bean-dot" + (i === 0 ? " is-active" : "");
-          dot.setAttribute("aria-label", (i + 1) + "枚目へ");
-          dot.addEventListener("click", function () {
-            scrollToIndex(i, true);
+      function showCoffee(coffeeKey, activeButton) {
+        cards.forEach(function (card) {
+          card.classList.remove("is-revealing", "is-slow-reveal");
+        });
+
+        cards.forEach(function (card) {
+          var isActive = card.dataset.coffeeCard === coffeeKey;
+          card.classList.toggle("is-active", isActive);
+          if (isActive && !prefersReducedMotion) {
+            card.classList.add("is-revealing");
+            card.classList.add("is-slow-reveal");
+          }
+        });
+
+        monthButtons.forEach(function (button) {
+          var isActive = button === activeButton;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+
+        if (!prefersReducedMotion) {
+          window.clearTimeout(revealTimer);
+          revealTimer = window.setTimeout(function () {
+            cards.forEach(function (card) {
+              card.classList.remove("is-revealing");
+            });
+          }, 760);
+        }
+      }
+
+      monthButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          resetMonthFocus();
+
+          if (prefersReducedMotion) {
+            showCoffee(button.dataset.coffee, button);
+            return;
+          }
+
+          if (monthGroup) {
+            monthGroup.classList.add("is-focusing");
+          }
+
+          monthButtons.forEach(function (monthButton) {
+            var isTarget = monthButton === button;
+            monthButton.classList.toggle("is-focus-target", isTarget);
+            monthButton.classList.toggle("is-hidden-during-pour", !isTarget);
           });
-          dotsWrap.appendChild(dot);
-          return dot;
+
+          button.classList.add("is-pouring");
+          pourTimer = window.setTimeout(function () {
+            showCoffee(button.dataset.coffee, button);
+          }, 360);
+
+          restoreTimer = window.setTimeout(function () {
+            button.classList.remove("is-pouring", "is-focus-target");
+            monthButtons.forEach(function (monthButton) {
+              monthButton.classList.remove("is-hidden-during-pour");
+            });
+
+            if (monthGroup) {
+              monthGroup.classList.remove("is-focusing");
+              monthGroup.classList.add("is-restoring");
+            }
+          }, 980);
+
+          cleanupTimer = window.setTimeout(function () {
+            if (monthGroup) {
+              monthGroup.classList.remove("is-restoring");
+            }
+          }, 1450);
         });
-      };
+      });
 
-      buildDots();
-      rail.addEventListener("scroll", updateDots, { passive: true });
-      updateDots();
+      if (!prevBtn || !nextBtn) return;
 
-      window.addEventListener("resize", function () {
-        updateDots();
+      function getScrollAmount() {
+        var card = list.querySelector(".special-coffee-card");
+        if (!card) return list.offsetWidth * 0.85;
+        var style = getComputedStyle(list);
+        var gap = parseFloat(style.gap) || 16;
+        return card.offsetWidth + gap;
+      }
+
+      prevBtn.addEventListener("click", function () {
+        list.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+      });
+      nextBtn.addEventListener("click", function () {
+        list.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
       });
     })();
 
@@ -2236,9 +1783,9 @@
         btn.style.width = "100%";
         btn.style.minHeight = "56px";
         btn.style.border = "0";
-        btn.style.borderRadius = "6px";
-        btn.style.background = "#6a4436";
-        btn.style.color = "#f7efea";
+        btn.style.borderRadius = "2px";
+        btn.style.background = "linear-gradient(180deg, #8b1e1e, #5a2f1b)";
+        btn.style.color = "#fcfaf2";
         btn.style.fontSize = "16px";
         btn.style.letterSpacing = "0.08em";
         btn.style.cursor = "pointer";
