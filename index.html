@@ -390,9 +390,54 @@
     }
 
     .roast-section {
-      background:
-        linear-gradient(90deg, rgba(25, 61, 45, 0.12), transparent 48%, rgba(139, 30, 30, 0.12)),
-        linear-gradient(180deg, rgba(255, 243, 213, 0.5), rgba(213, 186, 139, 0.4));
+      position: relative;
+      overflow: hidden;
+      color: var(--paper);
+      background: transparent;
+    }
+
+    .roast-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .roast-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: sepia(0.18) saturate(0.92) contrast(1.05);
+    }
+
+    .roast-section .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .roast-section .section-title,
+    .roast-section .section-lead,
+    .roast-section .copy p {
+      color: var(--paper);
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.88);
+    }
+
+    .roast-section .section-title::after {
+      background: var(--gold);
+    }
+
+    .roast-section .roast-layout {
+      grid-template-columns: minmax(0, 820px);
+      justify-content: center;
+    }
+
+    .roast-section .copy {
+      max-width: 820px;
     }
 
     .roast-layout,
@@ -1364,6 +1409,9 @@
     </section>
 
     <section class="section roast-section" id="roast" data-scroll-reveal>
+      <video class="roast-bg-video" autoplay muted loop playsinline preload="metadata" poster="roast.jpg" aria-hidden="true">
+        <source src="baisen-syhort.mp4" type="video/mp4">
+      </video>
       <div class="container">
         <h2 class="section-title">こだわりの焙煎</h2>
         <div class="roast-layout">
@@ -1372,12 +1420,6 @@
             <p>日本の「自家焙煎」という文化を形作ってきたマスターが培ってきた焙煎の技術をお届けします。</p>
             <p>当店の自慢は、今なお現役で鼓動を続ける「10kg焙煎機の第1号機」。40年以上の歳月を経て、鋳物の隅々にまで熱が馴染んだこの機体は、最新鋭のデジタル機では決して出せない、深く、優しく、それでいて力強い火力を豆に届けます。</p>
             <p>本物のコーヒーの味をご提供します。</p>
-          </div>
-          <div class="photo-frame">
-            <video autoplay muted loop playsinline preload="metadata" poster="roast.jpg">
-              <source src="baisen-syhort.mp4" type="video/mp4">
-              <img src="roast.jpg" alt="焙煎の様子">
-            </video>
           </div>
         </div>
       </div>
