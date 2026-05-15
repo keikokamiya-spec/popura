@@ -655,8 +655,7 @@
       overflow: visible;
     }
 
-    .special-coffee-month .coffee-pour::before,
-    .special-coffee-month .coffee-pour::after {
+    .special-coffee-month .coffee-pour::before {
       content: "";
       position: absolute;
       left: 50%;
@@ -681,26 +680,6 @@
         0 212px 0 -1px #6d3518;
       transform: translateX(-50%);
       opacity: 0;
-    }
-
-    .special-coffee-month .coffee-pour::after {
-      top: 18px;
-      width: 13px;
-      height: 19px;
-      border-radius: 50%;
-      background:
-        linear-gradient(96deg, transparent 44%, rgba(255, 215, 150, 0.38) 47% 51%, rgba(42, 15, 7, 0.74) 54%, transparent 58%),
-        radial-gradient(circle at 28% 22%, #9a592c 0 16%, #653015 48%, #321409 100%);
-      box-shadow:
-        0 28px 0 -1px #5c2a13,
-        0 58px 0 0 #8b4721,
-        0 88px 0 -2px #47200f,
-        0 118px 0 -1px #6e3519,
-        0 148px 0 0 #8a4923,
-        0 178px 0 -1px #552711,
-        0 208px 0 -2px #743819;
-      opacity: 0;
-      transform: translateX(-50%);
     }
 
     .special-coffee-month:hover {
@@ -758,10 +737,6 @@
       animation: coffeePour 0.92s cubic-bezier(0.2, 0.65, 0.24, 1) both;
     }
 
-    .special-coffee-month.is-pouring .coffee-pour::after {
-      animation: coffeeBeansFallB 0.92s ease-out both;
-    }
-
     .special-coffee-month.is-pouring .coffee-pour::before {
       animation: coffeeBeansFallA 0.92s ease-out both;
     }
@@ -791,14 +766,6 @@
       28% { opacity: 1; transform: translate(-50%, 6px) scale(0.96); }
       72% { opacity: 1; transform: translate(-50%, 28px) scale(1); }
       100% { opacity: 0; transform: translate(-50%, 54px) scale(0.82); }
-    }
-
-    @keyframes coffeeBeansFallB {
-      0%,
-      20% { opacity: 0; transform: translate(-50%, -12px) scale(0.68); }
-      38% { opacity: 1; transform: translate(-50%, 12px) scale(0.94); }
-      76% { opacity: 0.95; transform: translate(-50%, 34px) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, 64px) scale(0.78); }
     }
 
     @keyframes monthButtonFadeIn {
