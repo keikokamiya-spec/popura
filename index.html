@@ -642,18 +642,17 @@
       position: absolute;
       left: calc(50% - 60px);
       top: 79px;
-      width: 100px;
+      width: 118px;
       height: 0;
       background: transparent;
       box-shadow: none;
       opacity: 0;
-      transform: translate(0, 0) scaleX(0.86);
+      transform: translate(0, 0) scale(0.9);
       transform-origin: top;
       z-index: 2;
       pointer-events: none;
-      filter: drop-shadow(0 3px 4px rgba(16, 4, 1, 0.8)) drop-shadow(0 0 9px rgba(108, 50, 18, 0.58));
-      overflow: hidden;
-      mix-blend-mode: multiply;
+      filter: drop-shadow(0 4px 5px rgba(16, 4, 1, 0.72)) drop-shadow(0 0 8px rgba(160, 96, 42, 0.36));
+      overflow: visible;
     }
 
     .special-coffee-month .coffee-pour::before,
@@ -665,25 +664,43 @@
     }
 
     .special-coffee-month .coffee-pour::before {
-      top: 0;
-      width: 100px;
-      height: 232px;
-      background: center top / 100px 232px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='232' viewBox='0 0 100 232'%3E%3Cdefs%3E%3ClinearGradient id='coffeeBody' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230b0200'/%3E%3Cstop offset='.32' stop-color='%23300d03'/%3E%3Cstop offset='.66' stop-color='%23783a16'/%3E%3Cstop offset='1' stop-color='%23130400'/%3E%3C/linearGradient%3E%3ClinearGradient id='coffeeGlow' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f0a45a' stop-opacity='.66'/%3E%3Cstop offset='.45' stop-color='%23a55724' stop-opacity='.42'/%3E%3Cstop offset='1' stop-color='%23fff0c2' stop-opacity='.12'/%3E%3C/linearGradient%3E%3Cfilter id='liquidEdge' x='-30%25' y='-8%25' width='160%25' height='116%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.018 .09' numOctaves='2' seed='6' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='2.2' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M25 0 C30 54 61 82 54 122 C48 157 64 194 64 232' fill='none' stroke='%23070100' stroke-width='29' stroke-linecap='round' opacity='.86' filter='url(%23liquidEdge)'/%3E%3Cpath d='M25 0 C30 54 61 82 54 122 C48 157 64 194 64 232' fill='none' stroke='url(%23coffeeBody)' stroke-width='23' stroke-linecap='round' filter='url(%23liquidEdge)'/%3E%3Cpath d='M21 5 C27 55 53 86 48 124 C43 158 55 193 58 227' fill='none' stroke='url(%23coffeeGlow)' stroke-width='10' stroke-linecap='round' opacity='.88'/%3E%3Cpath d='M18 14 C26 58 47 88 43 124 C39 157 48 190 54 217' fill='none' stroke='%23ffd28c' stroke-width='3' stroke-linecap='round' opacity='.48'/%3E%3Cpath d='M33 23 C39 67 62 92 55 127 C51 154 61 185 64 211' fill='none' stroke='%23100000' stroke-width='5' stroke-linecap='round' opacity='.35'/%3E%3C/svg%3E");
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
+      top: 4px;
+      width: 15px;
+      height: 21px;
+      border-radius: 50%;
+      background:
+        linear-gradient(82deg, transparent 45%, rgba(255, 205, 138, 0.42) 47% 51%, rgba(48, 18, 8, 0.72) 53%, transparent 57%),
+        radial-gradient(circle at 30% 24%, #8a4c25 0 18%, #5d2b13 46%, #2d1208 100%);
+      box-shadow:
+        -30px 32px 0 -1px #4f2411,
+        22px 48px 0 0 #7a3d1d,
+        -5px 78px 0 -2px #3f1b0c,
+        36px 104px 0 -1px #5f2e15,
+        -22px 132px 0 0 #7f421e,
+        18px 164px 0 -2px #4a2110,
+        -36px 194px 0 -1px #6d3518;
+      transform: translateX(-50%) rotate(-24deg);
+      opacity: 0;
     }
 
     .special-coffee-month .coffee-pour::after {
-      bottom: -13px;
-      width: 68px;
-      height: 22px;
+      top: 18px;
+      width: 13px;
+      height: 19px;
+      border-radius: 50%;
       background:
-        radial-gradient(ellipse at 50% 52%, rgba(18, 3, 0, 0.78) 0 25%, rgba(87, 34, 10, 0.58) 38%, transparent 70%),
-        radial-gradient(circle at 24% 38%, rgba(255, 212, 138, 0.36) 0 8%, transparent 18%),
-        radial-gradient(circle at 76% 42%, rgba(255, 180, 88, 0.28) 0 7%, transparent 17%);
-      filter: blur(0.15px) drop-shadow(0 0 4px rgba(96, 41, 15, 0.55));
+        linear-gradient(96deg, transparent 44%, rgba(255, 215, 150, 0.38) 47% 51%, rgba(42, 15, 7, 0.74) 54%, transparent 58%),
+        radial-gradient(circle at 28% 22%, #9a592c 0 16%, #653015 48%, #321409 100%);
+      box-shadow:
+        24px 24px 0 -1px #5c2a13,
+        -18px 56px 0 0 #8b4721,
+        32px 88px 0 -2px #47200f,
+        -34px 116px 0 -1px #6e3519,
+        6px 146px 0 0 #8a4923,
+        30px 178px 0 -1px #552711,
+        -18px 204px 0 -2px #743819;
       opacity: 0;
-      transform: translateX(-50%);
+      transform: translateX(-50%) rotate(28deg);
     }
 
     .special-coffee-month:hover {
@@ -742,7 +759,11 @@
     }
 
     .special-coffee-month.is-pouring .coffee-pour::after {
-      animation: coffeeDrops 0.92s ease-out both;
+      animation: coffeeBeansFallB 0.92s ease-out both;
+    }
+
+    .special-coffee-month.is-pouring .coffee-pour::before {
+      animation: coffeeBeansFallA 0.92s ease-out both;
     }
 
     .special-coffee-month.is-pouring::before {
@@ -757,20 +778,27 @@
     }
 
     @keyframes coffeePour {
-      0% { height: 0; opacity: 0; transform: translate(0, 0) scaleX(0.62); }
-      18% { opacity: 1; transform: translate(2px, 0) scaleX(0.9); }
-      36% { transform: translate(-2px, 1px) scaleX(1); }
-      58% { height: 218px; opacity: 1; transform: translate(3px, 2px) scaleX(1.04); }
-      78% { height: 206px; opacity: 0.92; transform: translate(-1px, 14px) scaleX(0.96); }
-      100% { height: 116px; opacity: 0; transform: translate(0, 38px) scaleX(0.7); }
+      0% { height: 0; opacity: 0; transform: translate(0, -8px) scale(0.72); }
+      16% { opacity: 1; transform: translate(3px, 0) scale(0.9); }
+      62% { height: 218px; opacity: 1; transform: translate(-2px, 10px) scale(1); }
+      82% { height: 218px; opacity: 0.9; transform: translate(2px, 24px) scale(0.96); }
+      100% { height: 218px; opacity: 0; transform: translate(0, 54px) scale(0.82); }
     }
 
-    @keyframes coffeeDrops {
+    @keyframes coffeeBeansFallA {
       0%,
-      16% { opacity: 0; transform: translate(-50%, -4px) scaleX(0.22); }
-      42% { opacity: 0.82; transform: translate(-50%, 4px) scaleX(0.82); }
-      74% { opacity: 0.62; transform: translate(-50%, 8px) scaleX(1); }
-      100% { opacity: 0; transform: translate(-50%, 10px) scaleX(0.38); }
+      12% { opacity: 0; transform: translate(-50%, -18px) rotate(-24deg) scale(0.72); }
+      28% { opacity: 1; transform: translate(-50%, 6px) rotate(-12deg) scale(0.96); }
+      72% { opacity: 1; transform: translate(-50%, 28px) rotate(18deg) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, 54px) rotate(52deg) scale(0.82); }
+    }
+
+    @keyframes coffeeBeansFallB {
+      0%,
+      20% { opacity: 0; transform: translate(-50%, -12px) rotate(28deg) scale(0.68); }
+      38% { opacity: 1; transform: translate(-50%, 12px) rotate(8deg) scale(0.94); }
+      76% { opacity: 0.95; transform: translate(-50%, 34px) rotate(-24deg) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, 64px) rotate(-58deg) scale(0.78); }
     }
 
     @keyframes monthButtonFadeIn {
