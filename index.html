@@ -258,11 +258,16 @@
     }
 
     .scroll-logo {
-      color: var(--gold);
-      font-family: var(--font-title);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      white-space: nowrap;
+      display: inline-flex;
+      width: 132px;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+
+    .scroll-logo img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.32));
     }
 
     .scroll-links {
@@ -1431,7 +1436,9 @@
 
   <nav class="scroll-nav" aria-label="ページ内ナビゲーション">
     <div class="scroll-nav-inner">
-      <a href="#top" class="scroll-logo">ポプラ館 珈琲</a>
+      <a href="#top" class="scroll-logo" aria-label="ポプラ館 珈琲 トップへ">
+        <img src="https://raw.githubusercontent.com/keikokamiya-spec/popura/main/shop-card.png" alt="ポプラ館 珈琲">
+      </a>
       <button class="scroll-menu-toggle" type="button" aria-expanded="false" aria-label="メニューを開く">
         <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
