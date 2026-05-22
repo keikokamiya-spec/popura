@@ -35,7 +35,7 @@
       --white: #fcfaf2;
       --shadow: 0 18px 34px rgba(45, 24, 16, 0.2);
       --container: 1120px;
-      --fixed-nav-height: 258px;
+      --fixed-nav-height: 168px;
       --font-title: "Kaisei Decol", "Shippori Mincho", "Noto Serif JP", serif;
       --font-body: "Zen Old Mincho", "Noto Serif JP", serif;
     }
@@ -240,23 +240,23 @@
       min-height: var(--fixed-nav-height);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 178px 56px;
+      grid-template-columns: minmax(112px, auto) minmax(0, 1fr) minmax(112px, auto);
+      grid-template-rows: 108px 44px;
       align-items: center;
-      gap: 0;
-      padding: 8px 0 12px;
+      gap: 0.25rem 0.55rem;
+      padding: 6px 0 8px;
       position: relative;
       z-index: 1;
     }
 
     .scroll-logo {
       display: inline-flex;
-      grid-column: 1;
+      grid-column: 1 / -1;
       grid-row: 1;
       position: relative;
-      width: min(660px, 78vw);
-      min-height: 162px;
-      padding: 1.35rem 1.55rem 1.55rem;
+      width: min(430px, 72vw);
+      min-height: 96px;
+      padding: 0.7rem 1rem 0.8rem;
       align-self: center;
       justify-self: center;
       flex-direction: column;
@@ -288,7 +288,7 @@
       z-index: 1;
       color: var(--paper);
       font-family: "Yuji Syuku", "Kaisei Decol", serif;
-      font-size: clamp(2.1rem, 4vw, 3.35rem);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
       line-height: 1.08;
       letter-spacing: 0.04em;
       white-space: nowrap;
@@ -301,18 +301,18 @@
       margin-top: 0.12rem;
       color: var(--gold);
       font-family: "Pirata One", Georgia, serif;
-      font-size: clamp(0.8rem, 1.1vw, 1rem);
-      letter-spacing: 0.28em;
+      font-size: clamp(0.68rem, 0.9vw, 0.82rem);
+      letter-spacing: 0.22em;
       text-transform: uppercase;
     }
 
     .scroll-logo-ribbon {
       position: relative;
       z-index: 1;
-      min-width: min(240px, 62vw);
-      height: 36px;
-      margin-top: 0.72rem;
-      padding: 0 1.5rem;
+      min-width: min(180px, 58vw);
+      height: 26px;
+      margin-top: 0.35rem;
+      padding: 0 1rem;
       border: 2px solid var(--gold);
       display: inline-flex;
       align-items: center;
@@ -321,25 +321,27 @@
       background: linear-gradient(180deg, rgba(139, 30, 30, 0.88), rgba(90, 47, 27, 0.88));
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
       font-family: var(--font-title);
-      font-size: 0.92rem;
+      font-size: 0.75rem;
       letter-spacing: 0.08em;
     }
 
     .scroll-catchphrase {
-      grid-column: 1 / -1;
+      grid-column: 2;
       grid-row: 2;
       justify-self: center;
       align-self: center;
-      padding: 0.58rem 1.45rem;
+      max-width: 100%;
+      padding: 0.42rem 0.75rem;
       border: 1px solid rgba(185, 147, 77, 0.48);
       border-radius: 4px;
       color: var(--paper);
       background: rgba(58, 36, 22, 0.72);
       backdrop-filter: blur(8px);
       font-family: var(--font-title);
-      font-size: clamp(0.82rem, 1.45vw, 1rem);
+      font-size: clamp(0.72rem, 1.15vw, 0.88rem);
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.82);
     }
 
@@ -465,7 +467,7 @@
     }
 
     .base-menu-slot {
-      grid-column: 1;
+      grid-column: 3;
       grid-row: 2;
       justify-self: end;
       align-self: center;
@@ -514,9 +516,9 @@
     .header-cart {
       position: relative;
       display: inline-flex;
-      min-width: 140px;
-      height: 46px;
-      padding: 0 1.1rem;
+      min-width: 110px;
+      height: 40px;
+      padding: 0 0.8rem;
       align-items: center;
       justify-content: center;
       border: 1px solid rgba(255, 222, 156, 0.7);
@@ -539,7 +541,7 @@
 
     .header-cart i {
       color: var(--paper);
-      font-size: 1.45rem;
+      font-size: 1.25rem;
       line-height: 1;
       text-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
     }
@@ -676,23 +678,23 @@
       grid-column: 1;
       grid-row: 2;
       width: auto;
-      min-width: 140px;
-      height: 46px;
+      min-width: 110px;
+      height: 40px;
       border: 1px solid rgba(255, 248, 232, 0.22);
       border-radius: 6px;
       align-items: center;
       justify-content: center;
       justify-self: start;
-      gap: 0.65rem;
+      gap: 0.45rem;
       color: var(--paper);
       background: rgba(255, 248, 232, 0.16);
-      font-size: 1.35rem;
+      font-size: 1.05rem;
       cursor: pointer;
     }
 
     .scroll-menu-toggle span {
       font-family: var(--font-title);
-      font-size: 1rem;
+      font-size: 0.88rem;
       font-weight: 700;
       letter-spacing: 0.04em;
     }
@@ -1941,6 +1943,10 @@
     }
 
     @media (max-width: 768px) {
+      :root {
+        --fixed-nav-height: 148px;
+      }
+
       .site-header {
         padding: calc(var(--fixed-nav-height) + 0.85rem) 0 1.7rem;
       }
@@ -1950,22 +1956,22 @@
       }
 
       .scroll-nav-inner {
-        width: min(100% - 40px, 420px);
+        width: min(100% - 28px, 420px);
         min-height: var(--fixed-nav-height);
         display: grid;
-        grid-template-columns: auto 1fr auto;
-        grid-template-rows: 158px 48px 40px;
+        grid-template-columns: minmax(82px, auto) minmax(0, 1fr) minmax(82px, auto);
+        grid-template-rows: 92px 38px;
         align-items: center;
-        gap: 0;
-        padding: 6px 0 8px;
+        gap: 0.25rem 0.4rem;
+        padding: 5px 0 7px;
       }
 
       .scroll-logo {
         grid-column: 1 / -1;
         grid-row: 1;
-        width: min(100%, 350px);
-        min-height: 156px;
-        padding: 1rem 0.85rem 1.1rem;
+        width: min(100%, 300px);
+        min-height: 88px;
+        padding: 0.55rem 0.7rem 0.65rem;
         align-self: center;
         justify-self: center;
         align-items: center;
@@ -1977,44 +1983,52 @@
       }
 
       .scroll-logo-title {
-        font-size: clamp(1.45rem, 7.4vw, 2.15rem);
+        font-size: clamp(1.2rem, 6vw, 1.72rem);
         letter-spacing: 0.02em;
       }
 
       .scroll-logo-subtitle {
-        font-size: 0.7rem;
+        font-size: 0.58rem;
+        letter-spacing: 0.2em;
       }
 
       .scroll-logo-ribbon {
-        min-width: 180px;
-        height: 32px;
-        margin-top: 0.55rem;
-        font-size: 0.82rem;
+        min-width: 145px;
+        height: 24px;
+        margin-top: 0.3rem;
+        font-size: 0.68rem;
       }
 
       .scroll-catchphrase {
-        grid-column: 1 / -1;
+        grid-column: 2;
         grid-row: 2;
-        max-width: min(100%, 280px);
-        padding: 0.48rem 0.75rem;
-        font-size: 0.76rem;
-        letter-spacing: 0.05em;
+        max-width: 100%;
+        padding: 0.38rem 0.45rem;
+        font-size: clamp(0.58rem, 2.5vw, 0.72rem);
+        letter-spacing: 0;
         text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .scroll-menu-toggle {
         display: inline-flex;
         grid-column: 1;
-        grid-row: 3;
+        grid-row: 2;
         width: auto;
-        min-width: 118px;
-        height: 40px;
+        min-width: 82px;
+        height: 38px;
         border-color: rgba(255, 248, 232, 0.22);
         border-radius: 6px;
         justify-self: start;
         color: var(--paper);
         background: rgba(255, 248, 232, 0.16);
-        font-size: 1.05rem;
+        gap: 0.35rem;
+        font-size: 0.9rem;
+      }
+
+      .scroll-menu-toggle span {
+        font-size: 0.78rem;
       }
 
       .scroll-links {
@@ -2023,7 +2037,7 @@
 
       .base-menu-slot {
         grid-column: 3;
-        grid-row: 3;
+        grid-row: 2;
         justify-self: end;
       }
 
@@ -2033,13 +2047,13 @@
 
       .base-menu-slot #baseMenu a,
       .header-cart {
-        min-width: 118px;
-        height: 40px;
-        padding: 0 0.9rem;
+        min-width: 82px;
+        height: 38px;
+        padding: 0 0.55rem;
       }
 
       .header-cart i {
-        font-size: 1.3rem;
+        font-size: 1.12rem;
       }
 
       .base-menu-slot #baseMenu img {
