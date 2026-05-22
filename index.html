@@ -471,12 +471,19 @@
       align-self: center;
       position: relative;
       z-index: 2;
+      display: inline-flex;
+      align-items: center;
     }
 
     .base-menu-slot #baseMenu {
-      position: static !important;
-      display: block !important;
-      min-height: 46px;
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      clip-path: inset(50%) !important;
+      white-space: nowrap !important;
     }
 
     .base-menu-slot #baseMenu ul,
@@ -503,7 +510,8 @@
       display: none !important;
     }
 
-    .base-menu-slot #baseMenu a {
+    .base-menu-slot #baseMenu a,
+    .header-cart {
       position: relative;
       display: inline-flex;
       min-width: 140px;
@@ -520,12 +528,42 @@
       transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
     }
 
-    .base-menu-slot #baseMenu a:hover {
+    .base-menu-slot #baseMenu a:hover,
+    .header-cart:hover {
       transform: translateY(-2px);
       border-color: rgba(255, 232, 181, 0.95);
       background:
         linear-gradient(180deg, rgba(255, 248, 232, 0.42), rgba(176, 138, 74, 0.32)),
         rgba(35, 20, 12, 0.5);
+    }
+
+    .header-cart i {
+      color: var(--paper);
+      font-size: 1.45rem;
+      line-height: 1;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+    }
+
+    .header-cart .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 7px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .header-cart .cart-qty {
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--burgundy);
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 17px;
+      text-align: center;
     }
 
     .base-menu-slot #baseMenu img {
@@ -1989,19 +2027,19 @@
         justify-self: end;
       }
 
-      .base-menu-slot #baseMenu,
-      .base-menu-slot #baseMenu ul {
-        min-height: 40px;
-      }
-
       .base-menu-slot #baseMenu ul {
         gap: 0.45rem;
       }
 
-      .base-menu-slot #baseMenu a {
+      .base-menu-slot #baseMenu a,
+      .header-cart {
         min-width: 118px;
         height: 40px;
         padding: 0 0.9rem;
+      }
+
+      .header-cart i {
+        font-size: 1.3rem;
       }
 
       .base-menu-slot #baseMenu img {
@@ -2179,6 +2217,12 @@
       <p class="scroll-catchphrase">一杯の贅沢、受け継がれる味。</p>
       <div class="base-menu-slot" aria-label="BASEメニュー">
         {BASEMenuTag}
+        <a class="header-cart cart js-cart-link" href="{ShopURL}/cart" aria-label="カート">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+          <span class="cart-badge js-cart-badge" style="display: none;">
+            <span class="cart-qty js-cart-qty" style="display: none;"></span>
+          </span>
+        </a>
       </div>
       <div class="scroll-links">
         <div class="menu-panel-brand">
