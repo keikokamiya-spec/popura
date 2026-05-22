@@ -35,6 +35,7 @@
       --white: #fcfaf2;
       --shadow: 0 18px 34px rgba(45, 24, 16, 0.2);
       --container: 1120px;
+      --fixed-nav-height: 258px;
       --font-title: "Kaisei Decol", "Shippori Mincho", "Noto Serif JP", serif;
       --font-body: "Zen Old Mincho", "Noto Serif JP", serif;
     }
@@ -77,7 +78,23 @@
     }
 
     .required-tags {
-      display: none !important;
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .item-required-tags {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
 
     .container {
@@ -121,7 +138,7 @@
       min-height: auto;
       position: relative;
       overflow: visible;
-      padding: 196px 0 2rem;
+      padding: calc(var(--fixed-nav-height) + 1rem) 0 2rem;
       color: var(--brown);
       background: var(--white);
     }
@@ -130,16 +147,16 @@
       position: relative;
       width: 100%;
       overflow: hidden;
+      background: #160d09;
     }
 
     .hero-track {
       display: flex;
-      gap: 1.1rem;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      padding: 0 calc((100vw - min(1120px, 100vw)) / 2);
+      width: max-content;
+      overflow: visible;
+      padding: 0;
+      animation: heroFilmLoop 38s linear infinite;
+      will-change: transform;
     }
 
     .hero-track::-webkit-scrollbar {
@@ -147,12 +164,12 @@
     }
 
     .hero-slide {
-      flex: 0 0 min(66vw, 608px);
-      min-width: min(66vw, 608px);
+      flex: 0 0 clamp(320px, 32vw, 608px);
+      min-width: clamp(320px, 32vw, 608px);
       aspect-ratio: 3 / 2;
+      margin-right: 1.1rem;
       border-radius: 4px;
       overflow: hidden;
-      scroll-snap-align: center;
       background: #160d09;
     }
 
@@ -164,22 +181,7 @@
     }
 
     .hero-slider-btn {
-      position: absolute;
-      top: 50%;
-      z-index: 2;
-      width: 56px;
-      height: 56px;
-      border: 0;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(90, 47, 27, 0.55);
-      background: rgba(255, 255, 255, 0.78);
-      box-shadow: 0 10px 18px rgba(45, 24, 16, 0.12);
-      font-size: 1.3rem;
-      cursor: pointer;
-      transform: translateY(-50%);
+      display: none;
     }
 
     .hero-slider-prev {
@@ -190,11 +192,16 @@
       right: max(0.9rem, calc((100vw - 1120px) / 2 - 0.5rem));
     }
 
+    @keyframes heroFilmLoop {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     .scroll-nav {
       position: fixed;
       inset: 0 0 auto;
       z-index: 20;
-      min-height: 258px;
+      min-height: var(--fixed-nav-height);
       border-bottom: 0;
       overflow: hidden;
       background: #160d09;
@@ -230,7 +237,7 @@
 
     .scroll-nav-inner {
       width: min(100% - 48px, 1200px);
-      min-height: 258px;
+      min-height: var(--fixed-nav-height);
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
@@ -432,22 +439,113 @@
       position: relative;
     }
 
-    .menu-panel-cart::after {
-      content: "1";
+    .menu-panel-cart .cart-badge,
+    .floating-cart .cart-badge {
       position: absolute;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .menu-panel-cart .cart-badge {
       top: 7px;
       right: calc(50% - 17px);
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
+    }
+
+    .menu-panel-cart .cart-qty,
+    .floating-cart .cart-qty {
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--gold);
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 17px;
+      text-align: center;
+    }
+
+    .base-menu-slot {
+      grid-column: 1;
+      grid-row: 2;
+      justify-self: end;
+      align-self: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .base-menu-slot #baseMenu {
+      position: static !important;
+      display: block !important;
+      min-height: 46px;
+    }
+
+    .base-menu-slot #baseMenu ul,
+    .base-menu-slot #baseMenu li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .base-menu-slot #baseMenu ul {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .base-menu-slot #baseMenu li {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      background: #9f7433;
+    }
+
+    .base-menu-slot #baseMenu a {
+      position: relative;
+      display: inline-flex;
+      width: 46px;
+      height: 46px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 248, 232, 0.22);
+      border-radius: 6px;
+      background: rgba(255, 248, 232, 0.16);
+    }
+
+    .base-menu-slot #baseMenu img {
+      width: auto;
+      max-width: 28px;
+      height: 28px !important;
+      object-fit: contain;
+    }
+
+    .base-menu-slot #baseMenu .cart-badge {
+      display: block !important;
+      position: absolute;
+      top: 2px;
+      right: 1px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .base-menu-slot #baseMenu .cart-qty {
+      display: block !important;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--gold);
       font-family: Arial, sans-serif;
-      font-size: 0.66rem;
-      line-height: 1;
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 17px;
+      text-align: center;
+    }
+
+    .base-menu-slot #baseMenu .cart-qty:empty {
+      display: none !important;
     }
 
     .menu-panel-section {
@@ -565,23 +663,9 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
     }
 
-    .floating-cart::after {
-      content: "1";
-      position: absolute;
+    .floating-cart .cart-badge {
       top: 2px;
       right: 0;
-      width: 17px;
-      height: 17px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      background: var(--gold);
-      font-family: Arial, sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      line-height: 1;
     }
 
     .floating-cart:hover {
@@ -1277,6 +1361,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .special-coffee-month.is-pouring .coffee-pour,
+      .hero-track,
       .special-coffee-card.is-active,
       .special-coffee-card.is-revealing .special-coffee-card-img::before,
       .special-coffee-card.is-revealing .special-coffee-card-img::after {
@@ -1319,10 +1404,6 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1.3rem;
-    }
-
-    .catalog-slider-controls {
-      display: none;
     }
 
     .productCard {
@@ -1682,6 +1763,127 @@
       text-align: center;
     }
 
+    .item-page-section {
+      padding: calc(var(--fixed-nav-height) + 3rem) 0 5rem;
+      background:
+        repeating-linear-gradient(90deg, rgba(58, 33, 24, 0.04) 0 1px, transparent 1px 72px),
+        linear-gradient(180deg, rgba(245, 235, 221, 0.96), rgba(226, 204, 162, 0.72));
+    }
+
+    .item-detail-container {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.88fr);
+      gap: clamp(1.6rem, 4vw, 3rem);
+      align-items: start;
+      padding: clamp(1rem, 3vw, 2rem);
+      border: 1px solid rgba(185, 147, 77, 0.46);
+      background: linear-gradient(180deg, rgba(255, 248, 232, 0.97), rgba(228, 209, 168, 0.97));
+      box-shadow: var(--shadow);
+    }
+
+    .item-detail-gallery {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .item-detail-main-image {
+      border: 1px solid rgba(185, 147, 77, 0.45);
+      background: #160d09;
+    }
+
+    .item-detail-main-image img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .item-detail-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.55rem;
+    }
+
+    .item-detail-thumbs img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border: 1px solid rgba(185, 147, 77, 0.38);
+      object-fit: cover;
+      background: #160d09;
+    }
+
+    .item-detail-info {
+      min-width: 0;
+    }
+
+    .item-detail-title {
+      color: var(--wood);
+      font-family: var(--font-title);
+      font-size: clamp(1.55rem, 4vw, 2.25rem);
+      line-height: 1.45;
+      letter-spacing: 0.04em;
+    }
+
+    .item-detail-price {
+      margin-top: 0.85rem;
+      color: var(--burgundy);
+      font-family: var(--font-title);
+      font-size: 1.45rem;
+      font-weight: 700;
+    }
+
+    .item-detail-description {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed rgba(58, 33, 24, 0.32);
+      line-height: 1.9;
+    }
+
+    .item-detail-attention {
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .item-detail-purchase {
+      margin-top: 1.35rem;
+    }
+
+    .item-detail-purchase select,
+    .item-detail-purchase input[type="number"],
+    .item-detail-purchase input[type="text"],
+    .item-detail-purchase textarea {
+      width: 100%;
+      min-height: 44px;
+      margin-bottom: 0.75rem;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(58, 36, 22, 0.28);
+      background: rgba(255, 252, 244, 0.96);
+      color: var(--brown);
+      font: inherit;
+    }
+
+    .item-detail-purchase input[type="submit"],
+    .item-detail-purchase button,
+    .item-detail-purchase .purchaseButton__btn {
+      width: 100%;
+      min-height: 56px;
+      border: 0;
+      border-radius: 2px;
+      color: var(--white);
+      background: linear-gradient(180deg, var(--burgundy), var(--wood));
+      font-family: var(--font-title);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+    }
+
+    .item-detail-purchase .purchaseButton,
+    .item-detail-purchase .purchaseButton form,
+    .item-detail-purchase form[data-purchase-form] {
+      width: 100%;
+    }
+
     [data-scroll-reveal] {
       opacity: 0;
       transform: translateY(34px);
@@ -1696,7 +1898,8 @@
     @media (max-width: 960px) {
       .roast-layout,
       .story-layout,
-      .item-layout {
+      .item-layout,
+      .item-detail-container {
         grid-template-columns: 1fr;
       }
 
@@ -1716,19 +1919,19 @@
 
     @media (max-width: 768px) {
       .site-header {
-        padding: 196px 0 1.7rem;
+        padding: calc(var(--fixed-nav-height) + 0.85rem) 0 1.7rem;
       }
 
       .scroll-nav {
-        min-height: 258px;
+        min-height: var(--fixed-nav-height);
       }
 
       .scroll-nav-inner {
-        width: min(100% - 52px, 420px);
-        min-height: 258px;
+        width: min(100% - 40px, 420px);
+        min-height: var(--fixed-nav-height);
         display: grid;
-        grid-template-columns: 1fr auto;
-        grid-template-rows: 164px 44px 38px;
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: 158px 48px 40px;
         align-items: center;
         gap: 0;
         padding: 6px 0 8px;
@@ -1769,9 +1972,11 @@
       .scroll-catchphrase {
         grid-column: 1 / -1;
         grid-row: 2;
-        padding: 0.48rem 0.8rem;
-        font-size: 0.78rem;
+        max-width: min(100%, 280px);
+        padding: 0.48rem 0.75rem;
+        font-size: 0.76rem;
         letter-spacing: 0.05em;
+        text-align: center;
       }
 
       .scroll-menu-toggle {
@@ -1779,8 +1984,8 @@
         grid-column: 1;
         grid-row: 3;
         width: auto;
-        min-width: 98px;
-        height: 36px;
+        min-width: 118px;
+        height: 40px;
         border-color: rgba(255, 248, 232, 0.22);
         border-radius: 6px;
         justify-self: start;
@@ -1793,51 +1998,77 @@
         width: min(265px, 88vw);
       }
 
-      .floating-cart {
-        top: 213px;
-        right: max(1.65rem, env(safe-area-inset-right));
-        bottom: auto;
-        width: 44px;
-        height: 44px;
-        border: 0;
-        border-radius: 0;
-        color: var(--paper);
-        background: transparent;
-        box-shadow: none;
-        font-size: 1.55rem;
+      .base-menu-slot {
+        grid-column: 3;
+        grid-row: 3;
+        justify-self: end;
       }
 
-      .floating-cart::after {
-        content: "1";
-        position: absolute;
+      .base-menu-slot #baseMenu,
+      .base-menu-slot #baseMenu ul {
+        min-height: 40px;
+      }
+
+      .base-menu-slot #baseMenu ul {
+        gap: 0.45rem;
+      }
+
+      .base-menu-slot #baseMenu a {
+        width: 40px;
+        height: 40px;
+      }
+
+      .base-menu-slot #baseMenu img {
+        max-width: 24px;
+        height: 24px !important;
+      }
+
+      .floating-cart {
+        top: 212px;
+        right: max(20px, env(safe-area-inset-right));
+        bottom: auto;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 248, 232, 0.22);
+        border-radius: 6px;
+        color: var(--paper);
+        background: rgba(255, 248, 232, 0.16);
+        box-shadow: none;
+        font-size: 1.36rem;
+      }
+
+      .floating-cart .cart-badge {
         top: 3px;
         right: -1px;
-        width: 16px;
+      }
+
+      .floating-cart .cart-qty {
+        min-width: 16px;
         height: 16px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white);
-        background: var(--gold);
-        font-family: Arial, sans-serif;
         font-size: 0.68rem;
-        font-weight: 700;
-        line-height: 1;
+        line-height: 16px;
       }
 
       .section {
         padding: 4rem 0;
       }
 
+      .item-page-section {
+        padding: calc(var(--fixed-nav-height) + 1.5rem) 0 4rem;
+      }
+
+      .item-detail-container {
+        padding: 1rem;
+      }
+
       .hero-track {
-        gap: 0.85rem;
-        padding: 0 1.15rem;
+        padding: 0;
       }
 
       .hero-slide {
-        flex-basis: min(78vw, 520px);
-        min-width: min(78vw, 520px);
+        flex-basis: clamp(260px, 78vw, 520px);
+        min-width: clamp(260px, 78vw, 520px);
+        margin-right: 0.85rem;
       }
 
       .hero-slider-btn {
@@ -1856,56 +2087,11 @@
       }
 
       .catalog-grid {
-        display: flex;
-        gap: 0;
-        width: 100%;
-        overflow: hidden;
-        scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-      }
-
-      .catalog-grid::-webkit-scrollbar {
-        display: none;
-      }
-
-      .catalog-grid .productCard {
-        flex: 0 0 100%;
-        scroll-snap-align: center;
+        grid-template-columns: 1fr;
       }
 
       .catalog-grid .productCard:hover {
         transform: none;
-      }
-
-      .catalog-slider-controls {
-        display: flex;
-        justify-content: center;
-        gap: 0.9rem;
-        margin-top: 1.25rem;
-      }
-
-      .catalog-slider-btn {
-        display: inline-flex;
-        width: 48px;
-        height: 48px;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid rgba(185, 147, 77, 0.72);
-        border-radius: 2px;
-        color: var(--white);
-        background: linear-gradient(180deg, var(--burgundy), var(--wood));
-        box-shadow: 0 10px 18px rgba(45, 24, 16, 0.24);
-        cursor: pointer;
-      }
-
-      .floating-cart {
-        top: 294px;
-        right: max(1.65rem, env(safe-area-inset-right));
-        bottom: auto;
-        width: 44px;
-        height: 44px;
-        font-size: 1.55rem;
       }
 
       .special-coffee-months {
@@ -2012,12 +2198,7 @@
 <body id="top">
   <div class="required-tags" aria-hidden="true">
     {LogoTag}
-    {BASEMenuTag}
     <a href="{PrivacyPageURL}">Privacy</a>
-    {block:ItemPage}
-    {ItemAttentionTag}
-    {IllegalReportTag}
-    {/block:ItemPage}
   </div>
 
   <nav class="scroll-nav" aria-label="ページ内ナビゲーション">
@@ -2036,6 +2217,9 @@
         <span>メニュー</span>
       </button>
       <p class="scroll-catchphrase">一杯の贅沢、受け継がれる味。</p>
+      <div class="base-menu-slot" aria-label="BASEメニュー">
+        {BASEMenuTag}
+      </div>
       <div class="scroll-links">
         <div class="menu-panel-brand">
           <button class="menu-panel-close" type="button" aria-label="メニューを閉じる">
@@ -2046,16 +2230,19 @@
         </div>
         <div class="menu-panel-icons" aria-label="主要リンク">
           <a href="#top" aria-label="ホーム"><i class="fa-solid fa-house" aria-hidden="true"></i></a>
-          <a class="menu-panel-cart" href="/cart" aria-label="カート"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></a>
+          <a class="menu-panel-cart cart js-cart-link" href="{ShopURL}/cart" aria-label="カート">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            <span class="cart-badge js-cart-badge" style="display: none;">
+              <span class="cart-qty js-cart-qty" style="display: none;"></span>
+            </span>
+          </a>
         </div>
         <section class="menu-panel-section" aria-labelledby="menu-category-title">
-          <h2 class="menu-panel-heading" id="menu-category-title">商品カテゴリー</h2>
+          <h2 class="menu-panel-heading" id="menu-category-title">カテゴリー</h2>
           <ul class="menu-category-list">
-            <li><a href="{IndexPageURL}#catalog">【5/31までの特別価格】お得なセット商品 <span aria-hidden="true">＋</span></a></li>
-            <li><a href="{IndexPageURL}#catalog">オリジナルブレンド <span aria-hidden="true">＋</span></a></li>
-            <li><a href="{IndexPageURL}#catalog">シングルオリジン <span aria-hidden="true">＋</span></a></li>
-            <li><a href="{IndexPageURL}#catalog">ギフト <span aria-hidden="true">＋</span></a></li>
-            <li><a href="{IndexPageURL}#catalog">ドリップバッグ <span aria-hidden="true">＋</span></a></li>
+            <li><a href="#news">お知らせ <span aria-hidden="true">›</span></a></li>
+            <li><a href="#catalog">全商品一覧 <span aria-hidden="true">›</span></a></li>
+            <li><a href="#shop-guide">ご利用案内 <span aria-hidden="true">›</span></a></li>
           </ul>
         </section>
         <figure class="menu-panel-photo" aria-hidden="true">
@@ -2064,7 +2251,7 @@
         <section class="menu-panel-section" aria-labelledby="menu-shop-title">
           <h2 class="menu-panel-heading" id="menu-shop-title">ショップ情報</h2>
           <ul class="menu-info-list">
-            <li><a href="{AboutPageURL}"><i class="fa-solid fa-store" aria-hidden="true"></i> ポプラ館珈琲について</a></li>
+            <li><a href="https://hiroyukimaekawa-lang.github.io/Poplar-Coffee-site/"><i class="fa-solid fa-store" aria-hidden="true"></i> ポプラ館珈琲について</a></li>
             <li><a href="{LawPageURL}"><i class="fa-regular fa-credit-card" aria-hidden="true"></i> お支払い方法について</a></li>
             <li><a href="{LawPageURL}"><i class="fa-solid fa-truck" aria-hidden="true"></i> 配送料について</a></li>
             <li><a href="{ContactPageURL}"><i class="fa-solid fa-envelope" aria-hidden="true"></i> CONTACT</a></li>
@@ -2074,10 +2261,14 @@
     </div>
   </nav>
 
-  <a class="floating-cart" href="/cart" aria-label="カートを開く">
+  <a class="floating-cart cart js-cart-link" href="{ShopURL}/cart" aria-label="カートを開く">
     <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+    <span class="cart-badge js-cart-badge" style="display: none;">
+      <span class="cart-qty js-cart-qty" style="display: none;"></span>
+    </span>
   </a>
 
+  {block:IndexPage}
   <header class="site-header">
     <div class="hero-slider" aria-label="店内写真スライドショー">
       <button type="button" class="hero-slider-btn hero-slider-prev" aria-label="前の写真へ">
@@ -2102,6 +2293,7 @@
       </button>
     </div>
   </header>
+  {/block:IndexPage}
 
   {block:IndexPage}
   <main>
@@ -2130,39 +2322,16 @@
         <p class="section-kicker">All Items</p>
         <h2 class="section-title">全商品一覧</h2>
         <div class="catalog-grid">
+          {block:Items}
           <article class="productCard">
-            <div class="productCard__image">
-              <img src="https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/original.jpn.png" alt="オリジナルブレンド 焙煎豆 100g" loading="lazy">
-            </div>
+            <a class="productCard__link" href="{ItemPageURL}">
+              <div class="productCard__image">
+                {block:ItemImage1}<img src="{ItemImage1URL-500}" alt="{ItemTitle}" loading="lazy">{/block:ItemImage1}
+              </div>
+              <h3 class="productCard__title">{ItemTitle}</h3>
+            </a>
           </article>
-          <article class="productCard">
-            <div class="productCard__image">
-              <img src="https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/mexico.jpn.png" alt="メキシコ アルツーラ・ブルマ クルスグランデ農園 焙煎豆 100g" loading="lazy">
-            </div>
-          </article>
-          <article class="productCard">
-            <div class="productCard__image">
-              <img src="https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/colombia.jpn.png" alt="コロンビア スプレモS18 焙煎豆 100g" loading="lazy">
-            </div>
-          </article>
-          <article class="productCard">
-            <div class="productCard__image">
-              <img src="https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/brazil.jpn.png" alt="ブラジル サントスNo.2 焙煎豆 100g" loading="lazy">
-            </div>
-          </article>
-          <article class="productCard">
-            <div class="productCard__image">
-              <img src="https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/indonesia.jpn.png" alt="インドネシア マンデリンビンダリマ 焙煎豆 100g" loading="lazy">
-            </div>
-          </article>
-        </div>
-        <div class="catalog-slider-controls" aria-label="自家焙煎豆のスライド操作">
-          <button type="button" class="catalog-slider-btn catalog-slider-prev" aria-label="前の商品へ">
-            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-          </button>
-          <button type="button" class="catalog-slider-btn catalog-slider-next" aria-label="次の商品へ">
-            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-          </button>
+          {/block:Items}
         </div>
       </div>
     </section>
@@ -2202,7 +2371,46 @@
   </main>
   {/block:IndexPage}
 
+  {block:ItemPage}
+  <main class="item-page-section">
+    <div class="container">
+      <article class="item-detail-container">
+        <div class="item-detail-gallery">
+          <figure class="item-detail-main-image">
+            {block:ItemImage1}<img src="{ItemImage1URL-1280}" alt="{ItemTitle}">{/block:ItemImage1}
+            {block:NoItemImage1}<img src="{ItemNoImageURL}" alt="{ItemTitle}">{/block:NoItemImage1}
+          </figure>
+          <div class="item-detail-thumbs" aria-label="商品画像">
+            {block:ItemImage1}<img src="{ItemImage1URL-300}" alt="{ItemTitle} 1">{/block:ItemImage1}
+            {block:ItemImage2}<img src="{ItemImage2URL-300}" alt="{ItemTitle} 2">{/block:ItemImage2}
+            {block:ItemImage3}<img src="{ItemImage3URL-300}" alt="{ItemTitle} 3">{/block:ItemImage3}
+            {block:ItemImage4}<img src="{ItemImage4URL-300}" alt="{ItemTitle} 4">{/block:ItemImage4}
+          </div>
+        </div>
+
+        <div class="item-detail-info">
+          <h1 class="item-detail-title">{ItemTitle}</h1>
+          <p class="item-detail-price">¥{ItemPrice}</p>
+          <div class="item-detail-description">{ItemDetail}</div>
+          <div class="item-detail-attention">
+            {ItemAttentionTag}
+          </div>
+          <div class="item-detail-purchase">
+            {block:PurchaseForm}
+              {ItemSelectTag}
+              {PurchaseButton}
+            {/block:PurchaseForm}
+          </div>
+          {IllegalReportTag}
+        </div>
+      </article>
+    </div>
+  </main>
+  {/block:ItemPage}
+
+  {block:NotItemPage}
   {PageContents}
+  {/block:NotItemPage}
 
   <script>
     (function () {
@@ -2284,51 +2492,84 @@
       var track = document.getElementById("hero-slider-track");
       if (!track) return;
       var slides = Array.prototype.slice.call(track.querySelectorAll(".hero-slide"));
-      var prevBtn = document.querySelector(".hero-slider-prev");
-      var nextBtn = document.querySelector(".hero-slider-next");
       if (!slides.length) return;
-      var current = 0;
-      var autoTimer = null;
-
-      function setActive(index, behavior) {
-        current = (index + slides.length) % slides.length;
-        var target = slides[current];
-        track.scrollTo({
-          left: target.offsetLeft - track.offsetLeft - (track.clientWidth - target.clientWidth) / 2,
-          behavior: behavior || "smooth"
-        });
-      }
-
-      function startAutoSlide() {
-        if (slides.length <= 1 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        window.clearInterval(autoTimer);
-        autoTimer = window.setInterval(function () {
-          setActive(current + 1);
-        }, 4200);
-      }
-
-      if (prevBtn) {
-        prevBtn.addEventListener("click", function () {
-          setActive(current - 1);
-          startAutoSlide();
-        });
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener("click", function () {
-          setActive(current + 1);
-          startAutoSlide();
-        });
-      }
-
-      window.addEventListener("resize", function () {
-        setActive(current, "auto");
+      slides.forEach(function (slide) {
+        var clone = slide.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
       });
+    })();
 
-      window.setTimeout(function () {
-        setActive(current, "auto");
-        startAutoSlide();
-      }, 0);
+    (function () {
+      var customCartLinks = Array.prototype.slice.call(document.querySelectorAll(".js-cart-link"));
+      var customBadges = Array.prototype.slice.call(document.querySelectorAll(".js-cart-badge"));
+      var customQtyItems = Array.prototype.slice.call(document.querySelectorAll(".js-cart-qty"));
+      if (!customCartLinks.length && (!customBadges.length || !customQtyItems.length)) return;
+
+      function getBaseCartURL() {
+        var baseCartLink = document.querySelector('.required-tags a[href*="/cart"], #baseMenu a[href*="/cart"]');
+        return baseCartLink ? baseCartLink.getAttribute("href") : "{ShopURL}/cart";
+      }
+
+      function getBaseCartQty() {
+        var qtySelectors = [
+          "#baseMenu .cart-qty:not(.js-cart-qty)",
+          ".required-tags .cart-qty:not(.js-cart-qty)",
+          "#baseMenu .cart-count",
+          ".required-tags .cart-count",
+          "#baseMenu .cartNum",
+          ".required-tags .cartNum",
+          "#baseMenu .cartAmount",
+          ".required-tags .cartAmount",
+          "#baseMenu [data-cart-count]",
+          ".required-tags [data-cart-count]"
+        ];
+        var baseQtyItems = Array.prototype.slice.call(document.querySelectorAll(qtySelectors.join(",")));
+        for (var i = 0; i < baseQtyItems.length; i += 1) {
+          var countText = baseQtyItems[i].getAttribute("data-cart-count") || baseQtyItems[i].textContent;
+          var count = parseInt(String(countText).replace(/[^\d]/g, ""), 10);
+          if (count > 0) return count;
+        }
+        var baseCartLinks = Array.prototype.slice.call(document.querySelectorAll('.required-tags a[href*="/cart"], #baseMenu a[href*="/cart"]'));
+        for (var j = 0; j < baseCartLinks.length; j += 1) {
+          var match = baseCartLinks[j].textContent.match(/\d+/);
+          if (match) return parseInt(match[0], 10) || 0;
+        }
+        return 0;
+      }
+
+      function renderCartBadge() {
+        var cartURL = getBaseCartURL();
+        var count = getBaseCartQty();
+        var hasItems = count > 0;
+        customCartLinks.forEach(function (link) {
+          if (cartURL) link.setAttribute("href", cartURL);
+        });
+        customBadges.forEach(function (badge) {
+          badge.style.display = hasItems ? "block" : "none";
+        });
+        customQtyItems.forEach(function (qty) {
+          qty.textContent = hasItems ? String(count) : "";
+          qty.style.display = hasItems ? "block" : "none";
+        });
+      }
+
+      renderCartBadge();
+      window.addEventListener("load", renderCartBadge);
+      window.setTimeout(renderCartBadge, 300);
+      window.setTimeout(renderCartBadge, 1200);
+
+      if ("MutationObserver" in window) {
+        var baseMenuArea = document.querySelector("#baseMenu") || document.querySelector(".required-tags") || document.body;
+        var observer = new MutationObserver(renderCartBadge);
+        observer.observe(baseMenuArea, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+          attributes: true,
+          attributeFilter: ["style", "class"]
+        });
+      }
     })();
 
     (function () {
@@ -2446,40 +2687,6 @@
       });
       nextBtn.addEventListener("click", function () {
         list.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
-      });
-    })();
-
-    (function () {
-      var catalog = document.querySelector(".catalog-grid");
-      var prevBtn = document.querySelector(".catalog-slider-prev");
-      var nextBtn = document.querySelector(".catalog-slider-next");
-      if (!catalog || !prevBtn || !nextBtn) return;
-
-      var cards = Array.prototype.slice.call(catalog.querySelectorAll(".productCard"));
-      if (!cards.length) return;
-
-      var current = 0;
-      var mobileQuery = window.matchMedia("(max-width: 768px)");
-
-      function scrollToCard(index, behavior) {
-        current = (index + cards.length) % cards.length;
-        if (!mobileQuery.matches) return;
-        catalog.scrollTo({
-          left: cards[current].offsetLeft - catalog.offsetLeft,
-          behavior: behavior || "smooth"
-        });
-      }
-
-      prevBtn.addEventListener("click", function () {
-        scrollToCard(current - 1);
-      });
-
-      nextBtn.addEventListener("click", function () {
-        scrollToCard(current + 1);
-      });
-
-      window.addEventListener("resize", function () {
-        scrollToCard(current, "auto");
       });
     })();
 
