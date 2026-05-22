@@ -1438,7 +1438,7 @@
     .catalog-section .productCard__image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       filter: none;
     }
 
@@ -2323,10 +2323,10 @@
         <h2 class="section-title">全商品一覧</h2>
         <div class="catalog-grid">
           {block:Items}
-          <article class="productCard">
+          <article class="productCard" data-catalog-title="{ItemTitle}">
             <a class="productCard__link" href="{ItemPageURL}">
               <div class="productCard__image">
-                {block:ItemImage1}<img src="{ItemImage1URL-500}" alt="{ItemTitle}" loading="lazy">{/block:ItemImage1}
+                {block:ItemImage1}<img src="{ItemImage1URL-500}" alt="{ItemTitle}" loading="lazy" data-catalog-image>{/block:ItemImage1}
               </div>
               <h3 class="productCard__title">{ItemTitle}</h3>
             </a>
@@ -2390,7 +2390,7 @@
 
         <div class="item-detail-info">
           <h1 class="item-detail-title">{ItemTitle}</h1>
-          <p class="item-detail-price">¥{ItemPrice}</p>
+          <p class="item-detail-price">{ItemPrice}</p>
           <div class="item-detail-description">{ItemDetail}</div>
           <div class="item-detail-attention">
             {ItemAttentionTag}
@@ -2497,6 +2497,36 @@
         var clone = slide.cloneNode(true);
         clone.setAttribute("aria-hidden", "true");
         track.appendChild(clone);
+      });
+    })();
+
+    (function () {
+      var catalogImages = [
+        { keywords: ["ブラジル", "brazil"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/brazil.png" },
+        { keywords: ["インドネシア", "indonesia"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/indonesia.png" },
+        { keywords: ["コロンビア", "colombia"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/colombia.png" },
+        { keywords: ["メキシコ", "mexico"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/mexico.png" },
+        { keywords: ["オリジナル", "ポプラ館", "popura", "original"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/original.png" }
+      ];
+      var cards = Array.prototype.slice.call(document.querySelectorAll(".catalog-section .productCard"));
+      if (!cards.length) return;
+      cards.forEach(function (card) {
+        var title = [
+          card.getAttribute("data-catalog-title"),
+          card.querySelector(".productCard__title") && card.querySelector(".productCard__title").textContent
+        ].join(" ").toLowerCase();
+        var image = card.querySelector("[data-catalog-image]");
+        if (!image) return;
+        for (var i = 0; i < catalogImages.length; i += 1) {
+          var item = catalogImages[i];
+          var hasKeyword = item.keywords.some(function (keyword) {
+            return title.indexOf(keyword.toLowerCase()) !== -1;
+          });
+          if (hasKeyword) {
+            image.setAttribute("src", item.src);
+            return;
+          }
+        }
       });
     })();
 
