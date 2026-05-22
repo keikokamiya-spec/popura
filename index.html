@@ -1447,10 +1447,66 @@
       background: rgba(245, 235, 221, 0.74);
     }
 
+    .catalog-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
     .catalog-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 1.3rem;
+    }
+
+    .catalog-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      border-top: 3px solid var(--gold);
+      background: rgba(255, 248, 232, 0.5);
+      border-radius: 4px;
+    }
+
+    .catalog-info p {
+      color: var(--brown);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.9;
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+
+    .catalog-info-mobile-break {
+      display: none;
+    }
+
+    .catalog-info-pc-break {
+      display: block;
+    }
+
+    .catalog-info-link {
+      display: inline-block;
+      padding: 0.75rem 1.25rem;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      color: var(--brown);
+      background: var(--white);
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .catalog-info-link:hover {
+      background: var(--gold);
+      color: var(--white);
+      box-shadow: 0 8px 20px rgba(176, 138, 74, 0.3);
     }
 
     .productCard {
@@ -1950,8 +2006,20 @@
         grid-template-columns: 1fr;
       }
 
+      .catalog-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
       .catalog-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .catalog-info {
+        border-left: none;
+        border-top: 3px solid var(--gold);
+        padding: 2rem 1.5rem;
+        margin-top: 1rem;
       }
 
       .shop-categories,
@@ -2136,6 +2204,11 @@
         transform: none;
       }
 
+      .catalog-info-mobile-break,
+      .catalog-info-pc-break {
+        display: block;
+      }
+
       .special-coffee-months {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 0.95rem 0.55rem;
@@ -2226,7 +2299,7 @@
       }
 
       .catalog-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .special-coffee-card-img {
@@ -2362,17 +2435,23 @@
       <div class="container">
         <p class="section-kicker">All Items</p>
         <h2 class="section-title">全商品一覧</h2>
-        <div class="catalog-grid">
-          {block:Items}
-          <article class="productCard" data-catalog-title="{ItemTitle}">
-            <a class="productCard__link" href="{ItemPageURL}">
-              <div class="productCard__image">
-                {block:ItemImage1}<img src="{ItemImage1URL-500}" alt="{ItemTitle}" loading="lazy" data-catalog-image>{/block:ItemImage1}
-              </div>
-              <h3 class="productCard__title">{ItemTitle}</h3>
-            </a>
-          </article>
-          {/block:Items}
+        <div class="catalog-container">
+          <div class="catalog-grid">
+            {block:Items}
+            <article class="productCard" data-catalog-title="{ItemTitle}">
+              <a class="productCard__link" href="{ItemPageURL}">
+                <div class="productCard__image">
+                  {block:ItemImage1}<img src="{ItemImage1URL-500}" alt="{ItemTitle}" loading="lazy" data-catalog-image>{/block:ItemImage1}
+                </div>
+                <h3 class="productCard__title">{ItemTitle}</h3>
+              </a>
+            </article>
+            {/block:Items}
+          </div>
+          <div class="catalog-info">
+            <p>30〜40種類の珈琲豆の中から<br class="catalog-info-mobile-break">毎週3種類をランダムにセレクト。<br class="catalog-info-pc-break">今週だけの味わいを見つけに、<br class="catalog-info-mobile-break">ぜひお店へお越しください。</p>
+            <a href="https://hiroyukimaekawa-lang.github.io/Poplar-Coffee-site/menu.html" class="catalog-info-link">メニューを見る</a>
+          </div>
         </div>
       </div>
     </section>
