@@ -1488,27 +1488,6 @@
       display: block;
     }
 
-    .catalog-info-link {
-      display: inline-block;
-      padding: 0.75rem 1.25rem;
-      border: 2px solid var(--gold);
-      border-radius: 4px;
-      color: var(--brown);
-      background: var(--white);
-      font-family: var(--font-title);
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .catalog-info-link:hover {
-      background: var(--gold);
-      color: var(--white);
-      box-shadow: 0 8px 20px rgba(176, 138, 74, 0.3);
-    }
-
     .productCard {
       min-width: 0;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -2441,7 +2420,7 @@
             <article class="productCard" data-catalog-title="{ItemTitle}">
               <a class="productCard__link" href="{ItemPageURL}">
                 <div class="productCard__image">
-                  {block:ItemImage1}<img src="{ItemImage1URL-500}" alt="{ItemTitle}" loading="lazy" data-catalog-image>{/block:ItemImage1}
+                  {block:ItemImage1}<img src="{ItemImage1URL-500}" alt="{ItemTitle}" loading="lazy">{/block:ItemImage1}
                 </div>
                 <h3 class="productCard__title">{ItemTitle}</h3>
               </a>
@@ -2450,7 +2429,6 @@
           </div>
           <div class="catalog-info">
             <p>30〜40種類の珈琲豆の中から<br class="catalog-info-mobile-break">毎週3種類をランダムにセレクト。<br class="catalog-info-pc-break">今週だけの味わいを見つけに、<br class="catalog-info-mobile-break">ぜひお店へお越しください。</p>
-            <a href="https://hiroyukimaekawa-lang.github.io/Poplar-Coffee-site/menu.html" class="catalog-info-link">メニューを見る</a>
           </div>
         </div>
       </div>
@@ -2617,36 +2595,6 @@
         var clone = slide.cloneNode(true);
         clone.setAttribute("aria-hidden", "true");
         track.appendChild(clone);
-      });
-    })();
-
-    (function () {
-      var catalogImages = [
-        { keywords: ["ブラジル", "brazil"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/brazil.png" },
-        { keywords: ["インドネシア", "indonesia"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/indonesia.png" },
-        { keywords: ["コロンビア", "colombia"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/colombia.png" },
-        { keywords: ["メキシコ", "mexico"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/mexico.png" },
-        { keywords: ["オリジナル", "ポプラ館", "popura", "original"], src: "https://raw.githubusercontent.com/keikokamiya-spec/popura/main/zikabaisenmame7/original.png" }
-      ];
-      var cards = Array.prototype.slice.call(document.querySelectorAll(".catalog-section .productCard"));
-      if (!cards.length) return;
-      cards.forEach(function (card) {
-        var title = [
-          card.getAttribute("data-catalog-title"),
-          card.querySelector(".productCard__title") && card.querySelector(".productCard__title").textContent
-        ].join(" ").toLowerCase();
-        var image = card.querySelector("[data-catalog-image]");
-        if (!image) return;
-        for (var i = 0; i < catalogImages.length; i += 1) {
-          var item = catalogImages[i];
-          var hasKeyword = item.keywords.some(function (keyword) {
-            return title.indexOf(keyword.toLowerCase()) !== -1;
-          });
-          if (hasKeyword) {
-            image.setAttribute("src", item.src);
-            return;
-          }
-        }
       });
     })();
 
